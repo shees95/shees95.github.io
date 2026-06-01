@@ -1,6 +1,6 @@
 ---
 title: "언리얼 호스트 서버 열기 1"
-date: 2026-mm-dd HH:mm:00 +0900
+date: 2026-05-13 00:00:00 +0900
 categories: [UnrealEngine]
 tags: [Listen-Host, Listen-Client]
 ---
