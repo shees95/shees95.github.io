@@ -4,7 +4,6 @@ date: 2026-06-01 16:50:00
 categories: [Git,GitPages]
 tags: [Category]
 ---
-~~~~
 
 # 깃허브 페이지(GitHub Pages) 운영 가이드
 
