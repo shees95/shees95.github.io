@@ -1,7 +1,9 @@
 ---
 title: "Blueprint VS CPP"
 date: 2026-06-01
-categories: unrealengine, bp, cpp
+categories: [UnrealEngine]
+tags:
+  - [bp, cpp]
 ---
 
 # 무엇이 더 나은가?

@@ -1,7 +1,8 @@
 ---
 title: "GitPage 이주"
 date: 2026-06-01
-categories: cpp, velog, gitpage
+categories: [Git] 
+tags: [cpp, velog, gitpage]
 ---
 
 # GitPage로 이주한 이유
