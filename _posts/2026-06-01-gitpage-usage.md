@@ -7,6 +7,8 @@ tags: [Category]
 
 # 깃허브 페이지(GitHub Pages) 운영 가이드
 
+---
+
 ## 1. 카테고리
 * **머리말(Front Matter):** 파일 최상단에 카테고리 명시하여 자동 분류
 

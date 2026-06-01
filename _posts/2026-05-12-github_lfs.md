@@ -7,6 +7,8 @@ tags: [Git, LFS]
 
 # Git LFS(Large File Storage)
 
+---
+
 ## Git LFS란?
 
 Git LFS(Large File Storage)는 대용량 파일을 Git 저장소에 직접 저장하지 않고, 별도의 저장 공간에 보관하는 Git 확장 기능이다.
