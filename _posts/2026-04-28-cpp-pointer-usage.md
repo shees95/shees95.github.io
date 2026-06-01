@@ -1,5 +1,5 @@
 ---
-title: "포인터 사용 방법"
+title: "CPP 포인터 사용 방법"
 date: 2026-04-28 00:00:00 +0900
 categories: [CPP]
 tags: [Pointer]
