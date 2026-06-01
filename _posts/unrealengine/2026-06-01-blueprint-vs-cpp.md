@@ -1,8 +1,8 @@
 ---
 title: "Blueprint VS CPP"
-date: 2026-06-01 21:00
+date: 2026-06-01 21:00:00
 categories: [UnrealEngine]
-tags: [Blueprint, CPP]
+tags: [Blueprint,CPP]
 ---
 
 # 무엇이 더 나은가?
