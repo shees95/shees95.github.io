@@ -1,0 +1,115 @@
+---
+title: "GitHub LFS 원리"
+date: 2026-05-12 00:00:00 +0900
+categories: [Git, LFS]
+tags: [Git, LFS]
+---
+
+# Git LFS(Large File Storage)
+
+## Git LFS란?
+
+Git LFS(Large File Storage)는 대용량 파일을 Git 저장소에 직접 저장하지 않고, 별도의 저장 공간에 보관하는 Git 확장 기능이다.
+
+일반 Git은 파일의 모든 변경 이력을 저장하기 때문에 이미지, 영상, 모델링 파일, 게임 에셋과 같은 대용량 파일이 많아질수록 저장소 크기가 급격히 증가한다.
+
+Git LFS는 실제 파일 대신 **포인터(Pointer) 파일**만 Git 저장소에 저장하여 저장소를 가볍게 유지한다.
+
+---
+
+## 동작 과정
+
+### 1. 추적 대상 등록
+
+먼저 Git LFS가 관리할 파일 확장자를 등록한다.
+
+```bash
+git lfs track "*.uasset"
+git lfs track "*.umap"
+```
+
+등록된 내용은 `.gitattributes` 파일에 저장된다.
+
+```text
+*.uasset filter=lfs diff=lfs merge=lfs -text
+*.umap   filter=lfs diff=lfs merge=lfs -text
+```
+
+---
+
+### 2. 포인터 파일 생성
+
+LFS로 추적 중인 파일을 커밋하면 실제 파일은 Git에 저장되지 않는다.
+
+대신 Git 저장소에는 다음과 같은 작은 텍스트 파일만 저장된다.
+
+```text
+version https://git-lfs.github.com/spec/v1
+oid sha256:7194bdd797bde471a6e29b4fa9c8c2278b3c4dadfc5cb2c36d7f4531dc6cb8f
+size 17330
+```
+
+#### 구성 요소
+
+* `version` : LFS 포인터 파일 규격 버전
+* `oid` : 실제 파일을 식별하는 SHA-256 해시값
+* `size` : 원본 파일 크기(Byte)
+
+---
+
+### 3. 실제 파일 업로드
+
+커밋 후 Push를 수행하면 실제 파일은 Git 저장소가 아닌 LFS 전용 저장 공간으로 업로드된다.
+
+대표적인 저장 위치는 다음과 같다.
+
+* GitHub LFS Storage
+* GitLab LFS Storage
+* Bitbucket LFS Storage
+
+실제 파일은 SHA-256 해시값을 기준으로 관리된다.
+
+---
+
+### 4. Clone 및 Pull
+
+다른 사용자가 저장소를 Clone하거나 Pull하면 Git에는 포인터 파일이 내려받아진다.
+
+이후 Git LFS가 자동으로 해시값을 확인하여 LFS 서버에서 실제 파일을 다운로드하고 원본 파일로 복원한다.
+
+```bash
+git lfs pull
+```
+
+---
+
+## Git LFS를 사용하는 이유
+
+### 저장소 크기 감소
+
+대용량 파일 자체가 Git 히스토리에 저장되지 않으므로 저장소가 불필요하게 커지는 것을 방지할 수 있다.
+
+### Clone 속도 향상
+
+프로젝트를 처음 내려받을 때 Git 객체 크기가 작아져 Clone 속도가 개선된다.
+
+### 게임 개발에 적합
+
+특히 언리얼 엔진 프로젝트의 다음과 같은 파일 관리에 많이 사용된다.
+
+* `.uasset`
+* `.umap`
+* 텍스처
+* 사운드 파일
+* 영상 파일
+* 3D 모델 파일
+
+---
+
+## 정리
+
+Git LFS는 대용량 파일을 별도 저장소에 보관하고, Git에는 파일 정보를 담은 포인터만 저장하는 시스템이다.
+
+흐름을 한 줄로 요약하면 다음과 같다.
+
+> **파일 추적 등록 → 커밋 시 포인터 저장 → 실제 파일은 LFS 서버 업로드 → Clone/Pull 시 원본 파일 자동 복원**
