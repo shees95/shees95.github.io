@@ -2,8 +2,8 @@
 
 ---
 
-## 1. 카테고리
-* **머리말(Front Matter):** 파일 최상단에 카테고리 명시하여 자동 분류
+## 1. 머리말
+* 파일 최상단에 카테고리 명시하여 자동 분류
 
 ```yaml
   ---
@@ -23,3 +23,11 @@
   - 자주 사용 : `/assets/img/*.png` 형태로 업로드
   - 1회성 사용 : `git/issues/` 에 업로드 후 마크다운 링크 추출
 
+## 4. 카테고리 분류
+### Categories
+- Unreal
+- CPP
+- Algorithm
+- Project
+- Git
+- TroubleShooting
