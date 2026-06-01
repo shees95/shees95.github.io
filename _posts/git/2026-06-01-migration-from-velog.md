@@ -1,6 +1,6 @@
 ---
 title: "GitPage 이주"
-date: 2026-06-01
+date: 2026-06-01 16:00
 categories: [Git]
 tags: [CPP, Velog, GitPage]
 ---

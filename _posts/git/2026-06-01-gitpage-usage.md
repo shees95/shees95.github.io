@@ -1,6 +1,6 @@
 ---
-title: "GitPage 이주"
-date: 2026-06-01
+title: "GitPage 운영가이드"
+date: 2026-06-01 16:50
 categories: [Git, GitPages]
 tags: [Category]
 ---
