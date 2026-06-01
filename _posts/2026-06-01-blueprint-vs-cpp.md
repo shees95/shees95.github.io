@@ -1,12 +1,11 @@
 ---
 title: "Blueprint VS CPP"
-date: 2026-06-01 16:58:00
+date: 2026-06-01 16:58:00 +0900
 categories: [UnrealEngine]
-tags: [Blueprint,CPP]
+tags: [Blueprint, CPP]
 ---
 
 # 무엇이 더 나은가?
-git 
 언리얼 엔진을 접하고 가장 먼저 들었던 생각은 이것이었다.
 
 > **블루프린트와 C++은 왜 나뉘어져 있을까? 그리고 개발자는 무엇을 사용해야 할까?**
