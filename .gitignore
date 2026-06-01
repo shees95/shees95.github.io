@@ -26,5 +26,5 @@ package-lock.json
 _sass/vendors
 assets/js/dist
 
-#
-./_posts/#*
+# ignore file
+_posts/\#*
