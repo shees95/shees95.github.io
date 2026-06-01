@@ -2,7 +2,7 @@
 title: "디자인패턴 GOF"
 date: 2026-06-01 18:50 +0900
 categories: [DesignPattern]
-tags: [GOF]
+tags: [DesignPattern-GOF]
 ---
 
 # GOF 패턴
