@@ -1,3 +1,9 @@
+---
+title: "GitPage 이주"
+date: 2026-06-01
+categories: cpp, velog, gitpage
+---
+
 # GitPage로 이주한 이유
 
 Velog를 사용하면서 가장 불편했던 점은 태그 관리였다.

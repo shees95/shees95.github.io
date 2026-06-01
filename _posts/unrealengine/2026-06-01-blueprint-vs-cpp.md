@@ -1,3 +1,9 @@
+---
+title: "Blueprint VS CPP"
+date: 2026-06-01
+categories: unrealengine, bp, cpp
+---
+
 # 무엇이 더 나은가?
 
 언리얼 엔진을 접하고 가장 먼저 들었던 생각은 이것이었다.
