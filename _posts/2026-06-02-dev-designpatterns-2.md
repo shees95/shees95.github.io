@@ -54,6 +54,7 @@ tags: [DesignPattern-GOF]
   
   DuplicateObject();
 ```
+  
 
 # 구조
 어떻게 연결할 것인가
