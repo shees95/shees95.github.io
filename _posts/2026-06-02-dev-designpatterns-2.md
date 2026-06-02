@@ -49,7 +49,8 @@ tags: [DesignPattern-GOF]
 
 ## Prototype
 > 복사해서 생성
-```c++
+
+```cpp
   Monster* Clone();
   
   DuplicateObject();
