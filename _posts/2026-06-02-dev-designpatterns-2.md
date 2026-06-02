@@ -14,7 +14,7 @@ tags: [DesignPattern-GOF]
 # 생성
 어떻게 생성할 것인가
 
-## 싱글톤
+## Singleton
 > 게임에서 객체를 하나만 만들겠다.
 - GameManager
 - AudioManager
