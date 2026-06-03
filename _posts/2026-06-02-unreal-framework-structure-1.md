@@ -3,6 +3,7 @@ title: "언리얼 프레임워크 구조 1"
 date: 2026-06-02 17:15:00 +0900
 categories: [UnrealEngine, Structure]
 tags: [UnrealEngine-Structure]
+description: "언리얼 엔진의 WinMain부터 EngineTick까지"
 ---
 
 # 언리얼엔진 프레임워크 구조 1
@@ -98,7 +99,7 @@ int32 GuardedMain(const TCHAR* CmdLine)
 }
 ```
 
-## 호출 흐름
+# 호출 흐름
 
 ```yaml
 GuardedMain

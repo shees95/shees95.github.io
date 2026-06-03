@@ -3,6 +3,7 @@ title: "GitPage 운영가이드"
 date: 2026-06-01 16:50:00 +0900
 categories: [Git, GitPages]
 tags: [GitPage-CategorySetting]
+description: "GitPage 운영 가이드"
 ---
 
 # 깃허브 페이지(GitHub Pages) 운영 가이드
