@@ -33,38 +33,37 @@ layout: page
   }
 </style>
 
-{% comment %} 모든 태그를 이름순 정렬 후 prefix로 그룹핑 {% endcomment %}
 {% assign sorted_tags = site.tags | sort %}
-{% assign current_prefix = "" %}
 
+{% comment %} 고유 prefix 목록 수집 {% endcomment %}
+{% assign prefix_list = "" %}
 {% for tag_data in sorted_tags %}
-  {% assign tag_name = tag_data[0] %}
-  {% assign tag_posts = tag_data[1] %}
-  {% assign prefix = tag_name | split: "-" | first %}
-
-  {% if prefix != current_prefix %}
-    {% if current_prefix != "" %}
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    {% assign current_prefix = prefix %}
-    <div class="tag-group">
-      <div class="tag-group-header">{{ prefix }}</div>
-      <div class="tag-group-items">
-  {% endif %}
-
-  <span class="tag-item">
-    <a href="{{ site.baseurl }}/tags/{{ tag_name | downcase | url_encode }}/">
-      {{ tag_name | remove_first: prefix | remove_first: "-" | default: tag_name }}
-      <span class="count">{{ tag_posts | size }}</span>
-    </a>
-  </span>
-
+  {% assign prefix = tag_data[0] | split: "-" | first %}
+  {% unless prefix_list contains prefix %}
+    {% assign prefix_list = prefix_list | append: prefix | append: "|" %}
+  {% endunless %}
 {% endfor %}
+{% assign prefixes = prefix_list | split: "|" %}
 
-{% if current_prefix != "" %}
-      </div>
+{% comment %} prefix별로 그룹 렌더링 {% endcomment %}
+{% for prefix in prefixes %}
+  <div class="tag-group">
+    <div class="tag-group-header">{{ prefix }}</div>
+    <div class="tag-group-items">
+      {% for tag_data in sorted_tags %}
+        {% assign tag_name = tag_data[0] %}
+        {% assign tag_posts = tag_data[1] %}
+        {% assign tag_prefix = tag_name | split: "-" | first %}
+        {% if tag_prefix == prefix %}
+          {% assign display_name = tag_name | remove_first: prefix | remove_first: "-" %}
+          {% if display_name == "" %}{% assign display_name = tag_name %}{% endif %}
+          <span class="tag-item">
+            <a href="{{ site.baseurl }}/tags/{{ tag_name | downcase | url_encode }}/">
+              {{ display_name }}<span class="count">{{ tag_posts | size }}</span>
+            </a>
+          </span>
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
-{% endif %}
+{% endfor %}
