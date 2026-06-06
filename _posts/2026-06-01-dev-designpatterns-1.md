@@ -10,7 +10,7 @@ description: "패턴 디자인 GOF 정리표"
 
 ---
 
-## 1. 생성 패턴 (Creational Patterns)
+# 1. 생성 패턴 (Creational Patterns)
 
 > **객체의 생성 과정**을 추상화하여, 객체가 생성되거나 표현되는 방식과 독립적으로 시스템을 구성할 수 있도록 돕는 패턴입니다.
 
@@ -24,7 +24,7 @@ description: "패턴 디자인 GOF 정리표"
 
 ---
 
-## 2. 구조 패턴 (Structural Patterns)
+# 2. 구조 패턴 (Structural Patterns)
 
 > 클래스나 객체들을 조합하여 **더 큰 구조를 만드는 방법**에 대한 패턴입니다. 서로 독립적으로 작동하던 객체들이 함께 일할 수 있는 형태로 조직화합니다.
 
@@ -40,7 +40,7 @@ description: "패턴 디자인 GOF 정리표"
 
 ---
 
-## 3. 행위 패턴 (Behavioral Patterns)
+# 3. 행위 패턴 (Behavioral Patterns)
 
 > 객체나 클래스 사이의 **알고리즘, 책임 분배, 상호작용(통신) 방법**을 정의하는 패턴입니다. 결합도를 낮추면서 유연하게 소통하는 것에 집중합니다.
 

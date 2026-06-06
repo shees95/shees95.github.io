@@ -265,11 +265,11 @@ StartupModule()
 
 ---
 
-# 4-1. Loading Phase
+## Loading Phase
 
 언리얼은 모듈을 단계별로 로드한다.
 
-주요 단계
+### 주요 단계
 
 ```text
 PreEarlyLoadingScreen
@@ -281,7 +281,7 @@ PostEngineInit
 
 ---
 
-## 부팅 시간 측정
+### 부팅 시간 측정
 
 ```c++
 SCOPED_BOOT_TIMING("IProjectManager::Get().LoadModulesForProject(ELoadingPhase::PreLoadingScreen)");
@@ -298,7 +298,7 @@ IProjectManager::Get().LoadModulesForProject(ELoadingPhase::PreLoadingScreen);
 
 ---
 
-# 정리
+## 정리
 
 ```yaml
 WinMain
@@ -425,7 +425,7 @@ UCLASS() 를 사용해서 정의된 클래스의 생성자에 게임 플레이 �
 
 ---
 
-# 7-2. 생성자에서 CreateDefaultSubobject를 사용하는 이유
+## 7-2. 생성자에서 CreateDefaultSubobject를 사용하는 이유
 
 ```c++
 CreateDefaultSubobject()
