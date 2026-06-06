@@ -22,14 +22,10 @@ sort(v1.begin(), v1.end());
 sort(v2.begin(), v2.end());
 ```
 
----
-
 ## 문제점
 
 * 순서는 중요하지 않음
 * 빈도 체크만 하면 됨
-
----
 
 ## 정답
 
@@ -50,15 +46,11 @@ abs(count1 - count2) // 합산 절대값
 attackPower → rarity → name (비일관 비교)
 ```
 
----
-
 ## 문제 분석
 
 * strict weak ordering 위반 가능성
 * map 내부 정렬 기준이 애매해짐
 * key 비교 기준과 실제 사용 기준(name)이 다름
-
----
 
 ## 정답
 
@@ -72,22 +64,16 @@ if (rarity != other.rarity)
 return name < other.name;
 ```
 
----
-
 ## 문제점 2: map을 선형 탐색처럼 사용
 
 ```cpp
 for (auto& i : shop)
 ```
 
----
-
 ## 문제 분석
 
 * map의 O(log N) 탐색 구조 무시
 * key 기반 자료구조 장점 상실
-
----
 
 ## 정답
 
@@ -105,14 +91,10 @@ auto it = shop.find(item);
 malloc(...) + delete[]
 ```
 
----
-
 ## 문제 분석
 
 * malloc 은 free
 * new 는 delete
-
----
 
 ## 정답
 

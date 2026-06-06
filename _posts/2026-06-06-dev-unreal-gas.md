@@ -14,8 +14,6 @@ description: "언리얼 GAS에 대한 개념정리"
 
 # 굵직한 개념 정리
 
----
-
 ## ASC (Ability Ssytem Component)
 
 캐릭터에게 능력부여 및 실행 관리하는 컴포넌트

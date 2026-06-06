@@ -38,8 +38,6 @@ class TPSBASE_API AMyCharacter : public ACharacter
 };
 ```
 
----
-
 ## 2-1. 자주 사용하는 태그
 
 ### Blueprintable
@@ -54,8 +52,6 @@ class TPSBASE_API AMyCharacter : public ACharacter
 };
 ```
 
----
-
 ### BlueprintType
 
 블루프린트 변수 타입으로 사용 가능
@@ -68,8 +64,6 @@ class TPSBASE_API UMyData : public UObject
 };
 ```
 
----
-
 ### Abstract
 
 직접 생성 불가
@@ -81,8 +75,6 @@ class TPSBASE_API ACharacterBase : public ACharacter
 	GENERATED_BODY()
 };
 ```
-
----
 
 ### Config
 
@@ -107,8 +99,6 @@ UPROPERTY()
 float HP;
 ```
 
----
-
 ## 3-1. EditAnywhere
 
 에디터 어디서든 수정 가능
@@ -117,8 +107,6 @@ float HP;
 UPROPERTY(EditAnywhere)
 float MoveSpeed = 600.f;
 ```
-
----
 
 ## 3-2. EditDefaultsOnly
 
@@ -129,8 +117,6 @@ UPROPERTY(EditDefaultsOnly)
 float MaxHP = 100.f;
 ```
 
----
-
 ## 3-3. EditInstanceOnly
 
 배치된 인스턴스만 수정 가능
@@ -139,8 +125,6 @@ float MaxHP = 100.f;
 UPROPERTY(EditInstanceOnly)
 float PatrolRadius;
 ```
-
----
 
 ## 3-4. VisibleAnywhere
 
@@ -153,8 +137,6 @@ UStaticMeshComponent* Mesh;
 
 주로 컴포넌트에 사용
 
----
-
 ## 3-5. BlueprintReadOnly
 
 블루프린트 읽기 가능
@@ -163,8 +145,6 @@ UStaticMeshComponent* Mesh;
 UPROPERTY(BlueprintReadOnly)
 float HP;
 ```
-
----
 
 ## 3-6. BlueprintReadWrite
 
@@ -175,8 +155,6 @@ UPROPERTY(BlueprintReadWrite)
 float HP;
 ```
 
----
-
 ## 3-7. Category
 
 에디터 카테고리 분류
@@ -185,8 +163,6 @@ float HP;
 UPROPERTY(EditAnywhere, Category="Character")
 float HP;
 ```
-
----
 
 ## 3-8. Transient
 
@@ -199,8 +175,6 @@ float RuntimeDamage;
 
 런타임 전용 데이터
 
----
-
 ## 3-9. Replicated
 
 네트워크 복제
@@ -209,8 +183,6 @@ float RuntimeDamage;
 UPROPERTY(Replicated)
 float HP;
 ```
-
----
 
 ## 3-10. ReplicatedUsing
 
@@ -224,8 +196,6 @@ UFUNCTION()
 void OnRep_HP();
 ```
 
----
-
 ## 3-11. Meta
 
 에디터 표시 방식 설정
@@ -234,8 +204,6 @@ void OnRep_HP();
 UPROPERTY(EditAnywhere, meta=(ClampMin="0"))
 float HP;
 ```
-
----
 
 ### ClampMin
 
@@ -246,8 +214,6 @@ UPROPERTY(EditAnywhere, meta=(ClampMin="0"))
 float HP;
 ```
 
----
-
 ### ClampMax
 
 최대값 제한
@@ -256,8 +222,6 @@ float HP;
 UPROPERTY(EditAnywhere, meta=(ClampMax="100"))
 float HP;
 ```
-
----
 
 ### UIMin / UIMax
 
@@ -268,8 +232,6 @@ UPROPERTY(EditAnywhere,
 	meta=(UIMin="0", UIMax="100"))
 float HP;
 ```
-
----
 
 ### AllowPrivateAccess
 
@@ -294,8 +256,6 @@ UFUNCTION()
 void Heal();
 ```
 
----
-
 ## 4-1. BlueprintCallable
 
 블루프린트에서 호출 가능
@@ -304,8 +264,6 @@ void Heal();
 UFUNCTION(BlueprintCallable)
 void Heal();
 ```
-
----
 
 ## 4-2. BlueprintPure
 
@@ -318,8 +276,6 @@ float GetHP() const;
 
 Getter 함수에 사용
 
----
-
 ## 4-3. BlueprintImplementableEvent
 
 블루프린트에서 구현
@@ -330,8 +286,6 @@ void OnDeath();
 ```
 
 CPP 구현 없음
-
----
 
 ## 4-4. BlueprintNativeEvent
 
@@ -345,8 +299,6 @@ void OnDeath();
 ```cpp
 void OnDeath_Implementation();
 ```
-
----
 
 ## 4-5. CallInEditor
 
@@ -363,8 +315,6 @@ void GeneratePoints();
 
 멀티플레이 함수 호출
 
----
-
 ## 5-1. Server
 
 클라이언트 → 서버
@@ -373,8 +323,6 @@ void GeneratePoints();
 UFUNCTION(Server, Reliable)
 void ServerAttack();
 ```
-
----
 
 ## 5-2. Client
 
@@ -385,8 +333,6 @@ UFUNCTION(Client, Reliable)
 void ClientNotify();
 ```
 
----
-
 ## 5-3. NetMulticast
 
 서버 → 모든 클라이언트
@@ -395,8 +341,6 @@ void ClientNotify();
 UFUNCTION(NetMulticast, Reliable)
 void MulticastExplosion();
 ```
-
----
 
 ## 5-4. Reliable
 
@@ -412,8 +356,6 @@ void ServerInteract();
 * 공격
 * 아이템 획득
 * 문 열기
-
----
 
 ## 5-5. Unreliable
 
@@ -481,8 +423,6 @@ UPROPERTY(
 USpringArmComponent* SpringArm;
 ```
 
----
-
 ### 에디터 설정값
 
 ```cpp
@@ -493,8 +433,6 @@ UPROPERTY(
 float MaxHP = 100.f;
 ```
 
----
-
 ### 레벨 배치 설정값
 
 ```cpp
@@ -504,8 +442,6 @@ UPROPERTY(
 float PatrolRadius;
 ```
 
----
-
 ### Getter
 
 ```cpp
@@ -513,16 +449,12 @@ UFUNCTION(BlueprintPure)
 float GetHP() const;
 ```
 
----
-
 ### 액션 함수
 
 ```cpp
 UFUNCTION(BlueprintCallable)
 void Attack();
 ```
-
----
 
 ### 서버 RPC
 

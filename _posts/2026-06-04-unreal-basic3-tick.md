@@ -16,6 +16,8 @@ description: ""
 
 public, private 설정하면 공개 여부를 설정할 수 있음
 
+---
+
 # 2. 전처리기 세팅
 ```#include "CoreMinimal.h"```
 - 엔진 전역 타입, 매크로, 함수
@@ -27,6 +29,8 @@ public, private 설정하면 공개 여부를 설정할 수 있음
 ```#include "Item.generated.h"```
 - 언리얼 헤더툴이 자동 생성하는 코드를 포함하는 것
 - 항상 마지막 줄에 위치해야함
+
+---
 
 # 3. ```.h``` 선언부 코드  
 
@@ -68,6 +72,8 @@ protected:
 ```GENERATED_BODY()```
 - ```UCLASS()```와 짝을 이루어, 언리얼 헤더툴 (UHT)이 자동 생성한 코드를 삽입해 주는 매크로
 
+---
+
 # 4. 컴포넌트 추가
 ```Component``` : Actor의 역할, 속성 등을 갖도록 만들어주는 부픔 개념  
 ```Root Component```
@@ -95,6 +101,8 @@ protected:
 이렇게 하면 구조적으로는 붙어있으나 Editor에서는 확인이 불가
 리플렉션을 설정하지 않았기 때문
 
+---
+
 # 5. 메쉬, 머테리얼 경로로 설정
 
 ```c++
@@ -118,6 +126,8 @@ AMyActor::AMyActor()
 ```ConstructorHelpers::FObjectFinder<T>``` 
 - 리소스를 경로 기반으로 로드
 - 경로 작성은 /Game/~~~/ResourceType/ResourceCategory.ResourceName
+
+---
 
 
 # 6. 삭제
