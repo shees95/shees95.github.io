@@ -9,7 +9,7 @@ layout: page
     {% assign cat0 = group0.name %}
     {% assign total0 = group0.items | size %}
     {% assign sub1_groups = group0.items | group_by_exp: "post", "post.categories[1]" | sort: "name" %}
-    {% assign named1 = sub1_groups | where_exp: "g", "g.name != ''" %}
+    {% assign named1 = sub1_groups | where_exp: "g", "g.name" %}
     {% assign named1_count = named1 | size %}
 
     <div class="card categories">
@@ -39,7 +39,7 @@ layout: page
               {% assign cat1 = group1.name %}
               {% assign total1 = group1.items | size %}
               {% assign sub2_groups = group1.items | group_by_exp: "post", "post.categories[2]" | sort: "name" %}
-              {% assign named2 = sub2_groups | where_exp: "g", "g.name != ''" %}
+              {% assign named2 = sub2_groups | where_exp: "g", "g.name" %}
               {% assign named2_count = named2 | size %}
 
               <li class="list-group-item">
