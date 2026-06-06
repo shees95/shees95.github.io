@@ -194,8 +194,8 @@ namespace ELoadingPhase
 }
 ```
 
-어떤 모듈은 언제, 어떤 플랫폼에서 로딩이 되는지, 시작이 되는지를 위 enum type으로 구분하여 동작시킨다
-PreInit 에서는 GEngine에 필요한 대부분의 필수 모듈들이 탑재가 된다
+어떤 모듈은 언제, 어떤 플랫폼에서 로딩이 되는지, 시작이 되는지를 위 enum type으로 구분하여 동작시킨다  
+PreInit 에서는 GEngine에 필요한 대부분의 필수 모듈들이 탑재가 된다  
 
 Ex)
 ```c++
