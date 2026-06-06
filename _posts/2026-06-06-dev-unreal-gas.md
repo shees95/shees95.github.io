@@ -12,26 +12,26 @@ description: "언리얼 GAS에 대한 개념정리"
 
 ---
 
-# 굵직한 개념 정리
+## 굵직한 개념 정리
 
 ---
 
-## ASC (Ability Ssytem Component)
+### ASC (Ability Ssytem Component)
 
 캐릭터에게 능력부여 및 실행 관리하는 컴포넌트
 
 
-## AS (Attribute Set)
+### AS (Attribute Set)
 
 속성, 자원 세팅을 여기서 한다
 
 
-## GA (Gameplay Ability)
+### GA (Gameplay Ability)
 
 부여할 어빌리티 로직 클래스
 
 
-## GE (Gameplay Effect)
+### GE (Gameplay Effect)
 
 AS에 데이터 반영
 
