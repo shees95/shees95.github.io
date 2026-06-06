@@ -1,0 +1,75 @@
+---
+layout: page
+---
+
+{% assign groups = site.posts | group_by_exp: "post", "post.categories[0]" %}
+
+<div id="categories" class="categories">
+  {% for group0 in groups %}
+    {% assign cat0 = group0.name %}
+    <div class="card categories">
+      <div class="card-header d-flex justify-content-between hide-border-bottom" id="h_{{ cat0 }}">
+        <span>
+          <a href="{{ site.baseurl }}/categories/{{ cat0 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat0 }}</a>
+          <span class="text-muted small">{{ group0.items | size }}</span>
+        </span>
+      </div>
+
+      {% assign sub1_groups = group0.items | group_by_exp: "post", "post.categories[1]" %}
+      {% if sub1_groups.size > 0 %}
+        <div class="card-body p-0 ps-3">
+          {% for group1 in sub1_groups %}
+            {% assign cat1 = group1.name %}
+            {% if cat1 == "" %}
+              {% for post in group1.items %}
+                <div class="post-item">
+                  <span class="dash">-</span>
+                  <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="sub-category">
+                <span class="fw-bold">
+                  <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat1 }}</a>
+                  <span class="text-muted small">{{ group1.items | size }}</span>
+                </span>
+
+                {% assign sub2_groups = group1.items | group_by_exp: "post", "post.categories[2]" %}
+                {% if sub2_groups.size > 0 %}
+                  <div class="ps-3">
+                    {% for group2 in sub2_groups %}
+                      {% assign cat2 = group2.name %}
+                      {% if cat2 == "" %}
+                        {% for post in group2.items %}
+                          <div class="post-item">
+                            <span class="dash">-</span>
+                            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                          </div>
+                        {% endfor %}
+                      {% else %}
+                        <div class="sub-category">
+                          <span class="fw-bold">
+                            <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat2 }}</a>
+                            <span class="text-muted small">{{ group2.items | size }}</span>
+                          </span>
+                          <div class="ps-3">
+                            {% for post in group2.items %}
+                              <div class="post-item">
+                                <span class="dash">-</span>
+                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                              </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

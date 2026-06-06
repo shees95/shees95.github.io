@@ -1,7 +1,7 @@
 ---
 title: "언리얼 GAS 사용법 1"
 date: 2026-06-06 17:24:00 +0900
-categories: [UnrealEngine, UnrealEngine-GAS]
+categories: [UnrealEngine, GAS, ASC]
 tags: [UnrealEngine, UnrealEngine-GAS, UnrealEngine-ASC, UnrealEngine-AS, UnrealEngine-GA, UnrealEngine-GE]
 description: "언리얼 GAS에 대한 개념정리"
 ---
@@ -14,7 +14,7 @@ description: "언리얼 GAS에 대한 개념정리"
 
 ## 굵직한 개념 정리
 
-### ASC (Ability Ssytem Component)
+### ASC (Ability System Component)
 
 캐릭터에게 능력부여 및 실행 관리하는 컴포넌트
 
@@ -43,7 +43,7 @@ AS에 데이터 반영
 ### 1. 프로젝트 설정
 
 #### 1-1. 빌드 추가
-`.Builid.cs`  
+`.Build.cs`  
 ```c++
 using UnrealBuildTool;
 
@@ -166,7 +166,7 @@ UAttributeSetBase::UAttributeSetBase()
 }
 ```
 
-PostGameplayEfectExecute 를 이용해서 속성 적용을 제한할 수 있다.
+PostGameplayEffectExecute 를 이용해서 속성 적용을 제한할 수 있다.
 `AttributeSetBase.cpp`
 ```c++
 void UAttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
@@ -277,7 +277,7 @@ UHealAbility::UHealAbility()
 {
   // 정책은 어빌리티당 1개
     // InstancePerActor : 각 액터마다 1개의 인스턴스를 갖는다
-    // InstancePerExcute : 실행마다 1개의 인스턴스를 갖는다
+    // InstancePerExecute : 실행마다 1개의 인스턴스를 갖는다
     // NonInstanced : 인스턴스 없이 CDO에서 관리된다.
   InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 }
@@ -290,7 +290,7 @@ void UHealAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
   // Cost 사용 처리
   if (!CommitAbility(Handle, ActorInfo, ActivationInfo))
   {
-    // Cost가 부족하면 End
+    // Cost, Cooldown 조건이 부합되지 않으면 End
     
     // 종료 시 항상 EndAbility가 있어야함
     // EndAbility가 없으면 해당 어빌리티가 실행중으로 판단됨
@@ -423,9 +423,12 @@ void UHealAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
     
     if (SpecHandle.IsValid())
     {
-      // SetByCaller : GE 내부에 변수 집어넣는 기능
+      // "Data.HealAmount"로 태그 생성
+      const FGameplayTag HealAmountTag = FGameplayTag::RequestGameplayTag(FName("Data.HealAmount"), false);
+      
+      // SetSetByCallerMagnitude : GE 내부에 변수 집어넣는 기능
       // "Data.HealAmount" 태그에 {HealAmount} 값이 저장
-      SpecHandle.Data->SetSetByCallerMagnitude(FGameplayTag::RequestGameplayTag( FName("Data.HealAmount")), HealAmount);
+      if (HealAmountTag.IsValid()) SpecHandle.Data->SetSetByCallerMagnitude(HealAmountTag, HealAmount);
       
       // Tag = "Data.HealAmount"
       // Value = 30.f
@@ -450,8 +453,8 @@ void ATPSBaseCharacter::GiveStartupAbilities()
   // if (!HasAuthority()) return;       // 서버용
   
   // 전체 어빌리티 삭제
-  ASC->ClearAllAbilities();             // 전체 해제
-  // ASC->ClearAbility(AbilityHandle);  // 개별 해제
+  AbilitySystemComponent->ClearAllAbilities();             // 전체 해제
+  // AbilitySystemComponent->ClearAbility(AbilityHandle);  // 개별 해제
   
   for (const auto& AbilityClass : StartupAbilities)
   {
@@ -483,7 +486,6 @@ Case 3
 ```c++
 void ATPSBaseCharacter::UseHealAbility()
 {
-  AbilitySystemComponent->CanActivateAbility(HealAbilityClass);         // 사용 가능한지 체크
   AbilitySystemComponent->CallActivateAbility(HealAbilityClass);        // 체크 없이 바로 호출
   AbilitySystemComponent->TryActivateAbilityByClass(HealAbilityClass);  // 체크 후 사용 가능하면 호출 
 }
