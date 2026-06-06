@@ -345,14 +345,20 @@ protected:
 
 ![Character GA_Heal StaticClass.png](../assets/img/unreal-gas/Character%20GA_Heal%20StaticClass.png)
 
-
+`TPSBaseCharacter.h`
 ```c++
-  // cpp는 StaticClass로 적용
+class ATPSBaseCharacter : public ACharacter, public IAbilitySystemInterface
+{
+  ...
+  
+protected:
+  // cpp 클래스로 만들었다면 StaticClass로 적용
   TSubclassOf<UGameplayAbility> HealAbilityClass = UHealAbility::StaticClass();
+}
 ```
 
 ### 5. GE (GameplayEffect) 추가
-GA에선 판단을 한다면, GE에선 실제 데이터에 적용을 해준다.  
+GA에선 판단을 한다면, GE에선 실제 데이터에 적용요청을 한다.  
 블루프린트로 주로 관리된다.  
 
 #### 5-1. GE BP 생성
@@ -366,7 +372,21 @@ Magnitude는 HealAmount 값을 넘겨받을 예정
 
 ![GE_Heal_Attribute.png](../assets/img/unreal-gas/GE_Heal_Attribute.png)
 
-#### 5-3. GA 헤더에 GE 변수 추가
+#### 5-3. 태그 생성 및 적용
+
+`언리얼엔진` 상단 리본 -> `Edit` -> `Project Settings ...` -> `Project` -> `GameplayTags` -> `Gameplay Tag List` [Manage Gameplay Tags...] 클릭
+
+![create tag.png](../assets/img/unreal-gas/create%20tag.png)
+
+왼쪽 위 [+] 버튼 누르고, 태그 명 작성하면 태그 생성 가능
+
+![create tag detail.png](../assets/img/unreal-gas/create%20tag%20detail.png)
+
+`GE_Heal` 에 `Tag` 적용
+
+![GE_Heal tag attach.png](../assets/img/unreal-gas/GE_Heal%20tag%20attach.png)
+
+#### 5-4. GA 헤더에 GE 변수 추가
 
 GameAbility에서 바로 HP를 적용하던걸, GameplayEffect로 변경할 것이다.
 
@@ -387,7 +407,7 @@ protected:
 }
 ```
 
-#### 5-4. 어빌리티 cpp에 GE 적용
+#### 5-5. 어빌리티 cpp에 GE 적용
 
 `HealAbility.cpp`
 
