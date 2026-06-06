@@ -9,29 +9,27 @@ layout: page
     display: flex;
     align-items: center;
     min-height: 48px;
-    padding: 0 1rem;
+    padding: 0 0.75rem;
   }
   .cat-header .cat-name { flex-shrink: 0; }
   .cat-header .cat-count { margin-left: 1.5rem; flex: 1; }
-  .cat-header .cat-toggle { flex-shrink: 0; margin-left: auto; }
+  .cat-header .cat-toggle { flex-shrink: 0; width: 1.5rem; text-align: center; }
 
   .cat-item {
     display: flex;
     align-items: center;
     min-height: 48px;
-    padding: 0 1rem;
-    cursor: pointer;
-    list-style: none;
+    padding: 0 0.75rem;
   }
   .cat-item .cat-name { flex-shrink: 0; }
   .cat-item .cat-count { margin-left: 1.5rem; flex: 1; }
-  .cat-item .cat-toggle { flex-shrink: 0; margin-left: auto; transition: transform 0.2s; }
+  .cat-item .cat-toggle { flex-shrink: 0; width: 1.5rem; text-align: center; }
 
   .cat-item-l3 {
     display: flex;
     align-items: center;
     min-height: 48px;
-    padding: 0 1rem 0 2rem;
+    padding: 0 0.75rem 0 2rem;
   }
   .cat-item-l3 .cat-name { flex-shrink: 0; }
   .cat-item-l3 .cat-count { margin-left: 1.5rem; flex: 1; }
@@ -40,9 +38,15 @@ layout: page
   details > summary { list-style: none; }
   details > summary::-webkit-details-marker { display: none; }
 
-  /* 닫혔을 때 화살표 회전 */
-  details:not([open]) .cat-toggle i { transform: rotate(-90deg); }
-  details[open] .cat-toggle i { transform: rotate(0deg); }
+  /* 하위 카테고리 상단 여백 */
+  details > ul.list-group { padding-top: 0.4rem; }
+
+  /* 화살표 트랜지션 */
+  .cat-toggle i {
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  .cat-toggle-closed i { transform: rotate(-90deg); }
 </style>
 
 <div id="categories" class="categories pl-xl-3">
@@ -137,3 +141,12 @@ layout: page
     </div>
   {% endfor %}
 </div>
+
+<script>
+  document.querySelectorAll('details').forEach(function(d) {
+    var toggle = d.querySelector('summary .cat-toggle');
+    d.addEventListener('toggle', function() {
+      if (toggle) toggle.classList.toggle('cat-toggle-closed', !d.open);
+    });
+  });
+</script>
