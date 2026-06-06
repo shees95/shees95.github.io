@@ -4,25 +4,116 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# About
+<style>
+  .about-wrapper { max-width: 640px; margin: 0 auto; padding: 1rem 0 3rem; }
 
-안녕하세요.
+  .about-profile { text-align: center; margin-bottom: 2.5rem; }
+  .about-profile .name { font-size: 2rem; font-weight: 700; margin: 0 0 0.4rem; }
+  .about-profile .tagline { font-size: 1rem; color: var(--text-muted-color); margin: 0 0 1.2rem; }
+  .about-profile .divider {
+    width: 40px; height: 3px;
+    background: var(--link-color, #5a9cf5);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
 
-게임 프로그래머를 목표로 공부하고 있는 개발자 **신희성** 입니다.
+  .about-section { margin-bottom: 2rem; }
+  .about-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted-color);
+    margin-bottom: 0.75rem;
+  }
+  .about-section p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0;
+  }
 
-현재 Unreal Engine 5와 C++를 중심으로 학습하고 있으며, 게임 시스템 구현과 문제 해결 과정을 기록하기 위해 이 블로그를 운영하고 있습니다.
+  .badge-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color, #3a3a3a);
+    font-size: 0.82rem;
+    color: var(--text-color);
+  }
+  .badge i { font-size: 0.75rem; color: var(--link-color, #5a9cf5); }
 
-주로 다음과 같은 내용을 다룹니다.
+  .career-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color, #2a2a2a);
+  }
+  .career-item:last-child { border-bottom: none; }
+  .career-period {
+    font-size: 0.78rem;
+    color: var(--text-muted-color);
+    white-space: nowrap;
+    padding-top: 0.1rem;
+    min-width: 90px;
+  }
+  .career-content .role { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.15rem; }
+  .career-content .desc { font-size: 0.82rem; color: var(--text-muted-color); }
+</style>
 
-* Unreal Engine 개발 기록
-* C++ 학습 및 설계 내용
-* 코딩 테스트 풀이와 오답 노트
-* Git, 협업 및 개발 환경 구성
-* 프로젝트 개발 과정에서 발생한 문제와 해결 과정
+<div class="about-wrapper">
 
-과거에는 RPA 개발자로 약 5년간 근무하며 다양한 업무 자동화 시스템을 개발했습니다. 그 과정에서 단순히 코드를 작성하는 것뿐만 아니라 협업, 유지보수, 그리고 변화에 대응하는 개발 방식의 중요성을 배웠습니다.
+  <div class="about-profile">
+    <div class="name">신희성</div>
+    <div class="tagline">Game Programmer · Unreal Engine · C++</div>
+    <div class="divider"></div>
+  </div>
 
-현재는 게임 개발 분야로 역량을 확장하며 Unreal Engine 기반 프로젝트를 진행하고 있습니다.
+  <div class="about-section">
+    <div class="about-section-title">About</div>
+    <p>게임 프로그래머를 목표로 공부하고 있습니다.<br>
+    Unreal Engine 5와 C++를 중심으로 게임 시스템 구현과 문제 해결 과정을 기록합니다.</p>
+  </div>
 
-이 블로그는 단순한 결과물 저장소가 아니라, 문제를 분석하고 해결해 나가는 과정을 기록하는 개발 노트입니다.
-배운 내용을 정리하고, 시행착오를 남기며, 더 나은 개발자가 되기 위한 성장 기록을 이어가고 있습니다.
+  <div class="about-section">
+    <div class="about-section-title">Skills</div>
+    <div class="badge-group">
+      <span class="badge"><i class="fas fa-gamepad"></i> Unreal Engine 5</span>
+      <span class="badge"><i class="fas fa-code"></i> C++</span>
+      <span class="badge"><i class="fas fa-code"></i> Blueprint</span>
+      <span class="badge"><i class="fas fa-network-wired"></i> GAS</span>
+      <span class="badge"><i class="fas fa-code-branch"></i> Git</span>
+      <span class="badge"><i class="fas fa-robot"></i> RPA</span>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-title">Career</div>
+    <div class="career-item">
+      <div class="career-period">2019 — 2024</div>
+      <div class="career-content">
+        <div class="role">RPA 개발자</div>
+        <div class="desc">업무 자동화 시스템 개발 · 협업 · 유지보수</div>
+      </div>
+    </div>
+    <div class="career-item">
+      <div class="career-period">2024 — 현재</div>
+      <div class="career-content">
+        <div class="role">게임 프로그래머 전향</div>
+        <div class="desc">Unreal Engine 5 · C++ · 게임 시스템 구현</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-section-title">This Blog</div>
+    <div class="badge-group">
+      <span class="badge"><i class="fas fa-gamepad"></i> Unreal Engine</span>
+      <span class="badge"><i class="fas fa-code"></i> C++</span>
+      <span class="badge"><i class="fas fa-pencil-alt"></i> 코딩테스트</span>
+      <span class="badge"><i class="fas fa-code-branch"></i> Git</span>
+      <span class="badge"><i class="fas fa-bug"></i> 트러블슈팅</span>
+    </div>
+  </div>
+
+</div>
