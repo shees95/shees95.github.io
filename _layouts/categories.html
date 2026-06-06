@@ -150,10 +150,17 @@ layout: page
 </div>
 
 <script>
-  // Bootstrap Collapse 미리 초기화 (첫 클릭 무반응 버그 방지)
+  // Bootstrap Collapse 초기화 + 화살표 애니메이션 연동
   document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function(el) {
     var target = document.querySelector(el.getAttribute('href'));
-    if (target) new bootstrap.Collapse(target, { toggle: false });
+    if (!target) return;
+    new bootstrap.Collapse(target, { toggle: false });
+    target.addEventListener('hide.bs.collapse', function() {
+      el.closest('.cat-toggle').classList.add('cat-toggle-closed');
+    });
+    target.addEventListener('show.bs.collapse', function() {
+      el.closest('.cat-toggle').classList.remove('cat-toggle-closed');
+    });
   });
 
   document.querySelectorAll('details').forEach(function(d) {
