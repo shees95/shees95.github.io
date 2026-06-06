@@ -438,3 +438,51 @@ void UHealAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 	
 }
 ```
+
+## 6. ASC에 Ability 부여 / 해제
+
+Case 1  
+> PlayerState : ASC  
+> Character : Avater  
+> -> PossessedBy() 에서 GiveStartupAbilities() 제공
+
+Case 2  
+> Character : ASC, Avater  
+> -> BeginPlay() 에서 GiveStartupAbilities() 제공  
+
+
+Case 3  
+> 게임 도중에 스킬/아이템 언락  
+> -> 이벤트 시점에 ASC->GiveAbility(SkillAbility);   
+
+
+부여 / 해제 방법
+
+```c++
+void ATPSBaseCharacter::GiveStartupAbilities()
+{
+  // if (!HasAuthority()) return;       // 서버용
+  
+  // 전체 어빌리티 삭제
+  ASC->ClearAllAbilities();             // 전체 해제
+  // ASC->ClearAbility(AbilityHandle);  // 개별 해제
+  
+  for (const auto& AbilityClass : StartupAbilities)
+  {
+    if (!AbilityClass) continue;
+    // 어빌리티 부여
+    AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(AbilityClass, 1));
+  }
+}
+```
+
+## 7. 어빌리티 사용
+
+```c++
+void ATPSBaseCharacter::UseHealAbility()
+{
+  AbilitySystemComponent->CanActivateAbility(HealAbilityClass);         // 사용 가능한지 체크
+  AbilitySystemComponent->CallActivateAbility(HealAbilityClass);        // 체크 없이 바로 호출
+  AbilitySystemComponent->TryActivateAbilityByClass(HealAbilityClass);  // 체크 후 사용 가능하면 호출 
+}
+```
