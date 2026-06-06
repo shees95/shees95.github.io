@@ -2,7 +2,7 @@
 title: "코딩 테스트 오답노트"
 date: 2026-06-01 11:40:00 +0900
 categories: [CPP]
-tags: [ErrorLog]
+tags: [CPP, ErrorLog]
 description: "코딩 테스트 오답노트"
 ---
 
