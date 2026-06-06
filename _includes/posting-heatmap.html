@@ -1,42 +1,9 @@
-<!-- Recently Updated -->
-{%- if site.posts.size > 0 -%}
-  <div class="access-policy d-flex flex-column col">
-    <div class="panel-heading">
-      <h2 class="panel-title">Recently Updated</h2>
-    </div>
-    <div id="access-lastmod" class="post-nav-links d-flex flex-column">
-      {%- assign sorted_posts = site.posts | sort: 'last_modified_at' | reverse -%}
-      {%- for post in sorted_posts limit: 5 -%}
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      {%- endfor -%}
-    </div>
-  </div>
-{%- endif -%}
-
-<!-- Trending Tags -->
-{%- if site.tags.size > 0 -%}
-  {%- assign sorted_tags = site.tags | sort_by: "size" | reverse -%}
-  <div class="panel-heading mt-4">
-    <h2 class="panel-title">Trending Tags</h2>
-  </div>
-  <div id="trending-tags">
-    {%- for tag in sorted_tags limit: 8 -%}
-      <a class="tag" href="{{ site.baseurl }}/tags/{{ tag[0] | downcase | url_encode }}/">
-        {{ tag[0] }}
-      </a>
-    {%- endfor -%}
-  </div>
-{%- endif -%}
-
-<!-- Posting Activity Heatmap -->
-{%- if site.posts.size > 0 -%}
 <style>
-  #posting-heatmap { margin-top: 2rem; }
+  #posting-heatmap { margin-top: 1.5rem; }
   #posting-heatmap .panel-title { margin-bottom: 0.75rem; }
   .heatmap-grid {
     display: flex;
     gap: 3px;
-    overflow-x: auto;
   }
   .heatmap-col { display: flex; flex-direction: column; gap: 3px; }
   .heatmap-cell {
@@ -44,6 +11,7 @@
     height: 10px;
     border-radius: 2px;
     background: var(--border-color, #2a2a2a);
+    cursor: default;
   }
   .heatmap-cell[data-count="1"] { background: #1e4a6e; }
   .heatmap-cell[data-count="2"] { background: #1e6ea8; }
@@ -57,29 +25,14 @@
     font-size: 0.7rem;
     color: var(--text-muted-color);
   }
-  .heatmap-legend .heatmap-cell { width: 10px; height: 10px; flex-shrink: 0; }
+  .heatmap-legend .heatmap-cell { flex-shrink: 0; }
 </style>
 
 <div id="posting-heatmap">
   <div class="panel-heading">
     <h2 class="panel-title">Posting Activity</h2>
   </div>
-
-  {%- comment -%} 최근 364일(52주) 날짜별 포스트 수 계산 {%- endcomment -%}
-  {%- assign today = 'now' | date: '%s' | plus: 0 -%}
-  {%- assign day_secs = 86400 -%}
-  {%- assign weeks = 52 -%}
-  {%- assign start_ts = today | minus: weeks | times: 7 | times: day_secs -%}
-
-  {%- comment -%} 포스트 날짜 목록 수집 {%- endcomment -%}
-  {%- assign post_dates = "" -%}
-  {%- for post in site.posts -%}
-    {%- assign pd = post.date | date: '%Y-%m-%d' -%}
-    {%- assign post_dates = post_dates | append: pd | append: "," -%}
-  {%- endfor -%}
-
   <div class="heatmap-grid" id="heatmap-grid"></div>
-
   <div class="heatmap-legend">
     <span>Less</span>
     <span class="heatmap-cell"></span>
@@ -93,17 +46,22 @@
 
 <script>
 (function() {
-  const postDates = "{{ post_dates }}".split(',').filter(Boolean);
+  {%- assign post_dates = "" -%}
+  {%- for post in site.posts -%}
+    {%- assign post_dates = post_dates | append: post.date | date: '%Y-%m-%d' | append: "," -%}
+  {%- endfor -%}
+  const raw = "{{ post_dates }}";
+  const postDates = raw.split(',').filter(Boolean);
   const countMap = {};
   postDates.forEach(d => { countMap[d] = (countMap[d] || 0) + 1; });
 
   const grid = document.getElementById('heatmap-grid');
+  if (!grid) return;
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
-  // 오늘 기준 요일(0=일)에 맞춰 52주 시작점 계산
   const startDate = new Date(today);
-  startDate.setDate(today.getDate() - (52 * 7) + 1);
+  startDate.setDate(today.getDate() - 52 * 7 + 1);
 
   for (let w = 0; w < 52; w++) {
     const col = document.createElement('div');
@@ -116,11 +74,10 @@
       const cell = document.createElement('div');
       cell.className = 'heatmap-cell';
       if (count > 0) cell.setAttribute('data-count', Math.min(count, 4));
-      cell.title = key + (count ? ` (${count} post${count > 1 ? 's' : ''})` : '');
+      cell.title = key + (count ? ` (${count}개 포스트)` : '');
       col.appendChild(cell);
     }
     grid.appendChild(col);
   }
 })();
 </script>
-{%- endif -%}
