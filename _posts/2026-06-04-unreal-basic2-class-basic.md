@@ -51,10 +51,13 @@ protected:
 		virtual void Tick(float DeltaTime) override;
 };
 ```
-```UCLASS```
+
+`UCLASS`
+
 - 리플렉션 시스템에 등록
 
-```class SPARTAPROJECT_API AItem : public AActor```
+`class SPARTAPROJECT_API AItem : public AActor`
+
 - Actor를 상속
 
 - 접두사 규칙 존재
@@ -65,19 +68,19 @@ protected:
   - ```E``` : 열거형
   - ```I``` : 인터페이스
   
-- ```ProjectName_API```
+- `ProjectName_API`
   - 클래스 모듈화  
   - 외부에서 사용 가능케 하는 매크로  
 
-```GENERATED_BODY()```
+`GENERATED_BODY()`
 - ```UCLASS()```와 짝을 이루어, 언리얼 헤더툴 (UHT)이 자동 생성한 코드를 삽입해 주는 매크로
 
 ## 4. 컴포넌트 추가
-```Component``` : Actor의 역할, 속성 등을 갖도록 만들어주는 부픔 개념  
-```Root Component```
+`Component` : Actor의 역할, 속성 등을 갖도록 만들어주는 부픔 개념  
+`Root Component`
 - 모든 Actor는 Root 컴포넌트를 갖아야함
 - Actor는 역할이 있는 대상이기 때문에 트랜스폼을 관리할 수 있는 Scene Component를 보통 루트로 설정함
-```Static Mesh Component``` : 애니메이션이나 스켈레탈 본 없는 정적 3D 모델을 그리는 컴포넌트 
+`Static Mesh Component` : 애니메이션이나 스켈레탈 본 없는 정적 3D 모델을 그리는 컴포넌트 
 
 ### 선언
 ```c++
