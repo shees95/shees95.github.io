@@ -1,7 +1,7 @@
 ---
 title: "언리얼 프레임워크 구조 1"
 date: 2026-06-02 17:15:00 +0900
-categories: [UnrealEngine, Structure]
+categories: [UnrealEngine, UnrealEngine-Structure]
 tags: [UnrealEngine-Structure]
 description: "언리얼 엔진의 WinMain부터 EngineTick까지"
 ---

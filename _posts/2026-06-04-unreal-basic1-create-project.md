@@ -1,7 +1,7 @@
 ---
 title: "언리얼 프로젝트 생성 및 설정"
 date: 2026-06-04 12:00:00 +0900
-categories: [UnrealEngine, Unreal-Basic]
+categories: [UnrealEngine, UnrealEngine-Basic]
 tags: [UnrealEngine-ProjectSettings]
 description: "언리얼 프로젝트 생성 및 세팅"
 ---

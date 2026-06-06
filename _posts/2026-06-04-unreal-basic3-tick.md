@@ -1,7 +1,7 @@
 ---
 title: "언리얼 Tick 사이클"
 date: 2026-06-04 19:00:00 +0900
-categories: [UnrealEngine, Unreal-Basic, Tick]
+categories: [UnrealEngine, UnrealEngine-Basic]
 tags: [UnrealEngine-Tick]
 description: ""
 ---

@@ -1,7 +1,7 @@
 ---
 title: "언리얼 로그 관련"
 date: 2026-06-04 14:00:00 +0900
-categories: [UnrealEngine, Unreal-Basic, Log]
+categories: [UnrealEngine, UnrealEngine-Basic]
 tags: [UnrealEngine-Log]
 description: "로그에 대한 명령어 및 용법"
 ---
