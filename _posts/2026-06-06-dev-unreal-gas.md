@@ -116,10 +116,10 @@ ATPSBaseCharacter::ATPSBaseCharacter()
 
 #### 3-1. AttributeSet 클래스 생성
 
-`ASCharacterHealth`
+`UAttributeSetBase`
 
 #### 3-1-1. 속성 선언 및 추가
-`ASCharacterHealth.h`
+`UAttributeSetBase.h`
 ```c++
 #include "AttributeSet.h"    // 라이브러리
 
