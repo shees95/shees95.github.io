@@ -1,7 +1,7 @@
 ---
 title: "트러블슈팅 : 언리얼 착지 애니메이션 시 캐릭터 크기 변형 문제"
 date: 2026-06-05 17:00:00 +0900
-categories: [TroubleShooting, TS-UnrealEngine]
+categories: [TroubleShooting, TroubleShooting-UnrealEngine]
 tags: [TroubleShooting, UnrealEngine-Animation]
 description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 ---

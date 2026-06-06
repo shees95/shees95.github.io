@@ -95,7 +95,9 @@ layout: page
                     <summary class="cat-item">
                       <span class="cat-name">
                         <i class="far fa-folder fa-fw"></i>
-                        <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1" onclick="event.stopPropagation()">{{ cat1 }}</a>
+                        {% assign display1 = cat1 | remove_first: cat0 | remove_first: "-" %}
+                        {% if display1 == "" %}{% assign display1 = cat1 %}{% endif %}
+                        <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1" onclick="event.stopPropagation()">{{ display1 }}</a>
                       </span>
                       <span class="cat-count text-muted small">
                         {{ named2_count }} categor{% if named2_count == 1 %}y{% else %}ies{% endif %} , {{ total1 }} post{% if total1 != 1 %}s{% endif %}
@@ -112,7 +114,9 @@ layout: page
                           <div class="cat-item-l3">
                             <span class="cat-name">
                               <i class="far fa-folder fa-fw"></i>
-                              <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/" class="ms-1">{{ cat2 }}</a>
+                              {% assign display2 = cat2 | remove_first: cat1 | remove_first: "-" %}
+                              {% if display2 == "" %}{% assign display2 = cat2 %}{% endif %}
+                              <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/" class="ms-1">{{ display2 }}</a>
                             </span>
                             <span class="cat-count text-muted small">
                               {{ total2 }} post{% if total2 != 1 %}s{% endif %}
@@ -126,7 +130,9 @@ layout: page
                   <div class="cat-item">
                     <span class="cat-name">
                       <i class="far fa-folder fa-fw"></i>
-                      <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1">{{ cat1 }}</a>
+                      {% assign display1b = cat1 | remove_first: cat0 | remove_first: "-" %}
+                      {% if display1b == "" %}{% assign display1b = cat1 %}{% endif %}
+                      <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1">{{ display1b }}</a>
                     </span>
                     <span class="cat-count text-muted small">
                       {{ total1 }} post{% if total1 != 1 %}s{% endif %}
