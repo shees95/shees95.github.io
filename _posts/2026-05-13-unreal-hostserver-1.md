@@ -11,9 +11,9 @@ description: "언리얼 Listen 서버 열기, 클라이언트 붙기"
 
 ---
 
-# 1. 서버 생성 및 클라이언트 접속 방식
+## 1. 서버 생성 및 클라이언트 접속 방식
 
-## Listen 서버 생성 (Host)
+### Listen 서버 생성 (Host)
 * **핵심 개념**
   * 호스트(방장)가 클라이언트 역할(플레이)을 동시에 수행하면서 서버를 구동하는 방식이다.
 * **구현 방법**
@@ -21,7 +21,7 @@ description: "언리얼 Listen 서버 열기, 클라이언트 붙기"
   ```cpp
   GetWorld()->ServerTravel(TEXT("/Game/Maps/MainMap?listen"), true);
 
-## 클라이언트 접속 (Join)
+### 클라이언트 접속 (Join)
 
 * **핵심 개념**
 * 생성된 Listen 서버의 공인 IP와 포트를 통해 클라이언트가 서버 세션에 진입하는 방식이다.
@@ -43,7 +43,7 @@ PlayerController->ClientTravel(TEXT("127.0.0.1"), TRAVEL_Absolute);
 
 ---
 
-# 2. 상황별 서버 이동 함수 비교
+## 2. 상황별 서버 이동 함수 비교
 
 언리얼 엔진은 서버 및 클라이언트 이동을 위해 다양한 레벨 전환 함수를 제공한다. 
 상황에 맞는 올바른 함수 선택이 시스템 안정성을 결정한다.  
@@ -56,11 +56,11 @@ PlayerController->ClientTravel(TEXT("127.0.0.1"), TRAVEL_Absolute);
 
 ---
 
-# 3. 구조적 개발 방향성 가이드
+## 3. 구조적 개발 방향성 가이드
 
 멀티플레이 프로젝트를 설계할 때 반드시 정립해야 하는 핵심 아키텍처 가이드라인이다.
 
-## 3-1. 클라이언트 관리 및 진입 프로세스 (GameMode 활용)
+### 3-1. 클라이언트 관리 및 진입 프로세스 (GameMode 활용)
 
 * **역할 분담**
 * 클라이언트의 로그인, 접속 승인, 캐릭터 생성(Spawn) 등의 비즈니스 로직은 오직 `AGameModeBase`에서만 처리한다. GameMode는 서버에만 존재하므로 클라이언트가 변조할 수 없다.
@@ -71,7 +71,7 @@ PlayerController->ClientTravel(TEXT("127.0.0.1"), TRAVEL_Absolute);
 
 
 
-## 3-2. 데이터 동기화의 기준점 (Replication 설계 방향성)
+### 3-2. 데이터 동기화의 기준점 (Replication 설계 방향성)
 
 캐릭터와 서버 간 Replicate 범위를 정할 때는 "서버는 검증하고, 클라이언트는 표현한다"는 원칙을 고수해야 한다.
 

@@ -10,7 +10,7 @@ description: "언리얼 Listen서버 내 데이터 통신 주고받기"
 
 ---
 
-# 1. 서버 권한 검증 (`HasAuthority`)
+## 1. 서버 권한 검증 (`HasAuthority`)
 
 네트워크 환경에서 중요한 연산(데미지 계산, 아이템 획득 등)은 반드시 서버에서만 실행되어야 합니다.
 
@@ -27,7 +27,7 @@ if (GetOwner()->HasAuthority())
 
 ---
 
-# 2. 액터 복제 활성화 (기본 세팅)
+## 2. 액터 복제 활성화 (기본 세팅)
 
 액터의 변수나 움직임이 네트워크를 통해 클라이언트들에게 전달되려면, **생성자**에서 복제 기능을 켜주어야 합니다.
 
@@ -48,11 +48,11 @@ AMyActor::AMyActor()
 
 ---
 
-# 3. 멤버 변수 복제 (`Replicated`)
+## 3. 멤버 변수 복제 (`Replicated`)
 
 특정 변수의 값이 서버에서 변경되었을 때, 이를 클라이언트들에게 자동으로 전송(동기화)하고 싶다면 2가지 작업이 필요합니다.
 
-## 3-1. UPROPERTY 매크로 설정
+### 3-1. UPROPERTY 매크로 설정
 
 변수 선언 위에 `Replicated` 지정자를 추가합니다. 이 변수는 **서버에서만 연산 및 수정**되어야 하며, 변경된 값이 클라이언트로 단방향 복제됩니다.
 
@@ -63,7 +63,7 @@ protected:
 
 ```
 
-## 3-2. `GetLifetimeReplicatedProps` 오버라이드 및 구현
+### 3-2. `GetLifetimeReplicatedProps` 오버라이드 및 구현
 
 `Replicated`로 지정된 변수는 **반드시** 이 함수를 통해 등록해 주어야 실제로 복제가 일어납니다.
 
@@ -95,6 +95,6 @@ void AMyActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetime
 
 ---
 
-# 정리
+## 정리
 
 > **"생성자에서 `bReplicates`를 켜고, 변수에 `Replicated`를 붙인 뒤, `GetLifetimeReplicatedProps`에 `DOREPLIFETIME`으로 등록하면, 서버(`HasAuthority`)에서 바꾼 변수 값이 클라이언트에게 안전하게 전달된다!"**

@@ -10,18 +10,18 @@ description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 
 ---
 
-# 오류
+## 오류
 
 점프 착륙을 할 때마다 캐릭터가 작아졌다가 커지는 오류가 발생
 ![land issue.png](../assets/img/troubleshooting-unreal-land-animiation/land%20issue.png)
 ```<하체 비만인가보다>```
 
-# Locomotion
+## Locomotion
 
 ![locomotion.png](../assets/img/troubleshooting-unreal-land-animiation/locomotion.png)
 
 
-# Additive 란?
+## Additive 란?
 
 `Additive Animation`은 애니메이션 자체를 재생하는 것이 아니라
 
@@ -39,8 +39,6 @@ description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 
 등에 사용
 
----
-
 이번 문제에서는 `MM_Land` 애니메이션이 `Additive Anim Type : Local Space` 로 설정됨
 
 착지 애니메이션 재생 시 캐릭터가 순간적으로 작아졌다가 다시 원래 크기로 돌아오는 현상이 발생하였으며,
@@ -49,13 +47,9 @@ description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 
 따라서 이번 이슈는 **Land 애니메이션이 Additive 방식으로 적용되면서 발생한 문제**로 판단하였다.
 
----
+## Automatic Rule Based on Sequence Player
 
-# Automatic Rule Based on Sequence Player
-
-애니메이션이 다 끝나기도 전에 착지를 하게 되어 Land 애니메이션이 일절 보이지 않았다.   
-
----
+애니메이션이 다 끝나기도 전에 착지를 하게 되어 Land 애니메이션이 일절 보이지 않았다.
 
 `Automatic Rule Based on Sequence Player: false -> true`
 
@@ -67,11 +61,11 @@ description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 
 ---
 
-# 결론
+## 결론
 
 이번 문제는 두 가지 설정이 복합적으로 작용한 결과였다.
 
-## 1. Additive 설정 문제
+### 1. Additive 설정 문제
 
 ```txt
 MM_Land
@@ -90,9 +84,7 @@ No Additive
 
 로 변경하여 해결
 
----
-
-## 2. State 전환 설정 문제
+### 2. State 전환 설정 문제
 
 ```txt
 Land → Idle
@@ -112,9 +104,7 @@ Automatic Rule Based on Sequence Player
 
 Land 애니메이션 재생 후 Idle 상태로 자연스럽게 전환
 
----
-
-최종적으로
+### 최종적으로
 
 ```txt
 Additive Anim Type : No Additive

@@ -12,37 +12,37 @@ description: "언리얼 GAS에 대한 개념정리"
 
 ---
 
-# 굵직한 개념 정리
+## 굵직한 개념 정리
 
-## ASC (Ability Ssytem Component)
+### ASC (Ability Ssytem Component)
 
 캐릭터에게 능력부여 및 실행 관리하는 컴포넌트
 
 
-## AS (Attribute Set)
+### AS (Attribute Set)
 
 속성, 자원 세팅 및 적용은 여기서 한다
 
 
-## GA (Gameplay Ability)
+### GA (Gameplay Ability)
 
 부여할 어빌리티 로직 클래스
 
 
-## GE (Gameplay Effect)
+### GE (Gameplay Effect)
 
 버프 디버프 효과 정의
 AS에 데이터 반영
 
 ---
 
-# 사용법
+## 사용법
 
 ---
 
-## 1. 프로젝트 설정
+### 1. 프로젝트 설정
 
-### 1-1. 빌드 추가
+#### 1-1. 빌드 추가
 `.Builid.cs`  
 ```c++
 using UnrealBuildTool;
@@ -60,7 +60,7 @@ public class TPSBase : ModuleRules
 }
 ```
 
-### 1-2. 플러그인 추가
+#### 1-2. 플러그인 추가
 `.uproject`
 ```c++
   "Plugins": [
@@ -73,12 +73,12 @@ public class TPSBase : ModuleRules
 
 자동으로 추가가 안될 때는 수동으로 입력 필요
 
-## 2. ASC 생성
+### 2. ASC 생성
 각 인스턴스는 해당 인스턴스의 어빌리티들을 관리하는 중앙관리 시스템이다.  
 Ability를 부여/해제 할 수도 있고, 실행 여부 또한 이곳에서 관리된다.  
 ASC 인스턴스 생성 필요 (보통 Character나 PlayerStat에 생성)  
 
-### 2-1. 인터페이스 상속
+#### 2-1. 인터페이스 상속
 `TPSBaseCharacter.h`
 ```c++
 #include "AbilitySystemInterface.h" // 라이브러리
@@ -97,7 +97,7 @@ protected:
 ```
 
 
-### 2-2. ASC 인스턴스 생성
+#### 2-2. ASC 인스턴스 생성
 `TPSBaseCharacter.cpp`
 ```c++
 // 생성자
@@ -111,10 +111,10 @@ ATPSBaseCharacter::ATPSBaseCharacter()
 
 ---
 
-## 3. AS (AttributeSet) 생성
+### 3. AS (AttributeSet) 생성
 자원을 관리하는 시스템이다.
 
-### 3-1. AttributeSet 클래스 생성
+#### 3-1. AttributeSet 클래스 생성
 
 `ASCharacterHealth`
 
@@ -184,7 +184,7 @@ void UAttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffectMo
 }
 ```
 
-### 3-2. 인스턴스 생성
+#### 3-2. 인스턴스 생성
 
 #### 3-2-1. 생성한 AttributeSet 선언
 
@@ -235,10 +235,10 @@ void ATPSBaseCharacter::BeginPlay() // or Possess() 최초 1회 수행 위치
 
 ---
 
-## 4. Ability 클래스 생성
+### 4. Ability 클래스 생성
 실질적인 능력 로직을 구현을 하는 곳이다.
 
-### 4-1. HealAbility 클래스 생성
+#### 4-1. HealAbility 클래스 생성
 
 ASC를 갖고있는 인스턴스에서 UCLASS 형태로 전달하면 ASC가 새 인스턴스를 생성 관리하며 Activate 해준다.
 
@@ -322,7 +322,7 @@ void UHealAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 }
 ```
 
-### 4-2. 캐릭터에게 HealAbility 정보 넘기기
+#### 4-2. 캐릭터에게 HealAbility 정보 넘기기
 
 `TPSBaseCharacter.h`
 ```c++
@@ -339,7 +339,7 @@ protected:
 ```
 
 
-### 4-3. BP 로 클래스 적용
+#### 4-3. BP 로 클래스 적용
 
 `BP_TPSBaseCharacter` 의 `HealAbilityClass`에 `BP_HealAbility` 적용
 
@@ -351,22 +351,22 @@ protected:
   TSubclassOf<UGameplayAbility> HealAbilityClass = UHealAbility::StaticClass();
 ```
 
-## 5. GE (GameplayEffect) 추가
+### 5. GE (GameplayEffect) 추가
 GA에선 판단을 한다면, GE에선 실제 데이터에 적용을 해준다.  
 블루프린트로 주로 관리된다.  
 
-### 5-1. GE BP 생성
+#### 5-1. GE BP 생성
 Blueprint Class - GameplayEffect 상속
 
 ![GE BP.png](../assets/img/unreal-gas/GE%20BP.png)
 
-### 5-2. GE 속성 설정
+#### 5-2. GE 속성 설정
 
 Magnitude는 HealAmount 값을 넘겨받을 예정
 
 ![GE_Heal_Attribute.png](../assets/img/unreal-gas/GE_Heal_Attribute.png)
 
-### 5-3. GA 헤더에 GE 변수 추가
+#### 5-3. GA 헤더에 GE 변수 추가
 
 GameAbility에서 바로 HP를 적용하던걸, GameplayEffect로 변경할 것이다.
 
@@ -387,7 +387,7 @@ protected:
 }
 ```
 
-### 5-4. 어빌리티 cpp에 GE 적용
+#### 5-4. 어빌리티 cpp에 GE 적용
 
 `HealAbility.cpp`
 
@@ -438,7 +438,7 @@ void UHealAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle, cons
 }
 ```
 
-## 6. ASC에 Ability 부여 / 해제
+### 6. ASC에 Ability 부여 / 해제
 
 어빌리티를 부여받으면 사용할 수 있는 환경이 된 것
 
@@ -462,7 +462,7 @@ void ATPSBaseCharacter::GiveStartupAbilities()
 }
 ```
 
-### 6-1. Ability 구현 위치
+#### 6-1. Ability 구현 위치
 
 Case 1
 > PlayerState : ASC  
@@ -478,7 +478,7 @@ Case 3
 > 게임 도중에 스킬/아이템 언락  
 > -> 이벤트 시점에 ASC->GiveAbility(SkillAbility);
 
-## 7. 어빌리티 사용
+### 7. 어빌리티 사용
 
 ```c++
 void ATPSBaseCharacter::UseHealAbility()

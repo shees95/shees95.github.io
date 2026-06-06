@@ -12,7 +12,7 @@ description: "언리얼 리플렉션 시스템 기본"
 
 ---
 
-# 1. 리플렉션 시스템이란?
+## 1. 리플렉션 시스템이란?
 
 C++ 클래스, 변수, 함수를 언리얼 엔진이 인식할 수 있도록 등록하는 시스템이다.
 
@@ -26,7 +26,7 @@ C++ 클래스, 변수, 함수를 언리얼 엔진이 인식할 수 있도록 등
 
 ---
 
-# 2. UCLASS
+## 2. UCLASS
 
 클래스를 엔진에 등록한다.
 
@@ -37,8 +37,6 @@ class TPSBASE_API AMyCharacter : public ACharacter
 	GENERATED_BODY()
 };
 ```
-
-## 2-1. 자주 사용하는 태그
 
 ### Blueprintable
 
@@ -90,7 +88,7 @@ class TPSBASE_API UMySettings : public UObject
 
 ---
 
-# 3. UPROPERTY
+## 3. UPROPERTY
 
 변수를 엔진에 등록한다.
 
@@ -99,7 +97,7 @@ UPROPERTY()
 float HP;
 ```
 
-## 3-1. EditAnywhere
+### 3-1. EditAnywhere
 
 에디터 어디서든 수정 가능
 
@@ -108,7 +106,7 @@ UPROPERTY(EditAnywhere)
 float MoveSpeed = 600.f;
 ```
 
-## 3-2. EditDefaultsOnly
+### 3-2. EditDefaultsOnly
 
 블루프린트 기본값만 수정 가능
 
@@ -117,7 +115,7 @@ UPROPERTY(EditDefaultsOnly)
 float MaxHP = 100.f;
 ```
 
-## 3-3. EditInstanceOnly
+### 3-3. EditInstanceOnly
 
 배치된 인스턴스만 수정 가능
 
@@ -126,7 +124,7 @@ UPROPERTY(EditInstanceOnly)
 float PatrolRadius;
 ```
 
-## 3-4. VisibleAnywhere
+### 3-4. VisibleAnywhere
 
 읽기만 가능
 
@@ -137,7 +135,7 @@ UStaticMeshComponent* Mesh;
 
 주로 컴포넌트에 사용
 
-## 3-5. BlueprintReadOnly
+### 3-5. BlueprintReadOnly
 
 블루프린트 읽기 가능
 
@@ -146,7 +144,7 @@ UPROPERTY(BlueprintReadOnly)
 float HP;
 ```
 
-## 3-6. BlueprintReadWrite
+### 3-6. BlueprintReadWrite
 
 블루프린트 읽기/쓰기 가능
 
@@ -155,7 +153,7 @@ UPROPERTY(BlueprintReadWrite)
 float HP;
 ```
 
-## 3-7. Category
+### 3-7. Category
 
 에디터 카테고리 분류
 
@@ -164,7 +162,7 @@ UPROPERTY(EditAnywhere, Category="Character")
 float HP;
 ```
 
-## 3-8. Transient
+### 3-8. Transient
 
 저장되지 않음
 
@@ -175,7 +173,7 @@ float RuntimeDamage;
 
 런타임 전용 데이터
 
-## 3-9. Replicated
+### 3-9. Replicated
 
 네트워크 복제
 
@@ -184,7 +182,7 @@ UPROPERTY(Replicated)
 float HP;
 ```
 
-## 3-10. ReplicatedUsing
+### 3-10. ReplicatedUsing
 
 복제 시 콜백 호출
 
@@ -196,7 +194,7 @@ UFUNCTION()
 void OnRep_HP();
 ```
 
-## 3-11. Meta
+### 3-11. Meta
 
 에디터 표시 방식 설정
 
@@ -247,7 +245,7 @@ UCameraComponent* Camera;
 
 ---
 
-# 4. UFUNCTION
+## 4. UFUNCTION
 
 함수를 엔진에 등록한다.
 
@@ -256,7 +254,7 @@ UFUNCTION()
 void Heal();
 ```
 
-## 4-1. BlueprintCallable
+### 4-1. BlueprintCallable
 
 블루프린트에서 호출 가능
 
@@ -265,7 +263,7 @@ UFUNCTION(BlueprintCallable)
 void Heal();
 ```
 
-## 4-2. BlueprintPure
+### 4-2. BlueprintPure
 
 실행 핀 없는 함수
 
@@ -276,7 +274,7 @@ float GetHP() const;
 
 Getter 함수에 사용
 
-## 4-3. BlueprintImplementableEvent
+### 4-3. BlueprintImplementableEvent
 
 블루프린트에서 구현
 
@@ -287,7 +285,7 @@ void OnDeath();
 
 CPP 구현 없음
 
-## 4-4. BlueprintNativeEvent
+### 4-4. BlueprintNativeEvent
 
 CPP 기본 구현 + BP 확장 가능
 
@@ -300,7 +298,7 @@ void OnDeath();
 void OnDeath_Implementation();
 ```
 
-## 4-5. CallInEditor
+### 4-5. CallInEditor
 
 에디터 버튼 생성
 
@@ -311,11 +309,11 @@ void GeneratePoints();
 
 ---
 
-# 5. RPC
+## 5. RPC
 
 멀티플레이 함수 호출
 
-## 5-1. Server
+### 5-1. Server
 
 클라이언트 → 서버
 
@@ -324,7 +322,7 @@ UFUNCTION(Server, Reliable)
 void ServerAttack();
 ```
 
-## 5-2. Client
+### 5-2. Client
 
 서버 → 특정 클라이언트
 
@@ -333,7 +331,7 @@ UFUNCTION(Client, Reliable)
 void ClientNotify();
 ```
 
-## 5-3. NetMulticast
+### 5-3. NetMulticast
 
 서버 → 모든 클라이언트
 
@@ -342,7 +340,7 @@ UFUNCTION(NetMulticast, Reliable)
 void MulticastExplosion();
 ```
 
-## 5-4. Reliable
+### 5-4. Reliable
 
 전송 보장
 
@@ -357,7 +355,7 @@ void ServerInteract();
 * 아이템 획득
 * 문 열기
 
-## 5-5. Unreliable
+### 5-5. Unreliable
 
 전송 보장 안함
 
@@ -374,7 +372,7 @@ void ServerMove();
 
 ---
 
-# 6. USTRUCT
+## 6. USTRUCT
 
 구조체를 엔진에 등록한다.
 
@@ -394,7 +392,7 @@ struct FCharacterData
 
 ---
 
-# 7. UENUM
+## 7. UENUM
 
 Enum을 엔진에 등록한다.
 
@@ -411,7 +409,7 @@ enum class ECharacterState : uint8
 
 ---
 
-# 8. 실무에서 가장 많이 쓰는 조합
+## 8. 실무에서 가장 많이 쓰는 조합
 
 ### 컴포넌트
 
@@ -465,7 +463,7 @@ void ServerInteract();
 
 ---
 
-# 9. 우선 암기할 것
+## 9. 우선 암기할 것
 
 초반에 가장 많이 보는 태그는 아래 10개다.
 

@@ -10,7 +10,7 @@ description: ""
 
 ---
 
-# 1. 클래스 생성
+## 1. 클래스 생성
 
 >Tool - New C++ Class - [부모 클래스 선택] 
 
@@ -18,7 +18,7 @@ public, private 설정하면 공개 여부를 설정할 수 있음
 
 ---
 
-# 2. 전처리기 세팅
+## 2. 전처리기 세팅
 ```#include "CoreMinimal.h"```
 - 엔진 전역 타입, 매크로, 함수
 - 맨 위에 포함
@@ -32,7 +32,7 @@ public, private 설정하면 공개 여부를 설정할 수 있음
 
 ---
 
-# 3. ```.h``` 선언부 코드  
+## 3. ```.h``` 선언부 코드  
 
 ```c++
 UCLASS()
@@ -74,25 +74,25 @@ protected:
 
 ---
 
-# 4. 컴포넌트 추가
+## 4. 컴포넌트 추가
 ```Component``` : Actor의 역할, 속성 등을 갖도록 만들어주는 부픔 개념  
 ```Root Component```
 - 모든 Actor는 Root 컴포넌트를 갖아야함
 - Actor는 역할이 있는 대상이기 때문에 트랜스폼을 관리할 수 있는 Scene Component를 보통 루트로 설정함
 ```Static Mesh Component``` : 애니메이션이나 스켈레탈 본 없는 정적 3D 모델을 그리는 컴포넌트 
 
-## 선언
+### 선언
 ```c++
   USceneComponent* Root;    // 씬 컴포넌트 선언
   UStaticMeshComponent* StaticMeshComp; // 스태틱 메쉬 컴포넌트 선언
 ```
 
-## 생성
+### 생성
 ```c++
   CreateDefaultSubobject<T>(TEXT(""));  // 컴포넌트 생성 및 초기화
 ```
 
-## 설정
+### 설정
 ```c++
   SetRootComponent(Root);  // 루트 컴포넌트를 생성한 씬 컴포넌트로 설정
   StaticMeshComp->SetupAttachment(Root);    // 스태틱 메쉬 컴포넌트를 Root에 부착 
@@ -103,7 +103,7 @@ protected:
 
 ---
 
-# 5. 메쉬, 머테리얼 경로로 설정
+## 5. 메쉬, 머테리얼 경로로 설정
 
 ```c++
 AMyActor::AMyActor()
@@ -130,7 +130,7 @@ AMyActor::AMyActor()
 ---
 
 
-# 6. 삭제
+## 6. 삭제
 cpp 파일이 생성된 파일 경로에서 파일 삭제를 하면 클래스 삭제가 가능
 
 > - 경로  
