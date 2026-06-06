@@ -5,41 +5,38 @@ layout: page
 {% assign groups = site.posts | group_by_exp: "post", "post.categories[0]" | sort: "name" %}
 
 <style>
-  .cat-header {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    padding: 0 0.75rem;
-  }
-  .cat-header .cat-name { flex-shrink: 0; }
-  .cat-header .cat-count { margin-left: 1.5rem; flex: 1; }
-  .cat-header .cat-toggle { flex-shrink: 0; width: 1.5rem; text-align: center; }
-
-  .cat-item {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    padding: 0 0.75rem 0 2.25rem;
-  }
-  .cat-item .cat-name { flex-shrink: 0; }
-  .cat-item .cat-count { margin-left: 1.5rem; flex: 1; }
-  .cat-item .cat-toggle { flex-shrink: 0; width: 1.5rem; text-align: center; }
-
+  .cat-header,
+  .cat-item,
   .cat-item-l3 {
     display: flex;
     align-items: center;
-    min-height: 48px;
-    padding: 0 0.75rem 0 3.75rem;
+    height: 48px;
+    box-sizing: border-box;
   }
+  .cat-header    { padding: 0 0.75rem; }
+  .cat-item      { padding: 0 0.75rem 0 2.25rem; }
+  .cat-item-l3   { padding: 0 0.75rem 0 3.75rem; }
+
+  .cat-header .cat-name,
+  .cat-item .cat-name,
   .cat-item-l3 .cat-name { flex-shrink: 0; }
+
+  .cat-header .cat-count,
+  .cat-item .cat-count,
   .cat-item-l3 .cat-count { margin-left: 1.5rem; flex: 1; }
+
+  .cat-header .cat-toggle,
+  .cat-item .cat-toggle { flex-shrink: 0; width: 1.5rem; text-align: center; }
+
+  /* list-group-item 기본 패딩 제거 */
+  .list-group-item { padding: 0 !important; }
 
   /* details/summary 기본 스타일 제거 */
   details > summary { list-style: none; }
   details > summary::-webkit-details-marker { display: none; }
 
-  /* 하위 카테고리 상단 여백 */
-  details > ul.list-group { padding-top: 0.4rem; }
+  /* 하위 카테고리 상단 여백 제거 */
+  details > ul.list-group { padding-top: 0; }
 
   /* 화살표 트랜지션 */
   .cat-toggle i {
