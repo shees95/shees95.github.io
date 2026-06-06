@@ -44,6 +44,10 @@ layout: page
     display: inline-block;
   }
   .cat-toggle-closed i { transform: rotate(-90deg); }
+
+  /* 토글 링크 언더바 제거 */
+  .cat-toggle a,
+  .cat-toggle a:hover { text-decoration: none; }
 </style>
 
 <div id="categories" class="categories pl-xl-3">
@@ -146,6 +150,12 @@ layout: page
 </div>
 
 <script>
+  // Bootstrap Collapse 미리 초기화 (첫 클릭 무반응 버그 방지)
+  document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function(el) {
+    var target = document.querySelector(el.getAttribute('href'));
+    if (target) new bootstrap.Collapse(target, { toggle: false });
+  });
+
   document.querySelectorAll('details').forEach(function(d) {
     var toggle = d.querySelector('summary .cat-toggle');
     d.addEventListener('toggle', function() {
