@@ -1,7 +1,7 @@
 ---
 title: "GitPage 이주"
 date: 2026-06-01 16:00:00 +0900
-categories: [Git, GitPage]
+categories: [Git, GitPages]
 tags: []
 description: "Velog가 불편해서 GitPage로 이주하게 된 이유"
 ---
