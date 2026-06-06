@@ -1,6 +1,6 @@
 <style>
-  #posting-heatmap { margin-top: 1.5rem; }
-  #posting-heatmap .panel-title { margin-bottom: 0.75rem; }
+  #posting-heatmap { }
+  #posting-heatmap h2.panel-heading { margin-bottom: 0.75rem; }
   .heatmap-grid {
     display: flex;
     gap: 3px;
@@ -28,10 +28,8 @@
   .heatmap-legend .heatmap-cell { flex-shrink: 0; }
 </style>
 
-<div id="posting-heatmap">
-  <div class="panel-heading">
-    <h2 class="panel-title">Posting Activity</h2>
-  </div>
+<section id="posting-heatmap">
+  <h2 class="panel-heading">Posting Activity</h2>
   <div class="heatmap-grid" id="heatmap-grid"></div>
   <div class="heatmap-legend">
     <span>Less</span>
@@ -42,7 +40,7 @@
     <span class="heatmap-cell" data-count="4"></span>
     <span>More</span>
   </div>
-</div>
+</section>
 
 <script>
 (function() {
