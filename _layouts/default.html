@@ -44,7 +44,9 @@ layout: compress
               {% include {{ _include_path }} lang=lang %}
             {% endfor %}
 
-            {% include posting-heatmap.html lang=lang %}
+            {% unless layout.layout == 'post' or page.layout == 'post' %}
+              {% include posting-heatmap.html lang=lang %}
+            {% endunless %}
           </aside>
         </div>
 
