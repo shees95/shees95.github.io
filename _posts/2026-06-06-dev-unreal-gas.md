@@ -17,9 +17,9 @@ description: "언리얼 GAS에 대한 개념정리"
 ---
 
 ## ASC (Ability Ssytem Component)
-`#include "AbilitySystemInterface.h"`  
 
 캐릭터에게 능력부여 및 실행 관리하는 컴포넌트
+
 
 ## AS (Attribute Set)
 
@@ -27,13 +27,11 @@ description: "언리얼 GAS에 대한 개념정리"
 
 
 ## GA (Gameplay Ability)
-`#include "Abilities/GameplayAbility.h"`
 
 부여할 어빌리티 로직 클래스
 
 
 ## GE (Gameplay Effect)
-`#include "GameplayEffect.h"`
 
 AS에 데이터 반영
 
