@@ -2,7 +2,7 @@
 title: "깃 페이지 Category, TOC 트리룰"
 date: 2026-06-06 20:33:00 +0900
 categories: [Git, Git-GitPage]
-tags: [Git, GitPage, Category, TOC]
+tags: [Git, GitPages, GitPages-Category, GitPages-TOC]
 description: "깃 페이지 사용법"
 ---
 
