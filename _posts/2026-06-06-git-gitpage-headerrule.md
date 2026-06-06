@@ -107,3 +107,8 @@ categories: [CPP, CPP-Basic]
 
 과도한 줄나눔 처리는 TOC 구조를 쉽게 깨트릴 수 있다.
 
+## 진짜 해결법
+
+클로드에게 부탁했다.
+
+![claude tags.png](../assets/img/gitpage-category%20toc/claude%20tags.png)
