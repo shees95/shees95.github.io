@@ -1,8 +1,8 @@
 ---
 title: "언리얼 호스트 서버 열기 2"
 date: 2026-05-19 00:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-ListenServer]
-tags: [UnrealEngine, UnrealEngine-ServerOperation, UnrealEngine-HasAuthority, UnrealEngine-Replicates]
+categories: [UnrealEngine, UE-ListenServer]
+tags: [UnrealEngine, ListenServer, HasAuthority, Replicates]
 description: "언리얼 Listen서버 내 데이터 통신 주고받기"
 ---
 

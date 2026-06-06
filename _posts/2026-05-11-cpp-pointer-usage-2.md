@@ -1,8 +1,8 @@
 ---
 title: "CPP 포인터/레퍼런스 사용 이유"
 date: 2026-05-11 00:00:00 +0900
-categories: [CPP]
-tags: [CPP, CPP-Pointer, CPP-Reference]
+categories: [CPP, CPP-Basic]
+tags: [CPP, Pointer, Reference]
 description: "포인터 레퍼런스 사용처"
 ---
 # 포인터와 레퍼런스를 언제 써야 할까?

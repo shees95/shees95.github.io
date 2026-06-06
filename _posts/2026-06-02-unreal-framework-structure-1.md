@@ -1,8 +1,8 @@
 ---
 title: "언리얼 프레임워크 구조 1"
 date: 2026-06-02 17:15:00 +0900
-categories: [UnrealEngine, UnrealEngine-Structure]
-tags: [UnrealEngine, UnrealEngine-Structure, UnrealEngine-Framework]
+categories: [UnrealEngine, UE-Framework]
+tags: [UnrealEngine, Framework, Structure]
 description: "언리얼 엔진의 WinMain부터 EngineTick까지"
 ---
 
@@ -471,9 +471,9 @@ int32 FEngineLoop::Init()
     //GEngine
     // Editor = UUnrealEdEngine : public UEditorEngine, public FNotifyHook
     // UEditorEngine : UEngine
-    #IF WITH_EDIT : GEngine = NewObject<UEngine>(GetTransientPackage(), EngineClass);
+    #IF WITH_EDITOR : GEngine = NewObject<UEngine>(GetTransientPackage(), EngineClass);
     // Game = UEngine
-    #IF !WITH_EDIT : GEngine = GEditor = GUnrealEd = NewObject<UUnrealEdEngine>(GetTransientPackage(), EngineClass);
+    #IF !WITH_EDITOR : GEngine = GEditor = GUnrealEd = NewObject<UUnrealEdEngine>(GetTransientPackage(), EngineClass);
     
     // 객체 초기화
     // 게임 인스턴스 초기화

@@ -1,8 +1,8 @@
 ---
 title: "디자인패턴 GOF 2"
 date: 2026-06-02 08:30:00 +0900
-categories: [Dev, DesignPattern]
-tags: [DesignPattern, DesignPattern-GOF]
+categories: [Dev, Dev-DesignPattern]
+tags: [DesignPattern, GOF]
 description: "GOF 패턴의 각 사용방법"
 ---
 
