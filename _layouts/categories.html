@@ -20,10 +20,12 @@ layout: page
     align-items: center;
     min-height: 48px;
     padding: 0 1rem;
+    cursor: pointer;
+    list-style: none;
   }
   .cat-item .cat-name { flex-shrink: 0; }
   .cat-item .cat-count { margin-left: 1.5rem; flex: 1; }
-  .cat-item .cat-toggle { flex-shrink: 0; margin-left: auto; }
+  .cat-item .cat-toggle { flex-shrink: 0; margin-left: auto; transition: transform 0.2s; }
 
   .cat-item-l3 {
     display: flex;
@@ -33,6 +35,14 @@ layout: page
   }
   .cat-item-l3 .cat-name { flex-shrink: 0; }
   .cat-item-l3 .cat-count { margin-left: 1.5rem; flex: 1; }
+
+  /* details/summary 기본 스타일 제거 */
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* 닫혔을 때 화살표 회전 */
+  details:not([open]) .cat-toggle i { transform: rotate(-90deg); }
+  details[open] .cat-toggle i { transform: rotate(0deg); }
 </style>
 
 <div id="categories" class="categories pl-xl-3">
@@ -76,29 +86,20 @@ layout: page
               {% assign named2_count = named2 | size %}
 
               <li class="list-group-item p-0">
-                <div class="cat-item">
-                  <span class="cat-name">
-                    <i class="far fa-folder fa-fw"></i>
-                    <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1">{{ cat1 }}</a>
-                  </span>
-                  <span class="cat-count text-muted small">
-                    {% if named2_count > 0 %}
-                      {{ named2_count }} categor{% if named2_count == 1 %}y{% else %}ies{% endif %} , {{ total1 }} post{% if total1 != 1 %}s{% endif %}
-                    {% else %}
-                      {{ total1 }} post{% if total1 != 1 %}s{% endif %}
-                    {% endif %}
-                  </span>
-                  <span class="cat-toggle">
-                    {% if named2_count > 0 %}
-                      <a href="#l_{{ cat0 }}_{{ cat1 }}" data-bs-toggle="collapse" aria-expanded="true" aria-label="expand-{{ cat1 }}">
-                        <i class="fas fa-fw fa-angle-down"></i>
-                      </a>
-                    {% endif %}
-                  </span>
-                </div>
-
                 {% if named2_count > 0 %}
-                  <div id="l_{{ cat0 }}_{{ cat1 }}" class="collapse show">
+                  <details open>
+                    <summary class="cat-item">
+                      <span class="cat-name">
+                        <i class="far fa-folder fa-fw"></i>
+                        <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1" onclick="event.stopPropagation()">{{ cat1 }}</a>
+                      </span>
+                      <span class="cat-count text-muted small">
+                        {{ named2_count }} categor{% if named2_count == 1 %}y{% else %}ies{% endif %} , {{ total1 }} post{% if total1 != 1 %}s{% endif %}
+                      </span>
+                      <span class="cat-toggle">
+                        <i class="fas fa-fw fa-angle-down"></i>
+                      </span>
+                    </summary>
                     <ul class="list-group">
                       {% for group2 in named2 %}
                         {% assign cat2 = group2.name %}
@@ -112,11 +113,20 @@ layout: page
                             <span class="cat-count text-muted small">
                               {{ total2 }} post{% if total2 != 1 %}s{% endif %}
                             </span>
-                            <span class="cat-toggle"></span>
                           </div>
                         </li>
                       {% endfor %}
                     </ul>
+                  </details>
+                {% else %}
+                  <div class="cat-item">
+                    <span class="cat-name">
+                      <i class="far fa-folder fa-fw"></i>
+                      <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1">{{ cat1 }}</a>
+                    </span>
+                    <span class="cat-count text-muted small">
+                      {{ total1 }} post{% if total1 != 1 %}s{% endif %}
+                    </span>
                   </div>
                 {% endif %}
               </li>
