@@ -7,89 +7,64 @@ layout: page
 <div id="categories" class="categories pl-xl-3">
   {% for group0 in groups %}
     {% assign cat0 = group0.name %}
+    {% assign total0 = group0.items | size %}
     {% assign sub1_groups = group0.items | group_by_exp: "post", "post.categories[1]" | sort: "name" %}
-    {% assign sub1_count = sub1_groups | map: "name" | reject: "" | size %}
-    {% assign total_count = group0.items | size %}
+    {% assign named1 = sub1_groups | where_exp: "g", "g.name != ''" %}
+    {% assign named1_count = named1 | size %}
 
     <div class="card categories">
-      <div
-        class="card-header d-flex justify-content-between hide-border-bottom"
-        id="h_{{ cat0 }}"
-      >
+      <div class="card-header d-flex justify-content-between hide-border-bottom" id="h_{{ cat0 }}">
         <span>
           <i class="far fa-folder fa-fw"></i>
-          <a href="{{ site.baseurl }}/categories/{{ cat0 | downcase | url_encode }}/"
-            class="ml-1 mr-2">{{ cat0 }}</a>
-          {% if sub1_count > 0 %}
-            <span class="text-muted small">{{ sub1_count }} categor{% if sub1_count == 1 %}y{% else %}ies{% endif %} , {{ total_count }} post{% if total_count != 1 %}s{% endif %}</span>
+          <a href="{{ site.baseurl }}/categories/{{ cat0 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat0 }}</a>
+          {% if named1_count > 0 %}
+            <span class="text-muted small">{{ named1_count }} categor{% if named1_count == 1 %}y{% else %}ies{% endif %} , {{ total0 }} post{% if total0 != 1 %}s{% endif %}</span>
           {% else %}
-            <span class="text-muted small">{{ total_count }} post{% if total_count != 1 %}s{% endif %}</span>
+            <span class="text-muted small">{{ total0 }} post{% if total0 != 1 %}s{% endif %}</span>
           {% endif %}
         </span>
-
-        {% if sub1_count > 0 %}
-          <a
-            href="#l_{{ cat0 }}"
-            data-bs-toggle="collapse"
-            aria-expanded="true"
-            aria-label="expand-{{ cat0 }}"
-            class="ms-auto"
-          >
+        {% if named1_count > 0 %}
+          <a href="#l_{{ cat0 }}" data-bs-toggle="collapse" aria-expanded="true" aria-label="expand-{{ cat0 }}" class="ms-auto">
             <i class="fas fa-fw fa-angle-down"></i>
           </a>
         {% else %}
-          <span class="ms-auto">
-            <i class="fas fa-fw fa-angle-right"></i>
-          </span>
+          <span class="ms-auto"><i class="fas fa-fw fa-angle-right"></i></span>
         {% endif %}
       </div>
 
-      {% if sub1_count > 0 %}
-        <div id="l_{{ cat0 }}" class="collapse show" aria-expanded="true">
+      {% if named1_count > 0 %}
+        <div id="l_{{ cat0 }}" class="collapse show">
           <ul class="list-group">
-            {% for group1 in sub1_groups %}
+            {% for group1 in named1 %}
               {% assign cat1 = group1.name %}
-              {% if cat1 == "" %}{% continue %}{% endif %}
+              {% assign total1 = group1.items | size %}
               {% assign sub2_groups = group1.items | group_by_exp: "post", "post.categories[2]" | sort: "name" %}
-              {% assign sub2_count = sub2_groups | map: "name" | reject: "" | size %}
-              {% assign count1 = group1.items | size %}
+              {% assign named2 = sub2_groups | where_exp: "g", "g.name != ''" %}
+              {% assign named2_count = named2 | size %}
 
-              <li
-                class="list-group-item"
-                id="h_{{ cat0 }}_{{ cat1 }}"
-              >
+              <li class="list-group-item">
                 <i class="far fa-folder fa-fw"></i>
-                <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/"
-                  class="ml-1 mr-2">{{ cat1 }}</a>
-                {% if sub2_count > 0 %}
-                  <span class="text-muted small">{{ sub2_count }} categor{% if sub2_count == 1 %}y{% else %}ies{% endif %} , {{ count1 }} post{% if count1 != 1 %}s{% endif %}</span>
-                  <a
-                    href="#l_{{ cat0 }}_{{ cat1 }}"
-                    data-bs-toggle="collapse"
-                    aria-expanded="true"
-                    aria-label="expand-{{ cat1 }}"
-                    class="ms-auto float-end"
-                  >
+                <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat1 }}</a>
+                {% if named2_count > 0 %}
+                  <span class="text-muted small">{{ named2_count }} categor{% if named2_count == 1 %}y{% else %}ies{% endif %} , {{ total1 }} post{% if total1 != 1 %}s{% endif %}</span>
+                  <a href="#l_{{ cat0 }}_{{ cat1 }}" data-bs-toggle="collapse" aria-expanded="true" aria-label="expand-{{ cat1 }}" class="ms-auto float-end">
                     <i class="fas fa-fw fa-angle-down"></i>
                   </a>
-
                   <div id="l_{{ cat0 }}_{{ cat1 }}" class="collapse show ps-3 mt-1">
                     <ul class="list-group">
-                      {% for group2 in sub2_groups %}
+                      {% for group2 in named2 %}
                         {% assign cat2 = group2.name %}
-                        {% if cat2 == "" %}{% continue %}{% endif %}
-                        {% assign count2 = group2.items | size %}
+                        {% assign total2 = group2.items | size %}
                         <li class="list-group-item">
                           <i class="far fa-folder fa-fw"></i>
-                          <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/"
-                            class="ml-1 mr-2">{{ cat2 }}</a>
-                          <span class="text-muted small">{{ count2 }} post{% if count2 != 1 %}s{% endif %}</span>
+                          <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/" class="ml-1 mr-2">{{ cat2 }}</a>
+                          <span class="text-muted small">{{ total2 }} post{% if total2 != 1 %}s{% endif %}</span>
                         </li>
                       {% endfor %}
                     </ul>
                   </div>
                 {% else %}
-                  <span class="text-muted small">{{ count1 }} post{% if count1 != 1 %}s{% endif %}</span>
+                  <span class="text-muted small">{{ total1 }} post{% if total1 != 1 %}s{% endif %}</span>
                 {% endif %}
               </li>
             {% endfor %}
