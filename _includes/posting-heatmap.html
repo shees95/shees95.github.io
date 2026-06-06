@@ -46,11 +46,8 @@
 
 <script>
 (function() {
-  {%- assign post_dates = "" -%}
-  {%- for post in site.posts -%}
-    {%- assign post_dates = post_dates | append: post.date | date: '%Y-%m-%d' | append: "," -%}
-  {%- endfor -%}
-  const raw = "{{ post_dates }}";
+  {%- capture post_dates -%}{%- for post in site.posts -%}{{ post.date | date: '%Y-%m-%d' }},{%- endfor -%}{%- endcapture -%}
+  const raw = "{{ post_dates | strip }}";
   const postDates = raw.split(',').filter(Boolean);
   const countMap = {};
   postDates.forEach(d => { countMap[d] = (countMap[d] || 0) + 1; });
@@ -61,9 +58,9 @@
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const startDate = new Date(today);
-  startDate.setDate(today.getDate() - 52 * 7 + 1);
+  startDate.setDate(today.getDate() - 20 * 7 + 1);
 
-  for (let w = 0; w < 52; w++) {
+  for (let w = 0; w < 20; w++) {
     const col = document.createElement('div');
     col.className = 'heatmap-col';
     for (let d = 0; d < 7; d++) {
