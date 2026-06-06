@@ -61,8 +61,6 @@ layout: page
             <a href="#l_{{ cat0 }}" data-bs-toggle="collapse" aria-expanded="true" aria-label="expand-{{ cat0 }}">
               <i class="fas fa-fw fa-angle-down"></i>
             </a>
-          {% else %}
-            <i class="fas fa-fw fa-angle-right text-muted"></i>
           {% endif %}
         </span>
       </div>
@@ -95,8 +93,6 @@ layout: page
                       <a href="#l_{{ cat0 }}_{{ cat1 }}" data-bs-toggle="collapse" aria-expanded="true" aria-label="expand-{{ cat1 }}">
                         <i class="fas fa-fw fa-angle-down"></i>
                       </a>
-                    {% else %}
-                      <i class="fas fa-fw fa-angle-right text-muted"></i>
                     {% endif %}
                   </span>
                 </div>
@@ -116,9 +112,7 @@ layout: page
                             <span class="cat-count text-muted small">
                               {{ total2 }} post{% if total2 != 1 %}s{% endif %}
                             </span>
-                            <span class="cat-toggle">
-                              <i class="fas fa-fw fa-angle-right text-muted"></i>
-                            </span>
+                            <span class="cat-toggle"></span>
                           </div>
                         </li>
                       {% endfor %}
