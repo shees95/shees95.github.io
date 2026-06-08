@@ -502,7 +502,6 @@ Case 3
 > -> 이벤트 시점에 ASC->GiveAbility(SkillAbility);
 
 ### 7. 어빌리티 사용
-
 ```c++
 void ATPSBaseCharacter::UseHealAbility()
 {
