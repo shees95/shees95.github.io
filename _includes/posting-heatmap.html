@@ -64,7 +64,7 @@
     for (let d = 0; d < 7; d++) {
       const date = new Date(startDate);
       date.setDate(startDate.getDate() + w * 7 + d);
-      const key = date.toISOString().slice(0, 10);
+      const key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
       const count = countMap[key] || 0;
       const cell = document.createElement('div');
       cell.className = 'heatmap-cell';
