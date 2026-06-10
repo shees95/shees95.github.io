@@ -10,4 +10,4 @@ description: ""
 
 ---
 
-![2 BeginPlay_Programming_Schematic.png](../assets/img/unreal-structure-official-img/2%20BeginPlay_Programming_Schematic.png)
+![2 BeginPlay_Programming_Schematic.png](/assets/img/unreal-structure-official-img/2%20BeginPlay_Programming_Schematic.png)

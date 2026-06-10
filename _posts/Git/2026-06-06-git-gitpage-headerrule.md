@@ -13,7 +13,7 @@ description: "깃 페이지 사용법"
 ## Category
 글들을 폴더처럼 분류해주는 기능
 
-![category.png](../assets/img/gitpage-category%20toc/category.png)
+![category.png](/assets/img/gitpage-category%20toc/category.png)
 
 ### 사용법
 
@@ -69,7 +69,7 @@ categories: [CPP, CPP-Basic]
 
 글에 헤더 `#`를 작성하면 해당 행으로 갈 수 있는 바로가기 링크가 생긴다.
 
-![toc.png](../assets/img/gitpage-category%20toc/toc.png)
+![toc.png](/assets/img/gitpage-category%20toc/toc.png)
 
 해당 기능은 룰을 제대로 따르지 않으면 구조가 완전히 무너지는 현상을 볼 수 있다.
 
@@ -111,4 +111,4 @@ categories: [CPP, CPP-Basic]
 
 클로드에게 부탁했다.
 
-![claude tags.png](../assets/img/gitpage-category%20toc/claude%20tags.png)
+![claude tags.png](/assets/img/gitpage-category%20toc/claude%20tags.png)

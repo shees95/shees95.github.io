@@ -13,12 +13,12 @@ description: "랜드 애니메이션 시 캐릭터 작아짐 이슈"
 ## 오류
 
 점프 착륙을 할 때마다 캐릭터가 작아졌다가 커지는 오류가 발생
-![land issue.png](../assets/img/troubleshooting-unreal-land-animiation/land%20issue.png)
+![land issue.png](/assets/img/troubleshooting-unreal-land-animiation/land%20issue.png)
 ```<하체 비만인가보다>```
 
 ## Locomotion
 
-![locomotion.png](../assets/img/troubleshooting-unreal-land-animiation/locomotion.png)
+![locomotion.png](/assets/img/troubleshooting-unreal-land-animiation/locomotion.png)
 
 
 ## Additive 란?
