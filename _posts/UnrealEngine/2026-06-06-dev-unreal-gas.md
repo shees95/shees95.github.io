@@ -510,3 +510,5 @@ void ATPSBaseCharacter::UseHealAbility()
   AbilitySystemComponent->TryActivateAbilityByClass(HealAbilityClass);  // 체크 후 사용 가능하면 호출 
 }
 ```
+
+![gas 흐름도.png](../../assets/img/unreal-gas/gas%20%ED%9D%90%EB%A6%84%EB%8F%84.png)
