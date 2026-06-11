@@ -56,3 +56,144 @@ GAS 기능 하나라도 쓰는 액터
 - 단순 환경 트리거 : 함수 호출하는게 나을 수 있음
 ```
 
+---
+
+## 태그 부여 방식 차이
+
+---
+
+### SetAndApplyTargetTagChanges vs ApplyGameplayEffectSpecToTarget
+
+| | SetAndApplyTargetTagChanges | ApplyGameplayEffectSpecToTarget |
+|---|---|---|
+| **레이어** | GE 에셋 정의 수정 | GE 런타임 인스턴스 적용 |
+| **대상** | UGameplayEffect CDO/에셋 | ASC의 FActiveGameplayEffectsContainer |
+| **시점** | 에셋 로드 후, 적용 전 | 실제 게임플레이 중 |
+| **영속성** | 에셋에 반영 → 이후 모든 적용에 영향 | Duration Policy에 따라 결정 |
+
+#### SetAndApplyTargetTagChanges
+GE 에셋의 "부여할 태그 목록"을 런타임에 변경하는 함수.  
+ASC에 직접 태그를 넣는 게 아니라, GE가 **나중에 적용될 때 어떤 태그를 줄지**를 결정하는 GE 에셋 자체를 수정한다.
+
+```cpp
+void UTargetTagsGameplayEffectComponent::ApplyTargetTagChanges() const {
+    UGameplayEffect* Owner = GetOwner();
+    InheritableGrantedTagsContainer.ApplyTo(Owner->CachedGrantedTags); // GE 에셋의 CachedGrantedTags 갱신
+    // 이 시점에선 ASC에 아무것도 들어가지 않는다
+}
+```
+
+**이점:**
+- 같은 GE 블루프린트를 재사용하면서 부여 태그만 C++/BP로 런타임 교체
+- 부모 GE Component의 태그를 상속받아 오버라이드 가능 (에셋 중복 없이 태그 변형)
+
+#### ASC에 실제로 태그가 들어가는 시점
+
+`SetAndApplyTargetTagChanges`는 GE 에셋의 `CachedGrantedTags`만 갱신한다.  
+실제 ASC 진입은 이후 GE가 Apply될 때 일반 경로를 탄다.
+
+```
+SetAndApplyTargetTagChanges()
+└─ Owner->CachedGrantedTags 갱신 (GE 에셋)
+   ↓ (이후 별도로)
+ASC->ApplyGameplayEffectSpecToSelf(Spec)
+└─ FActiveGameplayEffectsContainer::ApplyGameplayEffectSpec()
+   └─ Owner->AddLooseGameplayTags(
+          Spec.Def->CachedGrantedTags  ← 여기서 수정된 값이 사용됨
+      )
+```
+
+태그의 영속성은 GE의 Duration Policy가 결정한다.
+
+| Duration Policy | 태그 수명 |
+|---|---|
+| Instant | 태그 부여 자체가 의미없음 (즉시 제거) |
+| HasDuration | Duration 만료 시 RemoveLooseGameplayTags로 제거 |
+| Infinite | GE가 명시적으로 제거될 때까지 유지 |
+
+> ASC에 태그가 실제로 들어가는 건 항상 `ApplyGameplayEffectSpecToTarget` 경로.  
+> `SetAndApplyTargetTagChanges`는 후자가 참조할 `CachedGrantedTags`를 미리 세팅하는 것.
+
+---
+
+## GAS 사용 범주
+
+---
+
+### 체력 (HP)
+
+GAS로 구현하는 게 표준.
+
+| 구성 | 역할 |
+|---|---|
+| UAttributeSet | HP, MaxHP 수치 보관 |
+| UGameplayEffect | 데미지/힐 적용 |
+| ASC | 어트리뷰트/이펙트 관리 |
+
+---
+
+### 무기 장착 / 방어구 장착
+
+장착 자체(소켓에 메시 붙이기, 인벤토리 슬롯 관리)는 **일반 Actor/Component 로직**.
+
+GAS 개입 시점:
+
+| 시점 | GAS 역할 |
+|---|---|
+| 장착 완료 후 | 무기/방어구가 주는 패시브 스탯 → GE로 어트리뷰트 수치 변경 |
+| 장착 완료 후 | 무기 고유 스킬 해금 → GA 부여 (GiveAbility) |
+| 해제 시 | 해당 GE 제거, GA 회수 |
+
+---
+
+### 무기 스왑
+
+스왑 자체는 일반 로직. 단, 아래 조건 중 하나라도 해당하면 **GA로 묶는 게 맞다**.
+
+```yaml
+GA로 묶어야 하는 경우:
++ 스왑 중 다른 행동 차단 필요 (태그로 Ability.Swap 중 공격/대시 블록)
++ 스왑 쿨타임 관리
++ 스왑 중 피격 시 캔슬 조건
++ 스왑 애니메이션 완료 후 장착 확정 (AbilityTask: PlayMontageAndWait)
++ 네트워크 예측 필요
+
+단순 인벤토리 슬롯 교체만이면 GA 불필요
+```
+
+---
+
+### 공격
+
+공격에 엮이는 것들 때문에 GAS가 필요하다.
+
+```yaml
+단순 히트박스 판정만 있으면 GAS 필요 없음.
+실제 공격에 붙는 것들:
++ 공격 중 다른 스킬 차단 (태그)
++ 쿨타임 관리
++ 히트 시 데미지 → 어트리뷰트 수치 변경 (GE)
++ 버프/디버프 적용 (스턴, 슬로우 등)
++ 콤보/상태 조건 (HP 50% 이하일 때만 발동 등)
++ 네트워크 예측 (Prediction Key)
+```
+
+> GAS = "조건 있는 행동 + 그 결과로 수치/상태 변경"을 다루는 시스템 → 공격이 그 정의에 딱 맞는다.
+
+---
+
+### 크래프팅
+
+**오버엔지니어링.** GAS가 풀려는 문제와 결이 다르다.
+
+```yaml
+크래프팅의 본질:
+  재료 소모 → 아이템 생성 = 인벤토리 데이터 조작
+  GAS는 인벤토리 개념 자체가 없음
+
+GAS 개입이 정당한 케이스:
++ 크래프팅 행동에 채널링 시간, 피격 중단, 캔슬 조건이 있을 때 → GA로 묶는 것만
+
+크래프팅 시스템 본체는 별도 시스템으로 구현
+```
+
