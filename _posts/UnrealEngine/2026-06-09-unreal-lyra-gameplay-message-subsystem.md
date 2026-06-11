@@ -52,12 +52,14 @@ MessageSystem.BroadcastMessage(Message.Verb, Message);
 라이라 실사용 예시 (`LyraHealthSet.cpp`):
 
 ```cpp
+// 메시지 생성
 FLyraVerbMessage Message;
 Message.Verb       = TAG_Lyra_Damage_Message;
 Message.Instigator = Data.EffectSpec.GetEffectContext().GetEffectCauser();
 Message.Target     = GetOwningActor();
 Message.Magnitude  = Data.EvaluatedData.Magnitude;
 
+// 월드에 알림
 UGameplayMessageSubsystem& MessageSystem = UGameplayMessageSubsystem::Get(GetWorld());
 MessageSystem.BroadcastMessage(Message.Verb, Message);
 ```

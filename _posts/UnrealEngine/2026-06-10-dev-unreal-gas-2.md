@@ -3,10 +3,10 @@ title: "언리얼 GAS 사용법 2"
 date: 2026-06-10 23:24:00 +0900
 categories: [UnrealEngine, UnrealEngine-GAS]
 tags: [UnrealEngine, UnrealEngine-GAS, UnrealEngine-ASC, UnrealEngine-AS, UnrealEngine-GA, UnrealEngine-GE]
-description: "어떤걸 써야하나?"
+description: "GAS 사용 범주"
 ---
 
-## 용도 정리
+## GAS 사용 범주
 
 ---
 
@@ -58,65 +58,7 @@ GAS 기능 하나라도 쓰는 액터
 
 ---
 
-## 태그 부여 방식 차이
-
----
-
-### SetAndApplyTargetTagChanges vs ApplyGameplayEffectSpecToTarget
-
-| | SetAndApplyTargetTagChanges | ApplyGameplayEffectSpecToTarget |
-|---|---|---|
-| **레이어** | GE 에셋 정의 수정 | GE 런타임 인스턴스 적용 |
-| **대상** | UGameplayEffect CDO/에셋 | ASC의 FActiveGameplayEffectsContainer |
-| **시점** | 에셋 로드 후, 적용 전 | 실제 게임플레이 중 |
-| **영속성** | 에셋에 반영 → 이후 모든 적용에 영향 | Duration Policy에 따라 결정 |
-
-#### SetAndApplyTargetTagChanges
-GE 에셋의 "부여할 태그 목록"을 런타임에 변경하는 함수.  
-ASC에 직접 태그를 넣는 게 아니라, GE가 **나중에 적용될 때 어떤 태그를 줄지**를 결정하는 GE 에셋 자체를 수정한다.
-
-```cpp
-void UTargetTagsGameplayEffectComponent::ApplyTargetTagChanges() const {
-    UGameplayEffect* Owner = GetOwner();
-    InheritableGrantedTagsContainer.ApplyTo(Owner->CachedGrantedTags); // GE 에셋의 CachedGrantedTags 갱신
-    // 이 시점에선 ASC에 아무것도 들어가지 않는다
-}
-```
-
-**이점:**
-- 같은 GE 블루프린트를 재사용하면서 부여 태그만 C++/BP로 런타임 교체
-- 부모 GE Component의 태그를 상속받아 오버라이드 가능 (에셋 중복 없이 태그 변형)
-
-#### ASC에 실제로 태그가 들어가는 시점
-
-`SetAndApplyTargetTagChanges`는 GE 에셋의 `CachedGrantedTags`만 갱신한다.  
-실제 ASC 진입은 이후 GE가 Apply될 때 일반 경로를 탄다.
-
-```
-SetAndApplyTargetTagChanges()
-└─ Owner->CachedGrantedTags 갱신 (GE 에셋)
-   ↓ (이후 별도로)
-ASC->ApplyGameplayEffectSpecToSelf(Spec)
-└─ FActiveGameplayEffectsContainer::ApplyGameplayEffectSpec()
-   └─ Owner->AddLooseGameplayTags(
-          Spec.Def->CachedGrantedTags  ← 여기서 수정된 값이 사용됨
-      )
-```
-
-태그의 영속성은 GE의 Duration Policy가 결정한다.
-
-| Duration Policy | 태그 수명 |
-|---|---|
-| Instant | 태그 부여 자체가 의미없음 (즉시 제거) |
-| HasDuration | Duration 만료 시 RemoveLooseGameplayTags로 제거 |
-| Infinite | GE가 명시적으로 제거될 때까지 유지 |
-
-> ASC에 태그가 실제로 들어가는 건 항상 `ApplyGameplayEffectSpecToTarget` 경로.  
-> `SetAndApplyTargetTagChanges`는 후자가 참조할 `CachedGrantedTags`를 미리 세팅하는 것.
-
----
-
-## GAS 사용 범주
+## GAS 용례
 
 ---
 
