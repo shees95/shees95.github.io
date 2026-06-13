@@ -6,7 +6,7 @@ tags: [UnrealEngine, UnrealEngine-AnimNotify, UnrealEngine-Interface, UnrealEngi
 description: "AnimNotify + Interface 조합으로 근접 공격 구현"
 ---
 
-## 전체 흐름
+## 언리얼 기본 Third Person Combat의 공격 흐름
 
 ---
 
@@ -14,12 +14,12 @@ description: "AnimNotify + Interface 조합으로 근접 공격 구현"
 
 ```
 입력
-    └→ ComboAttack()        공격 플래그 설정 + 몽타주 재생
-        └→ AnimNotify       몽타주의 특정 프레임에서 발동
-            └→ DoAttackTrace()      구체 스윕으로 히트 감지
-                └→ ApplyDamage()    ICombatDamageable 인터페이스로 호출
-                    └→ TakeDamage() HP 차감
-                        └→ HandleDeath()  HP <= 0
+  └→ ComboAttack()        공격 플래그 설정 + 몽타주 재생
+      └→ AnimNotify       몽타주의 특정 프레임에서 발동
+          └→ DoAttackTrace()      구체 스윕으로 히트 감지
+              └→ ApplyDamage()    ICombatDamageable 인터페이스로 호출
+                  └→ TakeDamage() HP 차감
+                      └→ HandleDeath()  HP <= 0
 ```
 
 ---
@@ -41,13 +41,15 @@ Move/Look은 기본 ThirdPerson을 상속받고, 공격 관련 입력(Combo, Cha
 
 ---
 
-에셋 경로 문자열로 찾는 게 아니라 `UPROPERTY`로 선언하고 BP 디테일 패널에서 직접 할당한다.
+`UPROPERTY`로 선언하고 BP 디테일 패널에서 직접 할당한다.
 
 ```c++
 // CombatCharacter.h
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 UAnimMontage* ComboAttackMontage;
 ```
+
+할당된 몽타주 애니메이션을 호출만 하는 식.
 
 ```c++
 // CombatCharacter.cpp
@@ -106,7 +108,9 @@ void UANS_DoAttackTrace::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 ```
 
 노티파이가 `ICombatAttacker`만 알면 되기 때문에,  
-캐릭터든 적이든 인터페이스를 구현한 액터라면 이 노티파이 하나로 공유할 수 있다.
+캐릭터든 적이든 인터페이스를 구현한 액터라면 이 노티파이 하나로 공유할 수 있다.  
+
+![notify montage.png](../../assets/img/unreal-notify/notify%20montage.png)
 
 ---
 
@@ -183,7 +187,11 @@ void ACombatCharacter::NotifyEnemiesOfIncomingAttack()
             ICombatDamageable* Damageable = Cast<ICombatDamageable>(CurrentHit.GetActor());
             if (Damageable)
             {
+                // 피격자 들에게 Notify 제공
                 Damageable->NotifyDanger(GetActorLocation(), this);
+                
+                // 이러면 Shoot RayTrace 할 때도, 미리 Notify를 한 뒤에 데미지 Apply를 하는 식으로 구현하면
+                // AI에게 회피기능을 제공할 수도 있을 것 같다
             }
         }
     }
