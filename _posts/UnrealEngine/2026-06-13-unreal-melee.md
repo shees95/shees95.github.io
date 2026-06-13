@@ -1,102 +1,74 @@
 ---
 title: "언리얼 밀리 공격 구현"
 date: 2026-06-13 15:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-GAS]
-tags: [UnrealEngine]
-description: "밀리 공격 구현"
+categories: [UnrealEngine, UnrealEngine-Combat]
+tags: [UnrealEngine, UnrealEngine-AnimNotify, UnrealEngine-Interface, UnrealEngine-Montage]
+description: "AnimNotify + Interface 조합으로 근접 공격 구현"
 ---
 
-# 언리얼에서 근접 공격은 어떻게 구현되어있을까?
+## 전체 흐름
 
 ---
 
-## 기본프로젝트 까보기
+근접 공격은 아래 파이프라인으로 동작한다.
 
-### 공격 입력은 어떻게 받는가?
-
-#### 1. 기본 ThirdPerson 의 컨트롤러 상속 및 자산이용
-Move와 Look은 기본 ThirdPerson을 상속받았고, Input Action들도 기본 자산을 이용    
-Combat 관련 입력 (Combo, Charge) 같은건 Combat Input에서 따로 관리    
-
-캐릭터에서 InputAction 관리 및 바인딩  
-컨트롤러에서 IMC 및 매핑 관리  
-
-
-
-
-### Third Person Base 에서 Combat Map의 근접공격 구현 내용 찾아보기
-
-#### 공격
-클릭 시 주는 공격 명령어
-
-`CombatCharacter.cpp`
-```c++
-void ACombatCharacter::ComboAttack()
-{
-	// raise the attacking flag
-	bIsAttacking = true;
-
-	// reset the combo count
-	ComboCount = 0;
-
-	// notify enemies they are about to be attacked
-	NotifyEnemiesOfIncomingAttack();
-
-	// play the attack montage
-	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
-	{
-		const float MontageLength = AnimInstance->Montage_Play(ComboAttackMontage, 1.0f, EMontagePlayReturnType::MontageLength, 0.0f, true);
-
-		// subscribe to montage completed and interrupted events
-		if (MontageLength > 0.0f)
-		{
-			// set the end delegate for the montage
-			AnimInstance->Montage_SetEndDelegate(OnAttackMontageEnded, ComboAttackMontage);
-		}
-	}
-
-}
+```
+입력
+    └→ ComboAttack()        공격 플래그 설정 + 몽타주 재생
+        └→ AnimNotify       몽타주의 특정 프레임에서 발동
+            └→ DoAttackTrace()      구체 스윕으로 히트 감지
+                └→ ApplyDamage()    ICombatDamageable 인터페이스로 호출
+                    └→ TakeDamage() HP 차감
+                        └→ HandleDeath()  HP <= 0
 ```
 
-#### 전방 적 탐지
+---
 
-`CombatCharacter.cpp`
+## 입력 처리
+
+---
+
+Move/Look은 기본 ThirdPerson을 상속받고, 공격 관련 입력(Combo, Charge)은 별도 InputAction으로 분리한다.
+
+```yaml
+캐릭터 : InputAction 바인딩 관리
+컨트롤러 : IMC(Input Mapping Context) 및 매핑 관리
+```
+
+---
+
+## 몽타주 연결 방식
+
+---
+
+에셋 경로 문자열로 찾는 게 아니라 `UPROPERTY`로 선언하고 BP 디테일 패널에서 직접 할당한다.
+
 ```c++
-void ACombatCharacter::NotifyEnemiesOfIncomingAttack()
+// CombatCharacter.h
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+UAnimMontage* ComboAttackMontage;
+```
+
+```c++
+// CombatCharacter.cpp
+void ACombatCharacter::ComboAttack()
 {
-  // 탐지 리스트
-	TArray<FHitResult> OutHits;
-  // 공격 범위 지정
-	const FVector TraceStart = GetActorLocation();
-	const FVector TraceEnd = TraceStart + (GetActorForwardVector() * DangerTraceDistance);
+    bIsAttacking = true;
+    ComboCount = 0;
 
-  // 충돌 범위 지정
-	FCollisionObjectQueryParams ObjectParams;
-	ObjectParams.AddObjectTypesToQuery(ECC_Pawn);
+    NotifyEnemiesOfIncomingAttack();
 
-  // Sphere Collision 으로 체크
-	FCollisionShape CollisionShape;
-	CollisionShape.SetSphere(DangerTraceRadius);
-  // 본인 제외
-	FCollisionQueryParams QueryParams;
-	QueryParams.AddIgnoredActor(this);
+    if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+    {
+        const float MontageLength = AnimInstance->Montage_Play(
+            ComboAttackMontage, 1.0f,
+            EMontagePlayReturnType::MontageLength, 0.0f, true);
 
-  // World의 콜리전 함수사용
-	if (GetWorld()->SweepMultiByObjectType(OutHits, TraceStart, TraceEnd, FQuat::Identity, ObjectParams, CollisionShape, QueryParams))
-	{
-		// 맞은 놈들 반복
-		for (const FHitResult& CurrentHit : OutHits)
-		{
-			// 때릴 수 있는 놈인지 인터페이스 보유 체크
-			ICombatDamageable* Damageable = Cast<ICombatDamageable>(CurrentHit.GetActor());
-      
-      // 때릴 수 있으면 데미지 부여
-			if (Damageable)
-			{
-				Damageable->NotifyDanger(GetActorLocation(), this);
-			}
-		}
-	}
+        if (MontageLength > 0.0f)
+        {
+            AnimInstance->Montage_SetEndDelegate(OnAttackMontageEnded, ComboAttackMontage);
+        }
+    }
 }
 ```
 
@@ -106,8 +78,8 @@ void ACombatCharacter::NotifyEnemiesOfIncomingAttack()
 
 ---
 
-몽타주에서 함수를 직접 호출하는 게 아니다.  
-`UAnimNotify`를 상속한 C++ 클래스를 만들고, `Notify()` 안에서 호출하면  
+몽타주에서 함수를 직접 호출할 수 없다.  
+`UAnimNotify`를 상속한 C++ 클래스를 만들고 `Notify()`를 오버라이드하면  
 컴파일 후 몽타주 노티파이 목록에 자동으로 등장한다.
 
 ```c++
@@ -133,52 +105,33 @@ void UANS_DoAttackTrace::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 }
 ```
 
-### 인터페이스와 조합하는 이유
-
-`DoAttackTrace()`를 `ICombatAttacker` 인터페이스에 선언하고,  
-노티파이에서 `Cast<ICombatAttacker>` 후 호출한다.
-
-```yaml
-장점:
-  노티파이 클래스 하나로 캐릭터, 적 등 구현체가 달라도 공유 가능
-  노티파이가 구체 클래스를 알 필요 없음
-```
+노티파이가 `ICombatAttacker`만 알면 되기 때문에,  
+캐릭터든 적이든 인터페이스를 구현한 액터라면 이 노티파이 하나로 공유할 수 있다.
 
 ---
 
-## 몽타주 연결 방식
+## 인터페이스 설계
 
 ---
 
-경로 문자열로 에셋을 찾는 게 아니라 `UPROPERTY`로 변수를 선언하고,  
-블루프린트 디테일 패널에서 직접 할당한다.
+### ICombatAttacker
+
+공격 판정 로직을 인터페이스로 분리한다.  
+AnimNotify가 이 인터페이스만 알면 어떤 액터든 공격 판정을 위임할 수 있다.
 
 ```c++
-// CombatCharacter.h
-UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-UAnimMontage* ComboAttackMontage;
+UINTERFACE()
+class UCombatAttacker : public UInterface { GENERATED_BODY() };
+
+class ICombatAttacker
+{
+    GENERATED_BODY()
+public:
+    virtual void DoAttackTrace() = 0;
+};
 ```
 
-```c++
-// 호출
-PlayAnimMontage(ComboAttackMontage);
-```
-
----
-
-## 데미지 흐름
-
----
-
-```
-AnimNotify (공격 판정 타이밍)
-    └→ DoAttackTrace()      구체 스윕으로 히트 감지
-        └→ ApplyDamage()    ICombatDamageable 인터페이스로 호출
-            └→ TakeDamage() HP 차감
-                └→ HandleDeath()  HP <= 0
-```
-
-### CombatDamageable 인터페이스
+### ICombatDamageable
 
 피격 가능한 모든 액터가 구현하는 인터페이스.  
 공격자는 대상이 캐릭터인지 오브젝트인지 몰라도 데미지를 전달할 수 있다.
@@ -195,19 +148,77 @@ public:
 };
 ```
 
-### CombatAttacker 인터페이스
+---
 
-공격 판정 로직을 인터페이스로 분리.  
-노티파이가 이 인터페이스만 알면 어떤 액터든 공격 판정을 위임할 수 있다.
+## 공격 판정 구현
+
+---
+
+### 전방 적 사전 탐지
+
+공격 시작 시점에 전방의 적을 미리 탐지해 대응할 수 있게 알린다.
 
 ```c++
-UINTERFACE()
-class UCombatAttacker : public UInterface { GENERATED_BODY() };
-
-class ICombatAttacker
+void ACombatCharacter::NotifyEnemiesOfIncomingAttack()
 {
-    GENERATED_BODY()
-public:
-    virtual void DoAttackTrace() = 0;
-};
+    TArray<FHitResult> OutHits;
+
+    const FVector TraceStart = GetActorLocation();
+    const FVector TraceEnd = TraceStart + (GetActorForwardVector() * DangerTraceDistance);
+
+    FCollisionObjectQueryParams ObjectParams;
+    ObjectParams.AddObjectTypesToQuery(ECC_Pawn);
+
+    FCollisionShape CollisionShape;
+    CollisionShape.SetSphere(DangerTraceRadius);
+
+    FCollisionQueryParams QueryParams;
+    QueryParams.AddIgnoredActor(this);
+
+    if (GetWorld()->SweepMultiByObjectType(OutHits, TraceStart, TraceEnd,
+        FQuat::Identity, ObjectParams, CollisionShape, QueryParams))
+    {
+        for (const FHitResult& CurrentHit : OutHits)
+        {
+            ICombatDamageable* Damageable = Cast<ICombatDamageable>(CurrentHit.GetActor());
+            if (Damageable)
+            {
+                Damageable->NotifyDanger(GetActorLocation(), this);
+            }
+        }
+    }
+}
+```
+
+### DoAttackTrace
+
+AnimNotify 발동 시 실제 히트 판정을 수행한다.  
+구체 스윕으로 범위 내 적을 감지하고 `ApplyDamage()`로 데미지를 전달한다.
+
+```c++
+void ACombatCharacter::DoAttackTrace()
+{
+    TArray<FHitResult> OutHits;
+
+    const FVector TraceStart = GetActorLocation();
+    const FVector TraceEnd = TraceStart + (GetActorForwardVector() * AttackTraceDistance);
+
+    FCollisionShape CollisionShape;
+    CollisionShape.SetSphere(AttackTraceRadius);
+
+    FCollisionQueryParams QueryParams;
+    QueryParams.AddIgnoredActor(this);
+
+    if (GetWorld()->SweepMultiByChannel(OutHits, TraceStart, TraceEnd,
+        FQuat::Identity, ECC_Pawn, CollisionShape, QueryParams))
+    {
+        for (const FHitResult& Hit : OutHits)
+        {
+            if (ICombatDamageable* Damageable = Cast<ICombatDamageable>(Hit.GetActor()))
+            {
+                Damageable->ApplyDamage(AttackDamage, this);
+            }
+        }
+    }
+}
 ```
