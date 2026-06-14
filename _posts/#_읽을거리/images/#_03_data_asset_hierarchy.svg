@@ -1,0 +1,199 @@
+<svg viewBox="0 0 1060 740" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#64B5F6"/>
+    </marker>
+    <marker id="ag" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#81C784"/>
+    </marker>
+    <marker id="ay" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#FFD54F"/>
+    </marker>
+    <marker id="ap" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#CE93D8"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="740" fill="#0D1117"/>
+  <text x="530" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#E0E0E0">Lyra Data Asset Hierarchy &amp; Management</text>
+  <line x1="50" y1="46" x2="1010" y2="46" stroke="#30363D" stroke-width="1"/>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- COLUMN A: Inventory Data -->
+  <!-- ─────────────────────────────────── -->
+  <text x="170" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#81C784">INVENTORY DATA</text>
+
+  <!-- ULyraInventoryItemDefinition -->
+  <rect x="50" y="78" width="240" height="90" rx="7" fill="#1C2128" stroke="#388E3C" stroke-width="1.8"/>
+  <text x="170" y="99" text-anchor="middle" font-size="11" font-weight="bold" fill="#81C784">ULyraInventoryItemDefinition</text>
+  <text x="170" y="114" text-anchor="middle" font-size="10" fill="#6E7681">: UPrimaryDataAsset</text>
+  <line x1="60" y1="120" x2="280" y2="120" stroke="#30363D" stroke-width="0.8"/>
+  <text x="60" y="133" font-size="9" fill="#80DEEA">  DisplayName: FText</text>
+  <text x="60" y="146" font-size="9" fill="#80DEEA">  Fragments: TArray&lt;ULyraInventoryItemFragment*&gt;</text>
+  <text x="60" y="159" font-size="9" fill="#6E7681">  PickupDefinition: TSoftObjectPtr</text>
+
+  <!-- UInventoryFragment_EquippableItem -->
+  <rect x="50" y="195" width="240" height="65" rx="7" fill="#1C2128" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="170" y="214" text-anchor="middle" font-size="10" font-weight="bold" fill="#A5D6A7">UInventoryFragment_EquippableItem</text>
+  <text x="170" y="228" text-anchor="middle" font-size="9" fill="#6E7681">: ULyraInventoryItemFragment</text>
+  <line x1="60" y1="234" x2="280" y2="234" stroke="#30363D" stroke-width="0.8"/>
+  <text x="60" y="247" font-size="9" fill="#80DEEA">  EquipmentDefinition: TSubclassOf&lt;</text>
+  <text x="60" y="258" font-size="9" fill="#80DEEA">    ULyraEquipmentDefinition&gt;</text>
+
+  <!-- UInventoryFragment_SetStats -->
+  <rect x="50" y="285" width="240" height="55" rx="7" fill="#1C2128" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="170" y="304" text-anchor="middle" font-size="10" font-weight="bold" fill="#A5D6A7">UInventoryFragment_SetStats</text>
+  <text x="170" y="318" text-anchor="middle" font-size="9" fill="#6E7681">: ULyraInventoryItemFragment</text>
+  <line x1="60" y1="324" x2="280" y2="324" stroke="#30363D" stroke-width="0.8"/>
+  <text x="60" y="336" font-size="9" fill="#80DEEA">  InitialItemStats: FGameplayTagStackContainer</text>
+
+  <!-- Fragment composition arrow -->
+  <line x1="170" y1="168" x2="170" y2="193" stroke="#81C784" stroke-width="1.4" marker-end="url(#ag)"/>
+  <line x1="170" y1="168" x2="170" y2="283" stroke="#81C784" stroke-width="1.4"/>
+  <text x="178" y="185" font-size="9" fill="#81C784">Fragments[]</text>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- COLUMN B: Equipment Data -->
+  <!-- ─────────────────────────────────── -->
+  <text x="530" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#B39DDB">EQUIPMENT DATA</text>
+
+  <!-- ULyraEquipmentDefinition -->
+  <rect x="400" y="78" width="260" height="100" rx="7" fill="#1C2128" stroke="#4527A0" stroke-width="1.8"/>
+  <text x="530" y="99" text-anchor="middle" font-size="11" font-weight="bold" fill="#B39DDB">ULyraEquipmentDefinition</text>
+  <text x="530" y="113" text-anchor="middle" font-size="10" fill="#6E7681">: UObject (DataAsset-like)</text>
+  <line x1="410" y1="119" x2="650" y2="119" stroke="#30363D" stroke-width="0.8"/>
+  <text x="415" y="132" font-size="9" fill="#80DEEA">  InstanceType: TSubclassOf&lt;ULyraEquipmentInstance&gt;</text>
+  <text x="415" y="146" font-size="9" fill="#80DEEA">  AbilitySetsToGrant: TArray&lt;ULyraAbilitySet*&gt;</text>
+  <text x="415" y="160" font-size="9" fill="#80DEEA">  ActorsToSpawn: TArray&lt;FLyraEquipmentActorToSpawn&gt;</text>
+  <text x="415" y="173" font-size="9" fill="#6E7681">  → Equip 시 이 배열 기준으로 모든 것이 결정</text>
+
+  <!-- ULyraEquipmentInstance -->
+  <rect x="400" y="210" width="260" height="80" rx="7" fill="#1C2128" stroke="#5E35B1" stroke-width="1.5"/>
+  <text x="530" y="230" text-anchor="middle" font-size="11" font-weight="bold" fill="#B39DDB">ULyraEquipmentInstance</text>
+  <text x="530" y="244" text-anchor="middle" font-size="10" fill="#6E7681">: UObject (Replicated)</text>
+  <line x1="410" y1="250" x2="650" y2="250" stroke="#30363D" stroke-width="0.8"/>
+  <text x="415" y="263" font-size="9" fill="#80DEEA">  Instigator: APawn*</text>
+  <text x="415" y="276" font-size="9" fill="#80DEEA">  SpawnedActors: TArray&lt;AActor*&gt;</text>
+  <text x="415" y="287" font-size="9" fill="#6E7681">  GrantedHandles: FLyraAbilitySet_GrantedHandles</text>
+
+  <!-- ULyraWeaponInstance (subclass) -->
+  <rect x="400" y="325" width="260" height="80" rx="7" fill="#1C2128" stroke="#B71C1C" stroke-width="1.8"/>
+  <text x="530" y="345" text-anchor="middle" font-size="11" font-weight="bold" fill="#EF9A9A">ULyraWeaponInstance</text>
+  <text x="530" y="359" text-anchor="middle" font-size="10" fill="#6E7681">: ULyraEquipmentInstance</text>
+  <line x1="410" y1="365" x2="650" y2="365" stroke="#30363D" stroke-width="0.8"/>
+  <text x="415" y="378" font-size="9" fill="#80DEEA">  HeatTracker / SpreadAngleDegrees</text>
+  <text x="415" y="390" font-size="9" fill="#80DEEA">  AddSpread() / GetBulletSpreadAngle()</text>
+  <text x="415" y="400" font-size="9" fill="#6E7681">  EquippingAnimMontages / UnequippingAnimMontages</text>
+
+  <!-- inheritance arrow -->
+  <line x1="530" y1="290" x2="530" y2="323" stroke="#EF9A9A" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a)"/>
+  <text x="540" y="310" font-size="9" fill="#6E7681">inherits</text>
+
+  <!-- create arrow -->
+  <line x1="530" y1="178" x2="530" y2="208" stroke="#B39DDB" stroke-width="1.5" marker-end="url(#ap)"/>
+  <text x="540" y="197" font-size="9" fill="#B39DDB">creates</text>
+
+  <!-- ─────────────────────────────────── -->
+  <!-- COLUMN C: GAS Data -->
+  <!-- ─────────────────────────────────── -->
+  <text x="875" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFAB91">GAS DATA</text>
+
+  <!-- ULyraAbilitySet -->
+  <rect x="730" y="78" width="290" height="105" rx="7" fill="#1C2128" stroke="#E65100" stroke-width="1.8"/>
+  <text x="875" y="98" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFAB91">ULyraAbilitySet</text>
+  <text x="875" y="112" text-anchor="middle" font-size="10" fill="#6E7681">: UPrimaryDataAsset</text>
+  <line x1="740" y1="118" x2="1010" y2="118" stroke="#30363D" stroke-width="0.8"/>
+  <text x="745" y="131" font-size="9" fill="#80DEEA">  GrantedGameplayAbilities:</text>
+  <text x="745" y="144" font-size="9" fill="#80DEEA">    TArray&lt;FLyraAbilitySet_GameplayAbility&gt;</text>
+  <text x="745" y="157" font-size="9" fill="#80DEEA">  GrantedGameplayEffects:</text>
+  <text x="745" y="170" font-size="9" fill="#80DEEA">    TArray&lt;FLyraAbilitySet_GameplayEffect&gt;</text>
+  <text x="745" y="183" font-size="9" fill="#6E7681">  GrantedAttributes: TArray&lt;...AttributeSet&gt;</text>
+
+  <!-- FLyraAbilitySet_GameplayAbility -->
+  <rect x="730" y="210" width="290" height="70" rx="7" fill="#1C2128" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="875" y="228" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFD54F">FLyraAbilitySet_GameplayAbility</text>
+  <text x="875" y="242" text-anchor="middle" font-size="9" fill="#6E7681">struct</text>
+  <line x1="740" y1="248" x2="1010" y2="248" stroke="#30363D" stroke-width="0.8"/>
+  <text x="745" y="260" font-size="9" fill="#80DEEA">  Ability: TSubclassOf&lt;ULyraGameplayAbility&gt;</text>
+  <text x="745" y="273" font-size="9" fill="#80DEEA">  AbilityLevel: int32</text>
+  <text x="745" y="283" font-size="9" fill="#80DEEA">  InputTag: FGameplayTag</text>
+
+  <!-- FLyraAbilitySet_GrantedHandles -->
+  <rect x="730" y="310" width="290" height="80" rx="7" fill="#1C2128" stroke="#37474F" stroke-width="1.5"/>
+  <text x="875" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#90A4AE">FLyraAbilitySet_GrantedHandles</text>
+  <text x="875" y="344" text-anchor="middle" font-size="9" fill="#6E7681">struct (Runtime)</text>
+  <line x1="740" y1="350" x2="1010" y2="350" stroke="#30363D" stroke-width="0.8"/>
+  <text x="745" y="363" font-size="9" fill="#80DEEA">  AbilitySpecHandles: TArray&lt;FGameplayAbilitySpecHandle&gt;</text>
+  <text x="745" y="376" font-size="9" fill="#80DEEA">  GameplayEffectHandles: TArray&lt;FActiveGameplayEffectHandle&gt;</text>
+  <text x="745" y="389" font-size="9" fill="#80DEEA">  AttributeSetHandles: TArray&lt;UAttributeSet*&gt;</text>
+
+  <!-- arrows from AbilitySet -->
+  <line x1="875" y1="183" x2="875" y2="208" stroke="#FFAB91" stroke-width="1.5" marker-end="url(#ay)"/>
+  <text x="885" y="199" font-size="9" fill="#6E7681">contains</text>
+  <line x1="875" y1="280" x2="875" y2="308" stroke="#90A4AE" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a)"/>
+  <text x="885" y="297" font-size="9" fill="#6E7681">grants→</text>
+
+  <!-- ──── CROSS-COLUMN ARROWS ──── -->
+  <!-- EquippableFragment → EquipmentDef -->
+  <line x1="290" y1="225" x2="398" y2="128" stroke="#CE93D8" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ap)"/>
+  <text x="340" y="175" font-size="9" fill="#CE93D8">ref</text>
+
+  <!-- EquipmentDef.AbilitySetsToGrant → AbilitySet -->
+  <line x1="660" y1="135" x2="728" y2="120" stroke="#FFAB91" stroke-width="1.5" marker-end="url(#ay)"/>
+  <text x="692" y="120" font-size="9" fill="#FFAB91">refs</text>
+
+  <!-- EquipmentInstance.GrantedHandles → GrantedHandles -->
+  <line x1="660" y1="287" x2="728" y2="350" stroke="#90A4AE" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#a)"/>
+  <text x="680" y="320" font-size="9" fill="#90A4AE">stores</text>
+
+  <!-- ──── BOTTOM: WEAPON ACTOR DATA ──── -->
+  <line x1="50" y1="430" x2="1010" y2="430" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="450" text-anchor="middle" font-size="12" font-weight="bold" fill="#E0E0E0">Runtime Data Flow (Server → Client Replication)</text>
+
+  <!-- Three columns at bottom -->
+  <rect x="50" y="460" width="290" height="110" rx="7" fill="#161B22" stroke="#388E3C" stroke-width="1.5"/>
+  <text x="195" y="480" text-anchor="middle" font-size="11" font-weight="bold" fill="#81C784">InventoryItemInstance</text>
+  <text x="195" y="496" text-anchor="middle" font-size="9" fill="#6E7681">Replicated: COND_OwnerOnly</text>
+  <line x1="60" y1="502" x2="330" y2="502" stroke="#30363D" stroke-width="0.8"/>
+  <text x="65" y="517" font-size="9" fill="#80DEEA">• StatTags (GameplayTagStackContainer)</text>
+  <text x="65" y="530" font-size="9" fill="#80DEEA">• Fragments (찾기 ULyraInventoryItemFragment)</text>
+  <text x="65" y="543" font-size="9" fill="#6E7681">• GetItemDef() → ItemDefinition 역참조</text>
+  <text x="65" y="557" font-size="9" fill="#6E7681">• AddStatTagStack / GetStatTagStackCount</text>
+  <text x="65" y="568" font-size="9" fill="#6E7681">  → 탄약/스택 수 저장용</text>
+
+  <rect x="385" y="460" width="290" height="110" rx="7" fill="#161B22" stroke="#4527A0" stroke-width="1.5"/>
+  <text x="530" y="480" text-anchor="middle" font-size="11" font-weight="bold" fill="#B39DDB">EquipmentInstance</text>
+  <text x="530" y="496" text-anchor="middle" font-size="9" fill="#6E7681">Replicated: All</text>
+  <line x1="395" y1="502" x2="665" y2="502" stroke="#30363D" stroke-width="0.8"/>
+  <text x="400" y="517" font-size="9" fill="#80DEEA">• Instigator (Pawn 역참조)</text>
+  <text x="400" y="530" font-size="9" fill="#80DEEA">• SpawnedActors (무기 Actor 리스트)</text>
+  <text x="400" y="543" font-size="9" fill="#6E7681">• GrantedHandles (Ability 제거용 핸들)</text>
+  <text x="400" y="557" font-size="9" fill="#6E7681">• GetItemInstance() → Inventory 역참조</text>
+  <text x="400" y="568" font-size="9" fill="#6E7681">  → 클라이언트도 무기 Actor 알 수 있음</text>
+
+  <rect x="720" y="460" width="300" height="110" rx="7" fill="#161B22" stroke="#E65100" stroke-width="1.5"/>
+  <text x="870" y="480" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFAB91">AbilitySystemComponent</text>
+  <text x="870" y="496" text-anchor="middle" font-size="9" fill="#6E7681">Replicated: All (mixed)</text>
+  <line x1="730" y1="502" x2="1010" y2="502" stroke="#30363D" stroke-width="0.8"/>
+  <text x="735" y="517" font-size="9" fill="#80DEEA">• ActivatableAbilities (FGameplayAbilitySpec[])</text>
+  <text x="735" y="530" font-size="9" fill="#80DEEA">• ActiveGameplayEffects</text>
+  <text x="735" y="543" font-size="9" fill="#6E7681">• AbilitySpec.InputID → InputTag로 매핑</text>
+  <text x="735" y="557" font-size="9" fill="#6E7681">• Server Grant → Client 동기화</text>
+  <text x="735" y="568" font-size="9" fill="#6E7681">  (MinimalReplication 옵션으로 절약 가능)</text>
+
+  <!-- Data flow arrows bottom -->
+  <line x1="340" y1="515" x2="383" y2="515" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="675" y1="515" x2="718" y2="515" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Bottom note -->
+  <rect x="50" y="590" width="970" height="60" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="610" text-anchor="middle" font-size="11" font-weight="bold" fill="#E0E0E0">데이터 분리 원칙</text>
+  <text x="70" y="628" font-size="10" fill="#6E7681">Definition (DataAsset) = 불변 설계 데이터 (에디터에서 설정).  Instance (UObject) = 런타임 상태 (서버에서 생성, 복제).</text>
+  <text x="70" y="643" font-size="10" fill="#6E7681">Fragment = Definition에 붙는 모듈식 데이터 조각.  Handle = Grant된 GAS 요소를 나중에 제거하기 위한 참조 묶음.</text>
+
+  <!-- Lyra Pawn Experience note -->
+  <rect x="50" y="665" width="970" height="55" rx="6" fill="#161B22" stroke="#F57F17" stroke-width="1"/>
+  <text x="530" y="683" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFD54F">ULyraExperienceDefinition → ULyraPawnData → DefaultAbilitySets</text>
+  <text x="70" y="700" font-size="10" fill="#6E7681">Pawn 고유 베이스 AbilitySet (이동, 점프 등)은 Experience/PawnData 경로로 부여. 무기 AbilitySet은 Equipment 경로로 추가/제거.</text>
+  <text x="70" y="713" font-size="10" fill="#6E7681">두 경로 모두 동일한 ULyraAbilitySet.GiveToAbilitySystem() 사용 → Handle 보관 → TakeFromAbilitySystem() 으로 회수.</text>
+</svg>

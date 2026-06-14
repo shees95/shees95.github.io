@@ -1,0 +1,154 @@
+<svg viewBox="0 0 1050 760" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64B5F6"/>
+    </marker>
+    <marker id="arr-ret" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#90A4AE"/>
+    </marker>
+    <marker id="arr-grn" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#81C784"/>
+    </marker>
+  </defs>
+
+  <rect width="1050" height="760" fill="#0D1117"/>
+  <text x="525" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#E0E0E0">GAS Ability Grant Sequence — Equipment Path</text>
+  <line x1="50" y1="45" x2="1000" y2="45" stroke="#30363D" stroke-width="1"/>
+
+  <!-- ── Lifeline headers ── -->
+  <!-- 1: EquipmentManager -->
+  <rect x="30" y="55" width="150" height="48" rx="6" fill="#1C2128" stroke="#4527A0" stroke-width="1.5"/>
+  <text x="105" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">ULyraEquipment</text>
+  <text x="105" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">ManagerComponent</text>
+  <!-- 2: EquipmentDef -->
+  <rect x="215" y="55" width="150" height="48" rx="6" fill="#1C2128" stroke="#4527A0" stroke-width="1.5"/>
+  <text x="290" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">ULyraEquipment</text>
+  <text x="290" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">Definition</text>
+  <!-- 3: EquipmentInstance -->
+  <rect x="400" y="55" width="150" height="48" rx="6" fill="#1C2128" stroke="#4527A0" stroke-width="1.5"/>
+  <text x="475" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">ULyraEquipment</text>
+  <text x="475" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="#B39DDB">Instance</text>
+  <!-- 4: AbilitySet -->
+  <rect x="585" y="55" width="150" height="48" rx="6" fill="#1C2128" stroke="#E65100" stroke-width="1.5"/>
+  <text x="660" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFAB91">ULyraAbilitySet</text>
+  <text x="660" y="90" text-anchor="middle" font-size="9" fill="#6E7681">(Data Asset)</text>
+  <!-- 5: ASC -->
+  <rect x="770" y="55" width="150" height="48" rx="6" fill="#1C2128" stroke="#E65100" stroke-width="1.5"/>
+  <text x="845" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFAB91">ULyraAbilitySystem</text>
+  <text x="845" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFAB91">Component</text>
+  <!-- 6: Ability -->
+  <rect x="955" y="55" width="80" height="48" rx="6" fill="#1C2128" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="995" y="75" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFD54F">ULyraGA</text>
+  <text x="995" y="90" text-anchor="middle" font-size="9" fill="#6E7681">_Weapon</text>
+
+  <!-- Lifelines -->
+  <line x1="105" y1="103" x2="105" y2="730" stroke="#4527A0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="290" y1="103" x2="290" y2="730" stroke="#4527A0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="475" y1="103" x2="475" y2="730" stroke="#4527A0" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="660" y1="103" x2="660" y2="730" stroke="#E65100" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="845" y1="103" x2="845" y2="730" stroke="#E65100" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="995" y1="103" x2="995" y2="730" stroke="#F57F17" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ── Activation boxes ── -->
+  <rect x="98" y="118" width="14" height="290" rx="2" fill="#4527A0" opacity="0.6"/>
+  <rect x="283" y="135" width="14" height="60" rx="2" fill="#4527A0" opacity="0.4"/>
+  <rect x="468" y="170" width="14" height="220" rx="2" fill="#4527A0" opacity="0.6"/>
+  <rect x="653" y="205" width="14" height="120" rx="2" fill="#E65100" opacity="0.5"/>
+  <rect x="838" y="210" width="14" height="130" rx="2" fill="#E65100" opacity="0.5"/>
+  <rect x="988" y="240" width="14" height="80" rx="2" fill="#F57F17" opacity="0.4"/>
+
+  <!-- ── Messages ── -->
+  <!-- [1] EquipItem -->
+  <line x1="112" y1="125" x2="283" y2="125" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="197" y="120" text-anchor="middle" font-size="10" fill="#80DEEA">EquipItem(ItemInstance)</text>
+
+  <!-- [2] read AbilitySetsToGrant -->
+  <line x1="297" y1="148" x2="468" y2="148" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="382" y="143" text-anchor="middle" font-size="10" fill="#80DEEA">new ULyraEquipmentInstance</text>
+  <line x1="297" y1="165" x2="297" y2="165"/>
+  <!-- return instance -->
+  <line x1="468" y1="185" x2="113" y2="185" stroke="#90A4AE" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-ret)"/>
+  <text x="290" y="180" text-anchor="middle" font-size="9" fill="#6E7681">return Instance</text>
+
+  <!-- [3] Instance.OnEquipped -->
+  <line x1="112" y1="210" x2="468" y2="210" stroke="#81C784" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="290" y="205" text-anchor="middle" font-size="10" fill="#81C784">OnEquipped()</text>
+
+  <!-- [4] AbilitySet loop -->
+  <rect x="490" y="225" width="500" height="115" rx="5" fill="none" stroke="#30363D" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="502" y="238" font-size="9" fill="#6E7681" font-style="italic">loop [for each AbilitySet in EquipDef.AbilitySetsToGrant]</text>
+
+  <line x1="475" y1="248" x2="653" y2="248" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="564" y="243" text-anchor="middle" font-size="10" fill="#FFAB91">GiveToAbilitySystem(ASC, &amp;Handle)</text>
+
+  <!-- AbilitySet inner loop -->
+  <rect x="672" y="260" width="310" height="65" rx="4" fill="none" stroke="#30363D" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="682" y="272" font-size="9" fill="#6E7681" font-style="italic">loop [for each GameplayAbility]</text>
+
+  <line x1="660" y1="282" x2="838" y2="282" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="749" y="277" text-anchor="middle" font-size="10" fill="#FFAB91">GiveAbility(AbilitySpec)</text>
+
+  <line x1="838" y1="298" x2="988" y2="298" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="913" y="293" text-anchor="middle" font-size="9" fill="#FFD54F">CreateNewInstance()</text>
+
+  <line x1="988" y1="315" x2="852" y2="315" stroke="#90A4AE" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-ret)"/>
+  <text x="920" y="311" text-anchor="middle" font-size="9" fill="#6E7681">FGameplayAbilitySpecHandle</text>
+
+  <!-- [5] Handle stored -->
+  <line x1="660" y1="330" x2="475" y2="330" stroke="#90A4AE" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arr-ret)"/>
+  <text x="567" y="325" text-anchor="middle" font-size="9" fill="#6E7681">FLyraAbilitySet_GrantedHandles stored</text>
+
+  <!-- InputTag binding section -->
+  <rect x="80" y="355" width="870" height="75" rx="5" fill="none" stroke="#006064" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="92" y="368" font-size="9" fill="#80DEEA" font-style="italic">note: Input Binding (ULyraHeroComponent::InitializePlayerInput)</text>
+
+  <line x1="112" y1="385" x2="468" y2="385" stroke="#80DEEA" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="290" y="380" text-anchor="middle" font-size="10" fill="#80DEEA">BindAbilityActions(InputConfig, InputTag→AbilityTag)</text>
+
+  <line x1="475" y1="400" x2="838" y2="400" stroke="#80DEEA" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="656" y="395" text-anchor="middle" font-size="9" fill="#80DEEA">AbilityInputTagPressed(InputTag) → TryActivateByTag</text>
+
+  <!-- ── Fire sequence ── -->
+  <line x1="50" y1="450" x2="1010" y2="450" stroke="#30363D" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="525" y="445" text-anchor="middle" font-size="10" fill="#6E7681">— — — fire input event — — —</text>
+
+  <rect x="80" y="460" width="155" height="40" rx="5" fill="#161B22" stroke="#006064" stroke-width="1"/>
+  <text x="157" y="477" text-anchor="middle" font-size="10" fill="#80DEEA">Player fires IA_Fire</text>
+  <text x="157" y="490" text-anchor="middle" font-size="9" fill="#6E7681">(EnhancedInput)</text>
+
+  <line x1="237" y1="480" x2="838" y2="480" stroke="#81C784" stroke-width="1.5" marker-end="url(#arr-grn)"/>
+  <text x="537" y="474" text-anchor="middle" font-size="10" fill="#81C784">TryActivateAbilitiesByTag(InputTag.Weapon.Fire)</text>
+
+  <line x1="845" y1="495" x2="988" y2="495" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="916" y="490" text-anchor="middle" font-size="9" fill="#FFD54F">ActivateAbility()</text>
+
+  <rect x="955" y="505" width="80" height="35" rx="4" fill="#1C2128" stroke="#F57F17" stroke-width="1"/>
+  <text x="995" y="520" text-anchor="middle" font-size="9" fill="#FFD54F">ActivateAbility</text>
+  <text x="995" y="533" text-anchor="middle" font-size="9" fill="#6E7681">StartFire()</text>
+
+  <!-- Unequip section -->
+  <line x1="50" y1="565" x2="1010" y2="565" stroke="#30363D" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="525" y="560" text-anchor="middle" font-size="10" fill="#6E7681">— — — unequip path — — —</text>
+
+  <line x1="112" y1="580" x2="468" y2="580" stroke="#EF9A9A" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="290" y="575" text-anchor="middle" font-size="10" fill="#EF9A9A">UnequipItem(Instance)</text>
+
+  <line x1="475" y1="596" x2="660" y2="596" stroke="#EF9A9A" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="567" y="591" text-anchor="middle" font-size="9" fill="#EF9A9A">OnUnequipped()</text>
+
+  <line x1="660" y1="612" x2="845" y2="612" stroke="#EF9A9A" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="752" y="607" text-anchor="middle" font-size="9" fill="#EF9A9A">TakeFromAbilitySystem(ASC, Handle)</text>
+
+  <line x1="845" y1="628" x2="988" y2="628" stroke="#EF9A9A" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="916" y="623" text-anchor="middle" font-size="9" fill="#EF9A9A">ClearAbility(Handle)</text>
+
+  <!-- Key classes table -->
+  <rect x="50" y="660" width="950" height="75" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="525" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#E0E0E0">Key Data Flow Notes</text>
+  <text x="70" y="698" font-size="10" fill="#B39DDB">• EquipDef.AbilitySetsToGrant</text>
+  <text x="70" y="712" font-size="9" fill="#6E7681">  TArray&lt;TObjectPtr&lt;ULyraAbilitySet&gt;&gt; — Equip 시 grant, Unequip 시 handle로 회수</text>
+  <text x="400" y="698" font-size="10" fill="#FFAB91">• FLyraAbilitySet_GrantedHandles</text>
+  <text x="400" y="712" font-size="9" fill="#6E7681">  AbilitySpecHandles + AttributeSetHandles + EffectHandles 묶음</text>
+  <text x="720" y="698" font-size="10" fill="#80DEEA">• InputTag ↔ AbilityTag</text>
+  <text x="720" y="712" font-size="9" fill="#6E7681">  AbilitySpec.DynamicAbilityTags에 InputTag 주입</text>
+</svg>

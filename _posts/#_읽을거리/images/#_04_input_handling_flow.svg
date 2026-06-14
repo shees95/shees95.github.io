@@ -1,0 +1,203 @@
+<svg viewBox="0 0 1060 720" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#64B5F6"/>
+    </marker>
+    <marker id="ag" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#81C784"/>
+    </marker>
+    <marker id="ay" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0,9 3.5,0 7" fill="#FFD54F"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="720" fill="#0D1117"/>
+  <text x="530" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#E0E0E0">Lyra Input System Flow (Enhanced Input → GAS)</text>
+  <line x1="50" y1="46" x2="1010" y2="46" stroke="#30363D" stroke-width="1"/>
+
+  <!-- ── PHASE 1: Setup ── -->
+  <rect x="50" y="58" width="960" height="18" rx="3" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="71" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFD54F">PHASE 1 — Setup (게임 시작 / Pawn 빙의 시)</text>
+
+  <!-- ULyraInputConfig -->
+  <rect x="50" y="85" width="200" height="90" rx="7" fill="#1C2128" stroke="#006064" stroke-width="1.8"/>
+  <text x="150" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#80DEEA">ULyraInputConfig</text>
+  <text x="150" y="119" text-anchor="middle" font-size="9" fill="#6E7681">: UPrimaryDataAsset</text>
+  <line x1="60" y1="125" x2="240" y2="125" stroke="#30363D" stroke-width="0.8"/>
+  <text x="60" y="138" font-size="9" fill="#80DEEA">  NativeInputActions[]</text>
+  <text x="60" y="151" font-size="9" fill="#80DEEA">  AbilityInputActions[]</text>
+  <text x="60" y="164" font-size="9" fill="#6E7681">  Tag → InputAction 매핑</text>
+
+  <!-- ULyraMappableConfigPair -->
+  <rect x="50" y="195" width="200" height="70" rx="7" fill="#1C2128" stroke="#00695C" stroke-width="1.5"/>
+  <text x="150" y="213" text-anchor="middle" font-size="10" font-weight="bold" fill="#80DEEA">ULyraMappableConfigPair</text>
+  <text x="150" y="228" text-anchor="middle" font-size="9" fill="#6E7681">PlayerMappableInputConfig</text>
+  <line x1="60" y1="234" x2="240" y2="234" stroke="#30363D" stroke-width="0.8"/>
+  <text x="60" y="247" font-size="9" fill="#6E7681">  IMC 에셋 래퍼</text>
+  <text x="60" y="259" font-size="9" fill="#6E7681">  (InputMappingContext)</text>
+
+  <!-- ULyraHeroComponent -->
+  <rect x="310" y="85" width="210" height="90" rx="7" fill="#1C2128" stroke="#1565C0" stroke-width="1.8"/>
+  <text x="415" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#64B5F6">ULyraHeroComponent</text>
+  <text x="415" y="119" text-anchor="middle" font-size="9" fill="#6E7681">: UPawnComponent</text>
+  <line x1="320" y1="125" x2="510" y2="125" stroke="#30363D" stroke-width="0.8"/>
+  <text x="325" y="138" font-size="9" fill="#80DEEA">  InitializePlayerInput()</text>
+  <text x="325" y="151" font-size="9" fill="#80DEEA">  AddInputMappings()</text>
+  <text x="325" y="164" font-size="9" fill="#80DEEA">  BindNativeAction()</text>
+  <text x="325" y="177" font-size="9" fill="#80DEEA">  BindAbilityActions()</text>
+
+  <!-- ULyraInputComponent -->
+  <rect x="580" y="85" width="210" height="90" rx="7" fill="#1C2128" stroke="#1565C0" stroke-width="1.8"/>
+  <text x="685" y="105" text-anchor="middle" font-size="11" font-weight="bold" fill="#64B5F6">ULyraInputComponent</text>
+  <text x="685" y="119" text-anchor="middle" font-size="9" fill="#6E7681">: UEnhancedInputComponent</text>
+  <line x1="590" y1="125" x2="780" y2="125" stroke="#30363D" stroke-width="0.8"/>
+  <text x="595" y="138" font-size="9" fill="#80DEEA">  BindNativeAction(Tag, Trigger,</text>
+  <text x="595" y="151" font-size="9" fill="#80DEEA">    Obj, Func)</text>
+  <text x="595" y="164" font-size="9" fill="#80DEEA">  BindAbilityActions(Config,</text>
+  <text x="595" y="177" font-size="9" fill="#80DEEA">    PressedFunc, ReleasedFunc)</text>
+
+  <!-- UEnhancedInputLocalPlayerSubsystem -->
+  <rect x="850" y="85" width="180" height="90" rx="7" fill="#1C2128" stroke="#283593" stroke-width="1.5"/>
+  <text x="940" y="101" text-anchor="middle" font-size="10" font-weight="bold" fill="#9FA8DA">Enhanced Input</text>
+  <text x="940" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#9FA8DA">LocalPlayer Subsystem</text>
+  <line x1="860" y1="121" x2="1020" y2="121" stroke="#30363D" stroke-width="0.8"/>
+  <text x="865" y="134" font-size="9" fill="#80DEEA">  AddMappingContext(IMC,</text>
+  <text x="865" y="147" font-size="9" fill="#80DEEA">    Priority)</text>
+  <text x="865" y="160" font-size="9" fill="#6E7681">  입력 리매핑 처리</text>
+  <text x="865" y="173" font-size="9" fill="#6E7681">  HardwareDevice 감지</text>
+
+  <!-- Setup phase arrows -->
+  <line x1="250" y1="130" x2="308" y2="130" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="279" y="124" text-anchor="middle" font-size="9" fill="#6E7681">reads</text>
+  <line x1="520" y1="130" x2="578" y2="130" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="549" y="124" text-anchor="middle" font-size="9" fill="#6E7681">binds via</text>
+  <line x1="790" y1="130" x2="848" y2="130" stroke="#64B5F6" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="819" y="124" text-anchor="middle" font-size="9" fill="#6E7681">registers IMC</text>
+
+  <!-- IMC ref arrow -->
+  <line x1="150" y1="265" x2="940" y2="175" stroke="#80DEEA" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#a)"/>
+  <text x="545" y="200" text-anchor="middle" font-size="9" fill="#80DEEA">IMC 등록 (AddMappingContext)</text>
+
+  <!-- ── PHASE 2: Native Action ── -->
+  <rect x="50" y="285" width="960" height="18" rx="3" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="298" text-anchor="middle" font-size="11" font-weight="bold" fill="#81C784">PHASE 2A — Native Input (Move / Look / Jump …)</text>
+
+  <rect x="50" y="310" width="155" height="52" rx="6" fill="#1C2128" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="127" y="329" text-anchor="middle" font-size="10" fill="#81C784">IA_Move (InputAction)</text>
+  <text x="127" y="345" text-anchor="middle" font-size="9" fill="#6E7681">Value: Axis2D</text>
+  <text x="127" y="358" text-anchor="middle" font-size="9" fill="#6E7681">Trigger: None(hold)</text>
+
+  <line x1="205" y1="336" x2="240" y2="336" stroke="#81C784" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <rect x="240" y="310" width="210" height="52" rx="6" fill="#1C2128" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="345" y="329" text-anchor="middle" font-size="10" fill="#81C784">ULyraInputComponent</text>
+  <text x="345" y="345" text-anchor="middle" font-size="9" fill="#80DEEA">BindNativeAction(Tag.Input.Move,</text>
+  <text x="345" y="358" text-anchor="middle" font-size="9" fill="#80DEEA">  ETriggerEvent::Triggered, this, &amp;Input_Move)</text>
+
+  <line x1="450" y1="336" x2="485" y2="336" stroke="#81C784" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <rect x="485" y="310" width="210" height="52" rx="6" fill="#1C2128" stroke="#2E7D32" stroke-width="1.5"/>
+  <text x="590" y="329" text-anchor="middle" font-size="10" fill="#81C784">ULyraHeroComponent</text>
+  <text x="590" y="345" text-anchor="middle" font-size="9" fill="#80DEEA">Input_Move(InputActionValue)</text>
+  <text x="590" y="358" text-anchor="middle" font-size="9" fill="#6E7681">→ AddMovementInput()</text>
+
+  <!-- ── PHASE 2B: Ability Input ── -->
+  <rect x="50" y="380" width="960" height="18" rx="3" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="393" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFAB91">PHASE 2B — Ability Input (Fire / ADS / Reload …)</text>
+
+  <rect x="50" y="405" width="155" height="52" rx="6" fill="#1C2128" stroke="#E65100" stroke-width="1.5"/>
+  <text x="127" y="424" text-anchor="middle" font-size="10" fill="#FFAB91">IA_Fire (InputAction)</text>
+  <text x="127" y="440" text-anchor="middle" font-size="9" fill="#6E7681">Tag: InputTag.Weapon.Fire</text>
+  <text x="127" y="453" text-anchor="middle" font-size="9" fill="#6E7681">Trigger: Pressed</text>
+
+  <line x1="205" y1="431" x2="240" y2="431" stroke="#FFAB91" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="240" y="405" width="210" height="52" rx="6" fill="#1C2128" stroke="#E65100" stroke-width="1.5"/>
+  <text x="345" y="424" text-anchor="middle" font-size="10" fill="#FFAB91">ULyraInputComponent</text>
+  <text x="345" y="440" text-anchor="middle" font-size="9" fill="#80DEEA">BindAbilityActions(Config,</text>
+  <text x="345" y="453" text-anchor="middle" font-size="9" fill="#80DEEA">  &amp;AbilityInputTagPressed)</text>
+
+  <line x1="450" y1="431" x2="485" y2="431" stroke="#FFAB91" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="485" y="405" width="210" height="52" rx="6" fill="#1C2128" stroke="#E65100" stroke-width="1.5"/>
+  <text x="590" y="424" text-anchor="middle" font-size="10" fill="#FFAB91">ULyraAbilitySystem</text>
+  <text x="590" y="438" text-anchor="middle" font-size="9" fill="#FFAB91">Component</text>
+  <text x="590" y="452" text-anchor="middle" font-size="9" fill="#80DEEA">AbilityInputTagPressed(Tag)</text>
+
+  <line x1="695" y1="431" x2="730" y2="431" stroke="#FFAB91" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect x="730" y="405" width="280" height="52" rx="6" fill="#1C2128" stroke="#F57F17" stroke-width="1.5"/>
+  <text x="870" y="424" text-anchor="middle" font-size="10" fill="#FFD54F">ULyraGameplayAbility_RangedWeapon</text>
+  <text x="870" y="440" text-anchor="middle" font-size="9" fill="#80DEEA">ActivateAbility() / StartFire()</text>
+  <text x="870" y="453" text-anchor="middle" font-size="9" fill="#6E7681">InputPressed() / InputReleased()</text>
+
+  <!-- InputTag matching explanation -->
+  <rect x="485" y="468" width="525" height="40" rx="5" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="747" y="484" text-anchor="middle" font-size="9" fill="#6E7681">AbilityInputTagPressed: AbilitySpec.DynamicAbilityTags에 InputTag 포함된 Spec 탐색</text>
+  <text x="747" y="498" text-anchor="middle" font-size="9" fill="#6E7681">→ Spec.Ability.InputPressed() 호출 (WaitInputPress Task와 연동)</text>
+
+  <!-- ── PHASE 3: Ability Execution ── -->
+  <rect x="50" y="525" width="960" height="18" rx="3" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <text x="530" y="538" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFD54F">PHASE 3 — Ability Execution (RangedWeapon 예시)</text>
+
+  <!-- Flow boxes -->
+  <rect x="50" y="550" width="130" height="48" rx="5" fill="#1C2128" stroke="#F57F17" stroke-width="1.2"/>
+  <text x="115" y="568" text-anchor="middle" font-size="9" font-weight="bold" fill="#FFD54F">ActivateAbility</text>
+  <text x="115" y="582" text-anchor="middle" font-size="9" fill="#6E7681">CommitAbility()</text>
+  <text x="115" y="595" text-anchor="middle" font-size="9" fill="#6E7681">→ Cost Check</text>
+
+  <line x1="180" y1="574" x2="215" y2="574" stroke="#64B5F6" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <rect x="215" y="550" width="155" height="48" rx="5" fill="#1C2128" stroke="#F57F17" stroke-width="1.2"/>
+  <text x="292" y="568" text-anchor="middle" font-size="9" font-weight="bold" fill="#FFD54F">StartFire()</text>
+  <text x="292" y="582" text-anchor="middle" font-size="9" fill="#6E7681">PerformLocalTargeting()</text>
+  <text x="292" y="595" text-anchor="middle" font-size="9" fill="#6E7681">GetWeaponInstance()</text>
+
+  <line x1="370" y1="574" x2="405" y2="574" stroke="#64B5F6" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <rect x="405" y="550" width="165" height="48" rx="5" fill="#1C2128" stroke="#F57F17" stroke-width="1.2"/>
+  <text x="487" y="568" text-anchor="middle" font-size="9" font-weight="bold" fill="#FFD54F">TraceBulletsInCartridge()</text>
+  <text x="487" y="582" text-anchor="middle" font-size="9" fill="#6E7681">GetBulletDirection()</text>
+  <text x="487" y="595" text-anchor="middle" font-size="9" fill="#6E7681">+ SpreadAngle 적용</text>
+
+  <line x1="570" y1="574" x2="605" y2="574" stroke="#64B5F6" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <rect x="605" y="550" width="170" height="48" rx="5" fill="#1C2128" stroke="#F57F17" stroke-width="1.2"/>
+  <text x="690" y="568" text-anchor="middle" font-size="9" font-weight="bold" fill="#FFD54F">FLyraGameplayAbilityTargetData</text>
+  <text x="690" y="582" text-anchor="middle" font-size="9" fill="#6E7681">_SingleTarget</text>
+  <text x="690" y="595" text-anchor="middle" font-size="9" fill="#6E7681">히트 결과 패킹</text>
+
+  <line x1="775" y1="574" x2="810" y2="574" stroke="#64B5F6" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <rect x="810" y="550" width="200" height="48" rx="5" fill="#1C2128" stroke="#81C784" stroke-width="1.5"/>
+  <text x="910" y="568" text-anchor="middle" font-size="9" font-weight="bold" fill="#81C784">ServerConfirmTargetData</text>
+  <text x="910" y="582" text-anchor="middle" font-size="9" fill="#6E7681">서버 검증 + GE 적용</text>
+  <text x="910" y="595" text-anchor="middle" font-size="9" fill="#6E7681">ApplyGameplayEffect(Damage)</text>
+
+  <!-- LocalPrediction note -->
+  <rect x="50" y="614" width="430" height="42" rx="5" fill="#161B22" stroke="#283593" stroke-width="1"/>
+  <text x="265" y="630" text-anchor="middle" font-size="9" font-weight="bold" fill="#9FA8DA">Local Prediction</text>
+  <text x="265" y="644" text-anchor="middle" font-size="9" fill="#6E7681">클라이언트: PerformLocalTargeting → 즉시 이펙트 재생 (총구 이펙트, 사운드)</text>
+  <text x="265" y="657" text-anchor="middle" font-size="9" fill="#6E7681">서버: ConfirmTargetData → 실제 데미지 적용 (PredictionKey로 롤백 관리)</text>
+
+  <!-- InputTag table -->
+  <rect x="500" y="614" width="510" height="90" rx="5" fill="#161B22" stroke="#006064" stroke-width="1"/>
+  <text x="755" y="630" text-anchor="middle" font-size="10" font-weight="bold" fill="#80DEEA">InputTag ↔ AbilityTag 매핑 예시 (LyraShooterGame)</text>
+  <line x1="510" y1="636" x2="1000" y2="636" stroke="#30363D" stroke-width="0.8"/>
+  <text x="510" y="649" font-size="9" fill="#6E7681">InputTag</text>
+  <text x="720" y="649" font-size="9" fill="#6E7681">InputAction</text>
+  <text x="870" y="649" font-size="9" fill="#6E7681">연결 Ability</text>
+  <line x1="510" y1="653" x2="1000" y2="653" stroke="#30363D" stroke-width="0.6" stroke-dasharray="3,2"/>
+  <text x="510" y="664" font-size="9" fill="#80DEEA">InputTag.Weapon.Fire</text>
+  <text x="720" y="664" font-size="9" fill="#6E7681">IA_Fire</text>
+  <text x="870" y="664" font-size="9" fill="#FFD54F">GA_Hero_Fire</text>
+  <text x="510" y="676" font-size="9" fill="#80DEEA">InputTag.Weapon.ADS</text>
+  <text x="720" y="676" font-size="9" fill="#6E7681">IA_ADS</text>
+  <text x="870" y="676" font-size="9" fill="#FFD54F">GA_Hero_ADS</text>
+  <text x="510" y="688" font-size="9" fill="#80DEEA">InputTag.Weapon.Reload</text>
+  <text x="720" y="688" font-size="9" fill="#6E7681">IA_Reload</text>
+  <text x="870" y="688" font-size="9" fill="#FFD54F">GA_Hero_Reload</text>
+  <text x="510" y="700" font-size="9" fill="#80DEEA">InputTag.Move / Look</text>
+  <text x="720" y="700" font-size="9" fill="#6E7681">IA_Move/Look</text>
+  <text x="870" y="700" font-size="9" fill="#81C784">Native (직접 바인딩)</text>
+</svg>
