@@ -1,7 +1,7 @@
 ---
 title: "언리얼 로그 기초"
 date: 2026-06-04 14:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-Base]
+categories: [UnrealEngine, UnrealEngine-Core]
 tags: [UnrealEngine, UnrealEngine-Log, UnrealEngine-UE_LOG, UnrealEngine-LogCategory]
 description: "UE_LOG 사용법부터 커스텀 카테고리, 화면 출력까지"
 ---

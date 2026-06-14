@@ -1,7 +1,7 @@
 ---
 title: "언리얼 DataTable + GameState + GameInstance 싱글게임 구조"
 date: 2026-06-08 22:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-Base]
+categories: [UnrealEngine, UnrealEngine-Framework]
 tags: [UnrealEngine, UnrealEngine-DataTable, UnrealEngine-GameState, UnrealEngine-GameInstance]
 description: "DataTable로 데이터 관리, GameState로 게임 상태 관리, GameInstance로 레벨 간 데이터 유지하는 싱글게임 구조"
 ---

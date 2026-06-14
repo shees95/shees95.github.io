@@ -1,7 +1,7 @@
 ---
 title: "언리얼 클래스 기본 개념"
 date: 2026-06-04 14:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-Base]
+categories: [UnrealEngine, UnrealEngine-Core]
 tags: [UnrealEngine, UnrealEngine-UObject, UnrealEngine-Actor, UnrealEngine-Component, UnrealEngine-Class]
 description: "언리얼 클래스 생성 및 삭제, 컴포넌트 추가, 라이프 사이클"
 ---
