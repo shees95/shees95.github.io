@@ -28,7 +28,7 @@
             {% assign trending_tags = trending_tags | append: tag | append: '|' %}
             {% assign count = count | plus: 1 %}
             <a class="post-tag btn btn-outline-primary" href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/">
-              {{ tag | replace: '-', '-<wbr>' }}
+              {{ tag | replace_first: 'UnrealEngine-', 'UnrealEngine-<br>' }}
             </a>
             {% if count >= MAX %}
               {% break %}
