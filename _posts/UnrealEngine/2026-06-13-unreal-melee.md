@@ -6,9 +6,11 @@ tags: [UnrealEngine, UnrealEngine-Combat, UnrealEngine-AnimNotify, UnrealEngine-
 description: "AnimNotify + Interface 조합으로 근접 공격 구현"
 ---
 
-## 언리얼 기본 Third Person Combat의 공격 흐름
+# 언리얼 밀리 공격 구현
 
 ---
+
+## 공격 흐름
 
 근접 공격은 아래 파이프라인으로 동작한다.
 
@@ -30,10 +32,8 @@ description: "AnimNotify + Interface 조합으로 근접 공격 구현"
 
 Move/Look은 기본 ThirdPerson을 상속받고, 공격 관련 입력(Combo, Charge)은 별도 InputAction으로 분리한다.
 
-```yaml
-캐릭터 : InputAction 바인딩 관리
-컨트롤러 : IMC(Input Mapping Context) 및 매핑 관리
-```
+- 캐릭터: InputAction 바인딩 관리
+- 컨트롤러: IMC(Input Mapping Context) 및 매핑 관리
 
 ---
 
@@ -108,9 +108,7 @@ void UANS_DoAttackTrace::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 ```
 
 노티파이가 `ICombatAttacker`만 알면 되기 때문에,  
-캐릭터든 적이든 인터페이스를 구현한 액터라면 이 노티파이 하나로 공유할 수 있다.  
-
-![notify montage.png](../../assets/img/unreal-notify/notify%20montage.png)
+캐릭터든 적이든 인터페이스를 구현한 액터라면 이 노티파이 하나로 공유할 수 있다.
 
 ---
 
