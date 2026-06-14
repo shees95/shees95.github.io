@@ -1,0 +1,44 @@
+<!-- Override Chirpy trending tags to wrap long dashed tags at the dash. -->
+{% assign MAX = 10 %}
+{% assign tag_list = '' | split: '' %}
+{% assign size_list = '' | split: '' %}
+
+{% for tag in site.tags %}
+  {% assign tag_name = tag | first %}
+  {% assign tag_size = tag | last | size %}
+  {% assign tag_list = tag_list | push: tag_name %}
+  {% assign size_list = size_list | push: tag_size %}
+{% endfor %}
+
+{% assign size_list = size_list | sort | reverse %}
+{% assign tag_list = tag_list | sort %}
+
+{% assign count = 0 %}
+{% assign trending_tags = '|' %}
+
+<section>
+  <h2 class="panel-heading">Trending Tags</h2>
+  <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+    {% for size in size_list %}
+      {% for tag in tag_list %}
+        {% assign tag_size = site.tags[tag] | size %}
+        {% if tag_size == size %}
+          {% assign tag_marker = '|' | append: tag | append: '|' %}
+          {% unless trending_tags contains tag_marker %}
+            {% assign trending_tags = trending_tags | append: tag | append: '|' %}
+            {% assign count = count | plus: 1 %}
+            <a class="post-tag btn btn-outline-primary" href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/">
+              {{ tag | replace: '-', '-<wbr>' }}
+            </a>
+            {% if count >= MAX %}
+              {% break %}
+            {% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+      {% if count >= MAX %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

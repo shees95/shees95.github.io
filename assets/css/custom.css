@@ -1,6 +1,8 @@
 a.post-tag {
   white-space: normal !important;
-  word-break: break-word !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  max-width: 9.25rem !important;
   height: auto !important;
   line-height: 1.4 !important;
   text-align: center !important;
