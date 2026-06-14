@@ -1,7 +1,7 @@
 ---
 title: "언리얼 라이라 - GameplayMessageSubsystem"
 date: 2026-06-09 22:50:00 +0900
-categories: [UnrealEngine, UnrealEngine-Lyra]
+categories: [UnrealEngine, UnrealEngine-StarterProject]
 tags: [UnrealEngine, Lyra, GameplayMessageSubsystem, MessageRouter]
 description: "라이라의 GameplayMessageSubsystem으로 느슨한 결합 메시지 브로드캐스트/수신 구조 정리"
 ---

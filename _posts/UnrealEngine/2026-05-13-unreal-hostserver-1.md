@@ -1,7 +1,7 @@
 ---
 title: "언리얼 호스트 서버 열기 1"
 date: 2026-05-13 00:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-ListenServer]
+categories: [UnrealEngine, UnrealEngine-Dev]
 tags: [UnrealEngine, UnrealEngine-ListenHost, UnrealEngine-ListenClient]
 description: "언리얼 Listen 서버 열기, 클라이언트 붙기"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "언리얼 리플렉션 시스템"
 date: 2026-06-05 09:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-Basic]
+categories: [UnrealEngine, UnrealEngine-Base]
 tags: [UnrealEngine, UnrealEngine-Reflection, UnrealEngine-UCLASS, UnrealEngine-UPROPERTY, UnrealEngine-UFUNCTION, UnrealEngine-USTRUCT, UnrealEngine-UENUM]
 description: "언리얼 리플렉션 시스템 기본"
 ---

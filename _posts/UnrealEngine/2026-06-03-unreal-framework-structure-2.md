@@ -1,7 +1,7 @@
 ---
 title: "언리얼 프레임워크 구조 2"
 date: 2026-06-03 14:15:00 +0900
-categories: [UnrealEngine, UnrealEngine-Structure]
+categories: [UnrealEngine, UnrealEngine-Base]
 tags: [UnrealEngine, UnrealEngine-Structure, UnrealEngine-Framework]
 description: "StartGameInstance 이후 흐름, Tick 구조, 월드 생성 과정"
 ---

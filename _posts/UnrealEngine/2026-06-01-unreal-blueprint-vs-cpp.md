@@ -1,7 +1,7 @@
 ---
 title: "Dev Blueprint VS CPP"
 date: 2026-06-01 16:58:00 +0900
-categories: [UnrealEngine, UnrealEngine-Basic]
+categories: [UnrealEngine, UnrealEngine-Base]
 tags: [UnrealEngine, UnrealEngine-BP, UnrealEngine-CPP]
 description: "언리얼은 블루프린트를 더 많이 쓸까? CPP을 더 많이 쓸까? 혹은 얼마나 쓸까?"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "언리얼 GAS 사용법 1"
 date: 2026-06-06 17:24:00 +0900
-categories: [UnrealEngine, UnrealEngine-GAS]
+categories: [UnrealEngine, UnrealEngine-Dev]
 tags: [UnrealEngine, UnrealEngine-GAS, UnrealEngine-ASC, UnrealEngine-AS, UnrealEngine-GA, UnrealEngine-GE]
 description: "언리얼 GAS에 대한 개념정리"
 ---
