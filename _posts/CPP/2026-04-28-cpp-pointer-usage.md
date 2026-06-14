@@ -1,7 +1,7 @@
 ---
 title: "CPP 포인터 사용 방법"
 date: 2026-04-28 00:00:00 +0900
-categories: [CPP, CPP-Basic]
+categories: [CPP, CPP-Dev]
 tags: [CPP, CPP-Pointer, CPP-Reference]
 description: "포인터 레퍼런스 용법"
 ---

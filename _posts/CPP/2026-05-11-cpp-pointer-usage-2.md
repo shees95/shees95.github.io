@@ -1,7 +1,7 @@
 ---
 title: "CPP 포인터/레퍼런스 사용 이유"
 date: 2026-05-11 00:00:00 +0900
-categories: [CPP, CPP-Basic]
+categories: [CPP, CPP-Dev]
 tags: [CPP, CPP-Pointer, CPP-Reference]
 description: "포인터 레퍼런스 사용처"
 ---
