@@ -1,4 +1,3 @@
-<!-- Override Chirpy trending tags to wrap long dashed tags at the dash. -->
 {% assign MAX = 10 %}
 {% assign tag_list = '' | split: '' %}
 {% assign size_list = '' | split: '' %}
@@ -27,9 +26,15 @@
           {% unless trending_tags contains tag_marker %}
             {% assign trending_tags = trending_tags | append: tag | append: '|' %}
             {% assign count = count | plus: 1 %}
-            <a class="post-tag btn btn-outline-primary" href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/">
-              {{ tag | replace_first: 'UnrealEngine-', 'UnrealEngine-<br>' }}
-            </a>
+            {% if tag contains '-' %}
+              {% assign display = tag | split: '-' | last %}
+            {% else %}
+              {% assign display = tag %}
+            {% endif %}
+            <a
+              class="post-tag btn btn-outline-primary"
+              href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/"
+            >{{ display }}</a>
             {% if count >= MAX %}
               {% break %}
             {% endif %}
