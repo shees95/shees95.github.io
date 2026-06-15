@@ -1,6 +1,7 @@
 # Lyra Sample Game — 총기·GAS 시스템 레퍼런스
 
-> UE 5.x Lyra Starter Game 기준. 소스 경로는 `LyraStarterGame/Source/LyraGame/` 기준.
+> UE 5.x Lyra Starter Game 기준. 소스 경로는 `LyraStarterGame/Source/LyraGame/` 기준
+> .
 
 ---
 
@@ -17,7 +18,7 @@
 
 ## 1. 총기 획득 전체 흐름
 
-![Weapon Acquisition Flow](images/01_weapon_acquisition_flow.svg)
+![#_01_weapon_acquisition_flow.svg](../../assets/img/lyla_gas_reference/%23_01_weapon_acquisition_flow.svg)
 
 ### 개요
 
@@ -60,7 +61,7 @@ EquipmentManager::UnequipItem(Instance)
 
 ## 2. GAS 어빌리티 부여 흐름
 
-![GAS Ability Grant Sequence](images/02_gas_ability_grant_sequence.svg)
+![#_02_gas_ability_grant_sequence.svg](../../assets/img/lyla_gas_reference/%23_02_gas_ability_grant_sequence.svg)
 
 ### 두 가지 Grant 경로
 
@@ -138,7 +139,7 @@ GrantedHandles->AbilitySpecHandles.Add(Handle);
 
 ## 3. 데이터 에셋 계층 구조
 
-![Data Asset Hierarchy](images/03_data_asset_hierarchy.svg)
+![#_03_data_asset_hierarchy.svg](../../assets/img/lyla_gas_reference/%23_03_data_asset_hierarchy.svg)
 
 ### Definition (불변) vs Instance (런타임)
 
@@ -182,7 +183,7 @@ UInventoryFragment_SetStats (Def)
 
 ## 4. 입력 처리 흐름
 
-![Input Handling Flow](images/04_input_handling_flow.svg)
+![#_04_input_handling_flow.svg](../../assets/img/lyla_gas_reference/%23_04_input_handling_flow.svg)
 
 ### 바인딩 초기화 경로
 
