@@ -31,10 +31,7 @@
             {% else %}
               {% assign display = tag %}
             {% endif %}
-            <a
-              class="post-tag btn btn-outline-primary"
-              href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/"
-            >{{ display }}</a>
+            <a class="post-tag btn btn-outline-primary" href="{{ site.baseurl }}/tags/{{ tag | downcase | url_encode }}/">{{ display }}</a>
             {% if count >= MAX %}
               {% break %}
             {% endif %}
