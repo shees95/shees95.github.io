@@ -57,7 +57,7 @@ Gitea 설치 마법사에서 DB 연결 정보를 입력했다.
 
 언리얼 프로젝트처럼 `.uasset`, `.umap` 등 대용량 바이너리 파일을 다룰 일이 많기 때문에 Git LFS 설정도 함께 진행했다.
 
-> LFS 동작 원리는 [GitHub LFS 원리]({% post_url 2026-05-12-git_lfs %})에 정리해둔 내용과 동일하다. Gitea도 LFS를 지원하므로 같은 방식으로 포인터 파일과 실제 파일이 분리되어 저장된다.
+> LFS 동작 원리는 [GitHub LFS 원리]({% post_url Git/2026-05-12-git_lfs %})에 정리해둔 내용과 동일하다. Gitea도 LFS를 지원하므로 같은 방식으로 포인터 파일과 실제 파일이 분리되어 저장된다.
 
 * Gitea 설정에서 LFS 활성화
 * 저장소에서 `git lfs track` 으로 대상 확장자 등록
