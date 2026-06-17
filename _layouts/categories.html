@@ -96,8 +96,8 @@ layout: page
                     <summary class="cat-item">
                       <span class="cat-name">
                         <i class="far fa-folder fa-fw"></i>
-                        {% assign display1 = cat1 | remove_first: cat0 | remove_first: "-" %}
-                        {% if display1 == "" %}{% assign display1 = cat1 %}{% endif %}
+                        {% assign display1_parts = cat1 | split: "-" %}
+                        {% assign display1 = display1_parts | last %}
                         <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1" onclick="event.stopPropagation()">{{ display1 }}</a>
                       </span>
                       <span class="cat-count text-muted small">
@@ -115,8 +115,8 @@ layout: page
                           <div class="cat-item-l3">
                             <span class="cat-name">
                               <i class="far fa-folder fa-fw"></i>
-                              {% assign display2 = cat2 | remove_first: cat1 | remove_first: "-" %}
-                              {% if display2 == "" %}{% assign display2 = cat2 %}{% endif %}
+                              {% assign display2_parts = cat2 | split: "-" %}
+                              {% assign display2 = display2_parts | last %}
                               <a href="{{ site.baseurl }}/categories/{{ cat2 | downcase | url_encode }}/" class="ms-1">{{ display2 }}</a>
                             </span>
                             <span class="cat-count text-muted small">
@@ -131,8 +131,8 @@ layout: page
                   <div class="cat-item">
                     <span class="cat-name">
                       <i class="far fa-folder fa-fw"></i>
-                      {% assign display1b = cat1 | remove_first: cat0 | remove_first: "-" %}
-                      {% if display1b == "" %}{% assign display1b = cat1 %}{% endif %}
+                      {% assign display1b_parts = cat1 | split: "-" %}
+                      {% assign display1b = display1b_parts | last %}
                       <a href="{{ site.baseurl }}/categories/{{ cat1 | downcase | url_encode }}/" class="ms-1">{{ display1b }}</a>
                     </span>
                     <span class="cat-count text-muted small">
