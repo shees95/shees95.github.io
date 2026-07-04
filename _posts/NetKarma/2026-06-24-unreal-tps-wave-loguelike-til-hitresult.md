@@ -26,7 +26,7 @@ description: "라인트레이스의 한계를 극복한 총기 히트 판정 구
 
 ## 해결
 
-![스크린샷 2026-06-26 111329.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20111329.png)  
+![스크린샷 2026-06-26 111329.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20111329.png)  
 공을 던지면 되잖아?
 
 ```c++
@@ -65,7 +65,7 @@ Multi 채널로 세팅함으로써 여러 충돌 또한 고려했다.
 ### 해결
 검색과 AI의 따끔한 첨언끝에 알아낸 것은 피격의 채널인 VIsibility가 꺼져있다는 사실이다.  
 
-![스크린샷 2026-06-26 112543.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20112543.png)
+![스크린샷 2026-06-26 112543.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20112543.png)
 
 왜냐하면 기본 캐릭터 비지빌리티 판정이 Ignore이기 때문이다.
 
@@ -84,7 +84,7 @@ Collision Presets을 Custom으로 변경 후, Camera 쪽은 스프링 암이 관
 
 충돌 가능한 모든 컴포넌트들의 콜리전 채널을 각각 세팅해줬다.
 
-![스크린샷 2026-06-26 112914.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20112914.png)
+![스크린샷 2026-06-26 112914.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20112914.png)
 
 ```
 Root : Visibility [Overlap]

@@ -41,7 +41,7 @@ PlayerController::PlayerTick(float DeltaTime)
 
 발사 시 반동 목표값만 PlayerController에 넘긴다.
 
-![스크린샷 2026-06-26 105854.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20105854.png)  
+![스크린샷 2026-06-26 105854.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20105854.png)  
 <GAFire::AddRecoil() : 최대 이만큼만 마시렴>
 
 ```cpp
@@ -61,7 +61,7 @@ void UGA_Fire::ApplyRecoil(float RecoilAmount)
 
 반동 목표값을 보관하고, `PlayerTick`에서 매 틱 처리한다.
 
-![스크린샷 2026-06-26 110050.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20110050.png)  
+![스크린샷 2026-06-26 110050.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-06-26%20110050.png)  
 <Controller::Tick() : 꼴깍꼴깍>  
 
 ```cpp

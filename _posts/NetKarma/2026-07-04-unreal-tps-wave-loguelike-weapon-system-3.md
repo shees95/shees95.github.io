@@ -89,7 +89,7 @@ void SelectAmmo(int32 Index);   // 리스트에서 사용할 탄 선택
 
 UI에서 버튼을 누르는 대로 무기 컴포넌트가 반응하는 걸 확인했다. Definition을 하나로 통일해둔 게 여기서 제대로 값을 했다 — UI는 Definition만 바라보면 되니 연결이 깔끔했다.
 
-![260704 1345.png](../../assets/netkarma/260704%201345.png)
+![260704 1345.png](/assets/netkarma/260704%201345.png)
 
 ---
 
