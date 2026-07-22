@@ -8,7 +8,7 @@ description: "증강 시스템의 GA 파트 — NKMAugmentAbility 상속과 GAS 
 
 # TPS 개발 - 증강 시스템 (2)
 
-[어제]({% post_url NetKarma/2026-07-10-unreal-tps-wave-loguelike-augment-system-1 %}) GE와 EffectSet 연결까지 정리했다. 오늘은 "특정 조건에서 발동하는" 능동형 증강, **GA 파트**다.
+어제 GE와 EffectSet 연결까지 정리했다. 오늘은 "특정 조건에서 발동하는" 능동형 증강, **GA 파트**다.
 
 ---
 

@@ -30,7 +30,7 @@ WorkspaceMenuStructure
 
 ## 2. GoogleSheetLoader의 에디터 의존도
 
-[CSV 파서]({% post_url NetKarma/2026-06-29-unreal-tps-wave-loguelike-item-definition-1 %})로 쓰던 `GoogleSheetLoader` 플러그인이 **에디터 전용으로 만들어져 있어서** 다른 모듈들의 의존도가 높았다.
+CSV 파서로 쓰던 `GoogleSheetLoader` 플러그인이 **에디터 전용으로 만들어져 있어서** 다른 모듈들의 의존도가 높았다.
 
 빌드 버전에서 이용 불가능한 헤더들을 `#if WITH_EDITOR`로 감싸서 빼내면, **에디터 의존도를 런타임 코드에서 분리**할 수 있다.
 

@@ -8,7 +8,7 @@ description: "CSV 파싱부터 증강 선택·제공까지, 일주일간 만든 
 
 # TPS 개발 - 증강 시스템 (3)
 
-[GE]({% post_url NetKarma/2026-07-10-unreal-tps-wave-loguelike-augment-system-1 %})와 [GA]({% post_url NetKarma/2026-07-11-unreal-tps-wave-loguelike-augment-system-2 %}) 파트를 각각 정리했으니, 오늘은 이 둘이 어떻게 하나의 파이프라인으로 굴러가는지 전체 흐름을 정리한다. 증강 시스템 하나 만드는 데 정확히 **일주일**이 걸렸다.
+GE와 GA파트를 각각 정리했으니, 오늘은 이 둘이 어떻게 하나의 파이프라인으로 굴러가는지 전체 흐름을 정리한다. 증강 시스템 하나 만드는 데 정확히 **일주일**이 걸렸다.
 
 ---
 

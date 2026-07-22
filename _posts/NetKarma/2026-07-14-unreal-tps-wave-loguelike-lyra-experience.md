@@ -44,7 +44,7 @@ Game Feature 방식
        (레벨 전환 없이 같은 자리에서 전환)
 ```
 
-우리 프로젝트가 웨이브(전투) ↔ 상점을 반복하는 로그라이크 구조라, 이 개념이 정확히 들어맞는다. [상점 시스템]({% post_url NetKarma/2026-07-01-unreal-tps-wave-loguelike-shop %})과 전투 사이를 레벨 전환 없이 오갈 수 있는 게 이 Experience/Game Feature 구조 덕분이다.
+우리 프로젝트가 웨이브(전투) ↔ 상점을 반복하는 로그라이크 구조라, 이 개념이 정확히 들어맞는다. 상점 시스템과 전투 사이를 레벨 전환 없이 오갈 수 있는 게 이 Experience/Game Feature 구조 덕분이다.
 
 ---
 
