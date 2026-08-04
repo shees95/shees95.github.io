@@ -3,7 +3,7 @@ title: "TPS 개발 : TIL — 멀티플레이 디버깅, 액터 초기화 순서�
 date: 2026-08-04 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Networking, UnrealEngine-DedicatedServer]
-description: "멀티플레이 디버깅용 에디터 옵션, GameMode→GameState→BeginPlay 호출 흐름과 PostNetInit/PostInitializeComponents 순서, ReplicateUsing·OnRep, NetUpdateFrequency·NetCullDistance·NetPriority·NetDormancy 등 레플리케이션 최적화 옵션 정리"
+description: "멀티플레이 디버깅용 에디터 옵션, GameMode→GameState→BeginPlay 호출 흐름과 PostNetInit/PostInitializeComponents 순서, ReplicateUsing·OnRep, NetUpdateFrequency·NetCullDistance·NetPriority·NetDormancy 등 레플리케이션 최적화 옵션, TearOff·Replication Graph/Iris·서브시스템까지 정리"
 ---
 
 # TPS 개발 - TIL: 멀티플레이 디버깅, 초기화 순서, 레플리케이션 최적화
@@ -85,6 +85,23 @@ FlushNetDormancy();           // 휴면 해제(다시 레플리케이션 대상�
 
 `GetLifetimeReplicatedProps`에 등록할 때 컨디션 옵션값(`COND_OwnerOnly` 등)으로도 "누구에게 복제할지"를 제어할 수 있다.
 
+## 11. RPC와 액터 네트워크 라이프사이클
+
+- 액터의 레플리케이션은 **레플리케이션 그래프의 생명주기**를 따라 관리된다 — 위치 기반 연관성, 항상 복제(Always Relevant) 등 조건에 따라 그래프 상에서 언제 복제 대상에 들어가고 빠지는지가 정해진다.
+- **TearOff** — 서버가 해당 액터와의 네트워크 연결을 끊는 처리. 서버 쪽에서 더 이상 갱신을 보내지 않지만, **클라이언트에는 마지막으로 받은 상태가 그대로 남아있다.** 그 시점 이후로는 서버가 property를 바꾸거나 RPC를 보내도 클라에 반영되지 않으므로, 죽는 연출처럼 "이후엔 서버 개입 없이 클라가 알아서 마무리해도 되는" 상황에 쓴다.
+
+## 12. NetDriver — Replication Graph vs Iris
+
+NetDriver 레벨에서 레플리케이션 방식으로 **Replication Graph**를 쓸지 **Iris**를 쓸지 선택할 수 있다.
+
+- **Iris** — 대규모 인원 처리, 캐싱, 안티 ESP(다른 클라이언트에 불필요한 정보가 새어나가는 걸 막는 것) 등에서 이점이 있다.
+
+## 13. 서브시스템
+
+- 언리얼에 이미 만들어져 있는 서브시스템들이 있고(`GameInstanceSubsystem`, `WorldSubsystem`, `LocalPlayerSubsystem` 등), 각각 생명주기가 정해져 있어서 용도에 맞는 걸 골라 쓴다.
+- 액터로는 다루기 애매한 것(액터 생명주기를 넘어서는 데이터 저장 등)을 보통 서브시스템이 담당한다.
+- 서브시스템에서 **Tick은 부하가 크므로 지양**하고, 이벤트/델리게이트 형식으로 처리하는 게 낫다.
+
 ---
 
 ## 정리
@@ -93,3 +110,5 @@ FlushNetDormancy();           // 휴면 해제(다시 레플리케이션 대상�
 - 액터 초기화는 `PostNetInit` → `PostInitializeComponents` → `BeginPlay` 순으로, `GameMode.StartPlay`가 `GameState`를 경유해 전체 액터에 전파한다
 - `ReplicateUsing`(C++)은 클라 전용·명시 호출 가능·변경 시에만 호출, 블루프린트 RepNotify는 서버/클라 모두·항시 호출로 성격이 다르다
 - `NetUpdateFrequency`(빈도 상한), `NetCullDistance`/`NetRelevantFor`(거리 연관성), `NetPriority`(우선순위), `NetDormancy`(휴면), 라이프타임 컨디션까지 조합해서 레플리케이션 트래픽을 조절한다
+- 액터는 레플리케이션 그래프의 생명주기를 따르며, TearOff로 서버 연결을 끊어도 클라에는 마지막 상태가 남는다 — NetDriver는 Replication Graph/Iris 중 선택 가능하고 Iris는 대규모 인원에 유리
+- 서브시스템은 생명주기별로 이미 정해져 있고, Tick 대신 이벤트 기반으로 처리하는 게 낫다
