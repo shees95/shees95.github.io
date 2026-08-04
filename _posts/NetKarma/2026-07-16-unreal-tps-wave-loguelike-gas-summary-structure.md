@@ -52,7 +52,7 @@ CSV에서 글자와 숫자로 받아온 데이터들을 **증강 관점에서 �
 ### 트리거형 증강 — GA + Event.Trigger 델리게이트 + GE
 
 특정 행동이 트리거되는 경우는 **GA로 `Event.Trigger`를 델리게이트로 받아 `ActivateAbility`** 한다. 
-![스크린샷 2026-07-15 103028.png](../../assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-07-15%20103028.png)
+![스크린샷 2026-07-15 103028.png](/assets/netkarma/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-07-15%20103028.png)
 
 트리거가 제거된 후에 GE를 떼어내야 하는 경우에만 **`EndAbility`에서 명시적으로 제거**한다.
 
