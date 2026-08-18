@@ -42,6 +42,8 @@ ServerConnection != nullptr → 클라이언트
 
 서로가 서로에게 `UNetConnection` 객체를 하나씩 만들고, 이 `UNetConnection`을 통해 실제 통신이 이루어진다. `UNetConnection`은 `UNetDriver`가 관리한다.
 
+![NetDriver와 NetConnection 구조 및 네트워크 실행 흐름](/assets/img/unreal-networking/netdriver-connection-flow.png)
+
 액터에서 `GetNetConnection()`을 호출하면 **액터 → 오너 → 폰 → 컨트롤러 → 커넥션** 순으로 타고 올라가며 커넥션 유무를 반환한다. 즉 **컨트롤러가 서버 커넥션의 근간**이다.
 
 별도 설정 없이 `UE_LOG`를 그대로 쓰면 데디케이트 서버 cmd 창에 로그가 출력된다.

@@ -2,7 +2,7 @@
 title: "DeepRaiders 개발 : 청크 언로드로 광물이 사라지는 문제"
 date: 2026-08-12 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, UnrealEngine-Project-DeepRaiders]
-tags: [UnrealEngine, DeepRaiders, Voxel, Invoker, Troubleshooting]
+tags: [UnrealEngine, DeepRaiders, Voxel, Invoker, TroubleShooting]
 description: "플레이어가 멀어질 때 청크가 사라져 광물이 공허로 떨어지던 문제와 Invoker 기반 해결 과정"
 ---
 
