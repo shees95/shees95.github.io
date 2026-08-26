@@ -1,16 +1,18 @@
 ---
-title: "언리얼 TIL - UI Component, Subsystem, Config를 이용한 UI 흐름"
+title: "언리얼 DeepRaiders - GameplayTag 기반 UI Manager"
 date: 2026-08-19 18:00:00 +0900
-categories: [UnrealEngine, UnrealEngine-UI]
-tags: [UnrealEngine, UMG, UIComponent, Subsystem, DataAsset, TIL]
-description: "PlayerController의 입력부터 Widget 생성과 표시까지 UI 계층별 역할과 처리 흐름 정리"
+categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
+tags: [UnrealEngine, DeepRaiders, UMG, GameplayTag, LocalPlayerSubsystem, DataAsset]
+description: "GameplayTag와 UI Config를 이용해 위젯을 조회하고 관리하는 DeepRaiders UI 구조 정리"
 ---
 
-# UI 시스템 구조
+# GameplayTag 기반 UI Manager
 
-UI 시스템은 `Widget`, `UI Component`, `UI Manager Subsystem`, `UI Config`를 이용해 하나의 흐름으로 구성했다.
+DeepRaiders의 UI는 `PlayerController`, `UI Component`, `UI Manager Subsystem`,
+`UI Config`, `Widget`이 하나의 흐름을 이루도록 구성했다.
 
-각 객체가 입력 처리, 데이터 가공, 위젯 관리, 클래스 설정이라는 하나의 역할만 담당하도록 분리하는 것이 핵심이다.
+기존에는 위젯 클래스를 직접 전달했지만, 현재는 사운드 매니저와 마찬가지로
+호출부에서 `GameplayTag`만 전달하면 Config에서 태그에 맞는 대상을 선택하는 방식으로 변경했다.
 
 ![UI 시스템 시퀀스 흐름](/assets/img/unreal-ui-architecture/ui-sequence-flow.png)
 
@@ -18,120 +20,265 @@ UI 시스템은 `Widget`, `UI Component`, `UI Manager Subsystem`, `UI Config`를
 
 ```text
 PlayerController
-    ↓ 입력 및 Pawn 변경 이벤트 전달
+    ↓ 입력 이벤트 전달
 UI Component
-    ↓ 데이터 가공 후 표시·숨김·생성·제거 요청
+    ↓ PushScreen(UI Screen Tag)
 UI Manager Subsystem
-    ↓ UI Config에서 WidgetClass 조회
+    ↓ UI Config에서 태그 조회
 UI Config DataAsset
-    ↓ WidgetClass 반환
+    ↓ WidgetClass, Layer, Order 반환
 UI Manager Subsystem
-    ↓ 위젯 생성 또는 캐시 재사용 후 화면에 표시
+    ↓ 위젯 생성 및 Viewport 등록
 Widget
 ```
 
-`PlayerController`는 입력을 감지해 `UI Component`로 전달한다.
-`UI Component`는 입력에 필요한 데이터를 가공하고, 어떤 위젯을 어떤 상태로 변경할지 결정한다.
+`UI Component`는 필요한 UI의 클래스 대신 다음과 같은 화면 태그를 전달한다.
 
-그 후 `UI Manager Subsystem`에 다음과 같은 처리를 요청한다.
+```cpp
+DRGameplayTags::UI_Screen_HUD
+DRGameplayTags::UI_Screen_QuickSlot
+DRGameplayTags::UI_Screen_Inventory_Player
+DRGameplayTags::UI_Screen_Inventory_Storage
+DRGameplayTags::UI_Screen_Teleport
+DRGameplayTags::UI_Screen_Shop
+DRGameplayTags::UI_Screen_Scoreboard
+```
 
-- 위젯 생성 또는 제거
-- 위젯 표시 또는 숨김
-- `Visible` 상태 변경
-- 필요한 데이터 전달
+UI Manager는 태그를 키로 `UI Config`를 조회한 뒤 위젯 클래스와 표시 설정을 가져온다.
+따라서 호출부는 어떤 Widget Blueprint가 연결되어 있는지 알 필요가 없다.
 
-`UI Manager Subsystem`은 `UI Config`에서 요청에 맞는 위젯 클래스를 조회한다.
-반환된 `WidgetClass`를 인스턴스화하거나 기존 위젯을 재사용하고 Viewport에 표시한다.
+## 태그 기반 UI Config
+
+UI Config는 화면 태그와 위젯 정의를 `TMap`으로 연결한다.
+
+```cpp
+USTRUCT(BlueprintType)
+struct FDRUIScreenDefinition
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    TSubclassOf<UUserWidget> WidgetClass;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    EDRUILayer Layer = EDRUILayer::Menu;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    int32 Order = 0;
+};
+```
+
+```cpp
+UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Screens")
+TMap<FGameplayTag, FDRUIScreenDefinition> Screens;
+```
+
+하나의 화면 태그에는 다음 정보가 함께 등록된다.
+
+| 값 | 역할 |
+|---|---|
+| `WidgetClass` | 생성할 Widget Blueprint 클래스 |
+| `Layer` | HUD, VFX, Menu, Modal 중 표시 레이어 |
+| `Order` | 해당 레이어의 기준 ZOrder에 더할 값 |
+
+조회는 전달받은 태그를 키로 사용한다.
+
+```cpp
+const FDRUIScreenDefinition* FindScreen(FGameplayTag ScreenTag) const
+{
+    return Screens.Find(ScreenTag);
+}
+```
+
+사운드 매니저의 태그 기반 조회와 목적은 같지만 현재 UI Config는
+부모 태그를 따라가는 계층형 Resolve가 아니라 `TMap::Find()`를 이용한 정확한 키 조회다.
+
+## PushScreen
+
+화면을 열 때는 위젯 클래스 대신 화면 태그를 전달한다.
+
+```cpp
+PlayerInventoryWidget = Cast<UDRInventoryScreenWidget>(
+    UIManager->PushScreen(DRGameplayTags::UI_Screen_Inventory_Player));
+```
+
+`PushScreen()`은 다음 순서로 동작한다.
+
+1. 화면 태그와 UI Config가 유효한지 확인한다.
+2. 같은 태그로 관리 중인 위젯이 있으면 다시 표시한다.
+3. 없다면 UI Config에서 `FDRUIScreenDefinition`을 조회한다.
+4. `WidgetClass`, `Layer`, `Order`로 위젯을 생성한다.
+5. 생성된 위젯을 화면 태그와 함께 `ActiveScreens`에 등록한다.
+
+```cpp
+UUserWidget* UDRUIManagerSubsystem::PushScreen(FGameplayTag ScreenTag)
+{
+    if (!ScreenTag.IsValid() || !IsValid(UIConfig))
+    {
+        return nullptr;
+    }
+
+    if (UUserWidget* ExistingWidget = GetScreen(ScreenTag))
+    {
+        SetManagedWidgetVisible(ExistingWidget, true);
+        return ExistingWidget;
+    }
+
+    const FDRUIScreenDefinition* Definition = UIConfig->FindScreen(ScreenTag);
+    if (!Definition || !Definition->WidgetClass)
+    {
+        return nullptr;
+    }
+
+    UUserWidget* Widget = CreateManagedWidget(
+        Definition->WidgetClass,
+        Definition->Layer,
+        Definition->Order);
+
+    if (IsValid(Widget))
+    {
+        ActiveScreens.Add(ScreenTag, Widget);
+    }
+
+    return Widget;
+}
+```
+
+`ActiveScreens` 역시 태그를 키로 사용한다.
+
+```cpp
+TMap<FGameplayTag, TObjectPtr<UUserWidget>> ActiveScreens;
+```
+
+이를 통해 위젯 조회, 열림 상태 확인, 제거 요청도 모두 같은 화면 태그를 기준으로 처리할 수 있다.
+
+## 화면 조회와 제거
+
+화면이 열려 있는지는 태그로 확인한다.
+
+```cpp
+if (UIManager->IsScreenOpen(DRGameplayTags::UI_Screen_Inventory_Player))
+{
+    CloseInventoryScreen();
+}
+```
+
+위젯을 제거할 때도 같은 태그를 사용한다.
+
+```cpp
+UIManager->PopScreen(DRGameplayTags::UI_Screen_Inventory_Storage);
+```
+
+`PopScreen()`은 `ActiveScreens`에서 태그에 대응하는 위젯을 찾고,
+Viewport와 관리 컨테이너에서 제거한 뒤 입력 모드를 갱신한다.
+
+플레이어 인벤토리처럼 자주 다시 여는 화면은 제거하지 않고 숨겨서 재사용할 수도 있다.
+
+```cpp
+UIManager->SetManagedWidgetVisible(PlayerInventoryWidget, false);
+```
+
+즉, 모든 화면을 자동으로 캐싱하는 구조는 아니며 각 UI의 생명주기에 따라
+숨겨서 재사용할지 `PopScreen()`으로 제거할지 UI Component가 결정한다.
+
+## 레이어와 입력 모드
+
+UI Manager는 위젯 정의의 `EDRUILayer`에 따라 기준 ZOrder를 결정한다.
+
+| 레이어 | 기준 ZOrder | 입력 처리 |
+|---|---:|---|
+| `HUD` | 0 | 게임 입력 유지 |
+| `VFX` | 50 | 게임 입력 유지 |
+| `Menu` | 100 | Game and UI |
+| `Modal` | 200 | UI Only |
+
+활성화된 Modal이 있으면 `FInputModeUIOnly`, Menu가 있으면
+`FInputModeGameAndUI`, 둘 다 없으면 `FInputModeGameOnly`로 전환한다.
+
+따라서 각 UI Component가 마우스 커서와 입력 모드를 개별적으로 설정하지 않아도
+UI Manager가 현재 표시 중인 최상위 UI 레이어를 기준으로 일관되게 처리할 수 있다.
 
 ## 구성 요소별 역할
 
 ### PlayerController
 
-플레이어 입력과 Pawn 변경처럼 UI 갱신의 시작점이 되는 이벤트를 감지한다.
-
-컨트롤러가 위젯을 직접 생성하거나 제거하지 않고 이벤트를 `UI Component`에 전달한다.
-따라서 입력 처리와 UI 구현이 직접 결합되지 않는다.
+플레이어 입력과 Pawn 변경처럼 UI 갱신의 시작점이 되는 이벤트를 감지하고
+해당 기능의 UI Component에 전달한다.
 
 ### UI Component
 
-UI와 관련된 데이터와 상태를 관리하는 중간 계층이다.
-
-- 컨트롤러에서 입력 이벤트 수신
+- 입력 이벤트 수신
 - UI에 필요한 데이터 가공
-- ViewModel 또는 델리게이트 바인딩
-- 표시할 위젯과 상태 결정
-- `UI Manager Subsystem`에 위젯 처리 요청
-- 위젯에서 발생한 클릭 및 닫기 이벤트 처리
+- 열거나 닫을 화면 태그 결정
+- UI Manager에 `PushScreen()` 또는 `PopScreen()` 요청
+- ViewModel 및 델리게이트 연결
+- 위젯에서 발생한 클릭과 닫기 이벤트 처리
+- 화면을 숨겨 재사용할지 제거할지 결정
 
-`UI Component`는 어떤 UI가 필요한지는 판단하지만, 위젯의 생성과 Viewport 관리는 직접 수행하지 않는다.
+UI Component는 어떤 UI가 필요한지는 판단하지만 실제 위젯 클래스와 생성 방법은 알지 못한다.
 
 ### UI Manager Subsystem
 
-프로젝트의 위젯 인스턴스와 생명주기를 관리한다.
+- 화면 태그로 UI Config 조회
+- 위젯 생성과 Viewport 등록
+- 태그별 활성 위젯 관리
+- 위젯 표시, 숨김, 제거
+- 레이어별 ZOrder 적용
+- 활성 레이어에 맞는 입력 모드와 마우스 커서 갱신
 
-- `UI Config`에서 `WidgetClass` 조회
-- 위젯 생성
-- 생성된 위젯 캐시 및 재사용
-- Viewport 추가
-- 표시 및 숨김 처리
-- 더 이상 필요하지 않은 위젯 제거
-
-여러 객체가 각자 위젯을 생성하지 않고 서브시스템을 통해 요청하므로 위젯 관리 지점을 하나로 모을 수 있다.
+`UDRUIManagerSubsystem`은 `ULocalPlayerSubsystem`이므로 로컬 플레이어별 UI 상태를 독립적으로 관리한다.
 
 ### UI Config DataAsset
 
-UI 식별자와 실제 위젯 클래스의 연결 정보를 저장한다.
-
-```text
-UI 식별자 → WidgetClass
-```
-
-위젯 클래스를 코드에 직접 지정하지 않고 Config에서 조회하므로 위젯 교체와 설정 변경이 쉬워진다.
-새로운 위젯을 추가할 때도 관리 코드보다 Config 데이터를 중심으로 확장할 수 있다.
+화면 태그와 `WidgetClass`, `Layer`, `Order`의 연결을 보관한다.
+위젯 Blueprint나 표시 순서를 바꿀 때 호출 코드를 수정하지 않고 DataAsset 설정을 변경할 수 있다.
 
 ### Widget
 
-최종적으로 화면을 표시하고 사용자의 UI 입력을 받는다.
-
-표시할 데이터는 `UI Component`의 ViewModel이나 델리게이트를 통해 전달받는다.
-버튼 클릭이나 닫기 같은 이벤트는 다시 `UI Component`로 전달한다.
-
-Widget은 게임플레이 로직이나 위젯 생성 정책을 직접 처리하지 않고 화면 표현에 집중한다.
+최종 화면 표시와 사용자의 UI 입력을 담당한다.
+데이터는 UI Component의 ViewModel이나 델리게이트를 통해 받고,
+클릭이나 닫기 이벤트는 다시 UI Component로 전달한다.
 
 ## 객체 관계
 
 ![UI 시스템 객체 관계](/assets/img/unreal-ui-architecture/ui-structure-flow.png)
 
-객체 간 요청 방향은 다음과 같다.
+## 사운드 매니저와의 공통점
 
-1. `PlayerController`가 입력 이벤트를 `UI Component`에 전달한다.
-2. `UI Component`가 `UI Manager Subsystem`에 위젯 표시 또는 제거를 요청한다.
-3. `UI Manager Subsystem`이 `UI Config`에서 위젯 클래스를 조회한다.
-4. `UI Manager Subsystem`이 위젯을 생성하거나 재사용해 화면에 표시한다.
-5. `UI Component`가 ViewModel 또는 델리게이트를 통해 위젯에 데이터를 전달한다.
-6. Widget의 클릭이나 닫기 이벤트가 `UI Component`로 돌아온다.
+두 시스템 모두 기능 코드와 실제 애셋 사이에 GameplayTag와 Config를 둔다.
 
-## 이 구조의 장점
+```text
+UI
+화면 태그 → UI Manager → UI Config → WidgetClass
 
-- 입력 처리와 위젯 생성 코드가 분리된다.
-- 위젯 인스턴스와 생명주기를 한곳에서 관리할 수 있다.
-- 위젯 클래스가 Config에 모여 있어 교체와 확장이 쉽다.
-- Widget이 화면 표현에만 집중하므로 게임플레이 로직과의 결합도가 낮아진다.
-- 위젯 캐시를 이용하면 반복적인 생성과 제거 비용을 줄일 수 있다.
+Sound
+사운드 태그 → GC_Sound → Sound Library → Sound
+```
+
+호출부는 구체적인 Widget 또는 Sound 애셋을 직접 참조하지 않는다.
+태그와 DataAsset의 연결만 변경해 실제 애셋을 교체할 수 있으므로 기능 코드와 콘텐츠의 결합도가 낮아진다.
+
+## 장점
+
+- 위젯 클래스를 기능 코드에서 직접 참조하지 않는다.
+- 화면 조회, 생성, 상태 확인, 제거가 하나의 태그를 기준으로 통일된다.
+- 위젯 클래스, 레이어, 표시 순서를 DataAsset에서 관리할 수 있다.
+- UI Component와 UI Manager의 역할이 분리된다.
+- 로컬 플레이어별 위젯과 입력 모드를 한곳에서 관리한다.
+- 새로운 화면은 태그와 Config 정의를 추가하는 방식으로 확장할 수 있다.
 
 ## 정리
 
-이 UI 구조는 각 계층의 책임을 다음과 같이 나눈다.
+DeepRaiders UI Manager의 핵심은 **UI Screen GameplayTag + UI Config**다.
 
-| 구성 요소 | 책임 |
-|---|---|
-| `PlayerController` | 입력과 Pawn 변경 이벤트 전달 |
-| `UI Component` | 데이터 가공, UI 상태 판단, 처리 요청 |
-| `UI Manager Subsystem` | 위젯 생성, 캐시, 표시, 숨김, 제거 |
-| `UI Config DataAsset` | UI 식별자와 WidgetClass 연결 |
-| `Widget` | 데이터 표시와 사용자 UI 이벤트 전달 |
+```cpp
+UIManager->PushScreen(DRGameplayTags::UI_Screen_Inventory_Player);
+UIManager->IsScreenOpen(DRGameplayTags::UI_Screen_Inventory_Player);
+UIManager->PopScreen(DRGameplayTags::UI_Screen_Inventory_Player);
+```
 
-컨트롤러의 입력이 UI 컴포넌트로 전달되면 컴포넌트가 데이터를 처리하고,
-UI 매니저 서브시스템이 Config에서 위젯 클래스를 찾아 화면에 표시하는 흐름이다.
+UI Component는 화면 태그만 전달하고, UI Manager가 Config에서 위젯 클래스와
+레이어 정보를 찾아 생성부터 입력 모드 갱신까지 처리한다.
 
-이렇게 역할을 분리하면 UI가 늘어나도 입력, 데이터, 위젯 관리 코드가 한 객체에 몰리지 않는다.
+사운드 매니저와 동일하게 태그를 콘텐츠 선택의 기준으로 사용해
+기능 코드와 실제 애셋의 직접 참조를 줄인 구조다.
