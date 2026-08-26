@@ -1,6 +1,6 @@
 ---
 title: "언리얼 DeepRaiders - GameplayTag 기반 UI Manager"
-date: 2026-08-19 18:00:00 +0900
+date: 2026-08-20 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
 tags: [UnrealEngine, DeepRaiders, UMG, GameplayTag, LocalPlayerSubsystem, DataAsset]
 description: "GameplayTag와 UI Config를 이용해 위젯을 조회하고 관리하는 DeepRaiders UI 구조 정리"
