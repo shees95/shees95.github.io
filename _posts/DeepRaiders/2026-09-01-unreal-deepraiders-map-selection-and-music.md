@@ -2,8 +2,7 @@
 title: "언리얼 DeepRaiders - 맵 선택 UI와 상황별 음악"
 date: 2026-09-01 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
-tags
-  : [UnrealEngine, DeepRaiders, UMG, ComboBoxString, GameState, Audio]
+tags : [UnrealEngine, DeepRaiders, UMG, ComboBoxString, GameState, Audio]
 description: "낮과 밤 맵을 구성하고 맵 정의 기반 선택 UI와 GameState 상태에 따른 음악 재생을 연결한 기록"
 ---
 
