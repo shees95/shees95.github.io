@@ -8,8 +8,6 @@ description: "Title에 방 관리 위젯을 연결하고 Public Dedicated와 Pri
 
 # 방 목록 UI와 Public·Private 생성 연결
 
-> 9월 7일~11일 주간 작업을 주제별로 나눈 회고다. 게시 날짜는 실제 구현일과 다를 수 있다.
-
 RoomService의 방 요청을 타이틀 UI에 연결했다.
 C++에서는 요청과 데이터, 접속 상태를 관리하고 WBP에서는 배치와 스타일, 클릭 이벤트를 연결했다.
 
@@ -105,4 +103,3 @@ Private 접속창의 내부 Overlay만 숨기고 위젯 자체를 Visible로 남
 UI 복귀에는 보이는 화면뿐 아니라 입력과 요청 상태까지 함께 정리해야 했다.
 Master가 없는 Private 생성·IP 접속과 접속창 종료 후 입력 복구는 후속 실행 검증에도 포함했다.
 
-<!-- 캡처: Public·Private 생성 화면과 Private 접속창 종료 후 방 목록 버튼을 다시 누르는 영상. -->

@@ -3,197 +3,174 @@ title: "언리얼 DeepRaiders - GPU 제조사별 복셀 연산 오류"
 date: 2026-08-28 22:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
 tags: [UnrealEngine, DeepRaiders, Voxel, GPU, AMD, NVIDIA, RDG, JumpFlood, TroubleShooting]
-description: "AMD에서는 정상이고 NVIDIA에서는 반대로 동작한 Voxel JumpFlood GPU 동기화 오류 추적과 해결"
+description: "같은 눈 생성 기능이 PC마다 다르게 동작한 문제를 GPU 계산 과정까지 좁혀 해결한 기록"
 ---
 
-# GPU에 따라 달라진 복셀 편집 결과
+# 같은 코드인데 왜 내 PC에서만 눈이 이상할까?
 
-복셀 최적화 이후 팀원이 눈총 전용 Frustum 흡수 Tool을 추가했다.
+복셀 연산을 최적화한 뒤, 팀원이 눈총으로 일정 범위의 눈을 흡수하는 기능을 추가했다.
+개발한 팀원의 PC에서는 잘 작동했지만 다른 팀원들의 PC에서는 눈이 제대로 쌓이지 않았다.
+바닥을 깎으면 오히려 눈이 위로 튀어나오기도 했다.
 
-기능을 개발한 팀원에게서는 정상적으로 동작했지만 다른 팀원들의 환경에서는
-눈이 쌓이지 않거나, 바닥을 제거했는데 오히려 위로 튀어나오는 문제가 발생했다.
+같은 코드와 데이터를 사용하고 있는데 실행하는 PC에 따라 결과가 달랐다.
+처음에는 새로 추가한 흡수 기능을 의심했지만, 원인을 따라가 보니 GPU에서 계산 결과를 주고받는 과정에 문제가 있었다.
 
-같은 코드와 같은 데이터인데 개발자마다 결과가 달랐다.
+## 1. 눈을 더해도, 지워도 이상했다
 
-## 처음 의심한 커밋
-
-전체 브랜치와 커밋을 하나씩 확인한 결과,
-눈총 전용 Frustum 흡수 Tool이 추가된 커밋부터 문제가 드러났다.
-
-![처음 문제를 의심한 Frustum Tool 커밋](/assets/img/deepraiders-voxel-gpu-sync/suspected-tool-commit.png)
-
-하지만 변경 내용을 보면 기존 복셀을 찾고 제거하는 기능이 대부분이었다.
-복셀 추가 기능까지 망가뜨리거나 제거 방향을 반대로 만들 만한 원인을 찾기 어려웠다.
-
-## 효과 없었던 시도
-
-로컬 환경 또는 빌드 캐시 문제라고 생각해 다음 작업을 진행했다.
-
-- 복셀 캐시 초기화와 새로고침
-- Unreal 캐시 파일 삭제
-- 솔루션 정리
-- 전체 재빌드
-- 브랜치와 커밋별 동작 비교
-
-결과는 같았다.
-
-기능 개발자의 PC에서는 정상이고 다른 팀원들의 PC에서는 계속 잘못 동작했다.
-
-## GPU 제조사 차이 발견
-
-팀원들의 하드웨어를 비교하던 중 차이점을 발견했다.
-
-- 정상 동작한 개발자: AMD GPU
-- 잘못 동작한 팀원들: NVIDIA GPU
-
-이전에 복셀 최적화를 논의할 때도 AMD GPU 사용자는 렉이 적고,
-다른 환경에서는 프레임 드랍이 크다는 차이가 있었다.
-
-최근 JumpFlood 거리장 연산을 CPU에서 GPU로 옮긴 변경까지 연결해서 확인했다.
-
-![JumpFlood GPU 연산이 추가된 커밋](/assets/img/deepraiders-voxel-gpu-sync/jump-flood-gpu-change.png)
-
-문제가 발생한 Tool 커밋은 원인을 만든 것이 아니라,
-기존 GPU 연산 오류가 눈에 띄는 형태로 드러나게 한 커밋에 가까웠다.
-
-## 잘못된 복셀 결과
-
-눈을 추가해도 표면에 제대로 쌓이지 않았다.
+눈을 추가하면 표면에 쌓여야 하는데 제대로 생성되지 않았다.
 
 ![눈 추가가 정상적으로 적용되지 않은 결과](/assets/img/deepraiders-voxel-gpu-sync/snow-add-failure.png)
 
-제거 기능은 더 명확했다.
-바닥을 깎아야 하는데 복셀이 반대 방향으로 튀어나왔다.
+눈을 제거할 때는 문제가 더 뚜렷했다.
+바닥을 깎아야 하는데 반대로 복셀이 위로 튀어나왔다.
 
 ![제거했지만 복셀이 튀어나온 결과](/assets/img/deepraiders-voxel-gpu-sync/remove-inverted-result.png)
 
-처음에는 GPU 제조사에 따라 배열 순서나 연산 방향이 뒤집히는 것을 의심했다.
-하지만 실제 원인은 배열의 정방향과 역방향 차이가 아니었다.
+단순히 화면이 끊기거나 처리가 느린 문제가 아니었다.
+눈을 만들고 지우는 계산 결과 자체가 잘못 나오고 있었다.
 
-## CPU 전환으로 원인 확정
+## 2. 처음에는 새로 추가한 흡수 기능을 의심했다
 
-같은 JumpFlood 연산을 GPU 대신 CPU 경로로 실행하자 모든 팀원의 PC에서 정상 동작했다.
+브랜치와 커밋을 비교하니 눈총의 Frustum 흡수 Tool이 추가된 시점부터 문제가 드러났다.
+여기서 Frustum은 눈총이 눈을 흡수할 범위의 모양을 뜻한다.
 
-![CPU 경로에서 정상 동작한 복셀](/assets/img/deepraiders-voxel-gpu-sync/cpu-fallback-result.png)
+![처음 문제를 의심한 흡수 기능 커밋](/assets/img/deepraiders-voxel-gpu-sync/suspected-tool-commit.png)
 
-이 결과로 다음 범위를 제외할 수 있었다.
+하지만 해당 변경은 주로 흡수할 복셀을 찾고 제거하는 내용이었다.
+눈을 추가하는 기능까지 잘못되는 이유를 이 코드만으로 설명하기 어려웠다.
 
-- Frustum Tool의 제거 수식
-- 복셀 캐시
-- Unreal 로컬 캐시
-- 빌드 결과 차이
-- 네트워크 복제
+로컬에 남은 파일이 문제일 수도 있어 캐시를 초기화하고, 솔루션을 정리한 뒤 전체 빌드도 다시 했다.
+이전 커밋과 비교해 실행해 봐도 상황은 같았다.
 
-입력 데이터와 상위 로직은 같고 GPU 경로에서만 결과가 달랐으므로,
-JumpFlood Compute Shader의 리소스 사용과 동기화를 확인했다.
+개발한 팀원의 PC에서는 정상이고, 다른 팀원들의 PC에서는 계속 잘못 동작했다.
 
-## 실제 원인: GPU 리소스 동기화
+## 3. 팀원들과 이야기하다 GPU 차이를 발견했다
 
-JumpFlood는 여러 Compute Pass가 같은 두 버퍼를 번갈아 사용하는 Ping-Pong 방식이다.
+팀원들과 각자 사용하는 하드웨어에 관해 이야기하던 중 공통점을 발견했다.
 
-```text
-Pass 1: Src 읽기 → Dst 쓰기
-                    ↓ Swap
-Pass 2: Src 읽기 → Dst 쓰기
-                    ↓ Swap
-Pass 3: Src 읽기 → Dst 쓰기
-```
+| 테스트 환경 | 결과 |
+|---|---|
+| AMD GPU를 사용하는 팀원 | 눈 생성과 제거가 정상 동작 |
+| NVIDIA GPU를 사용하는 팀원들 | 눈이 쌓이지 않거나 제거 결과가 이상함 |
 
-이전 구현은 직전 Pass가 쓴 버퍼를 다음 Pass에서 읽을 때
-리소스의 읽기와 쓰기 상태 및 Pass 간 의존성을 충분히 명시하지 않았다.
+이전에 복셀 최적화를 이야기할 때도 AMD를 사용하는 팀원은 렉이 적고,
+다른 팀원들은 프레임이 많이 떨어진다는 차이가 있었다.
 
-구체적으로 다음 문제가 있었다.
+이 차이를 보고 최근에 복셀 계산 일부를 CPU에서 GPU로 옮긴 작업을 다시 확인했다.
+옮긴 계산은 **JumpFlood**라는 방식이었다.
+이 글에서는 눈 표면의 위치와 거리를 구하는 데 사용한 계산이라고 이해하면 된다.
 
-- 읽기 전용 Source까지 UAV로 바인딩
-- UAV Write 이후 SRV Read 전환이 불명확
-- Compute Pass 사이의 Barrier와 Cache Visibility가 드라이버 동작에 의존
-- GPU 결과를 CPU로 가져오는 Readback 동기화가 불안정
-- CPU와 GPU의 Invalid Surface Position 기준 불일치
+![복셀 계산을 GPU로 옮긴 커밋](/assets/img/deepraiders-voxel-gpu-sync/jump-flood-gpu-change.png)
 
-AMD 환경에서는 우연히 기대한 순서와 가시성이 유지됐지만,
-NVIDIA 환경에서는 이전 Pass의 결과가 다음 Pass에 올바르게 보장되지 않았다.
+다만 GPU 제조사가 다르다는 사실만으로 원인을 확정할 수는 없었다.
+실제로 GPU에서 계산하는 부분이 문제인지 비교할 필요가 있었다.
 
-그 결과 잘못된 Surface Position과 거리장이 만들어졌고,
-추가와 제거가 반대로 보이는 복셀 편집 결과로 이어졌다.
+## 4. 같은 계산을 CPU로 돌리자 정상으로 돌아왔다
 
-## 1차 수정: SRV와 UAV 분리
+문제가 의심되는 계산을 GPU 대신 기존 CPU 방식으로 실행했다.
+그러자 모든 팀원의 PC에서 눈 생성과 제거가 정상으로 돌아왔다.
 
-Source는 읽기 전용 SRV, Destination은 쓰기용 UAV로 분리했다.
+![CPU 계산으로 바꾼 뒤 정상 동작한 복셀](/assets/img/deepraiders-voxel-gpu-sync/cpu-fallback-result.png)
 
-```cpp
-SetSRVParameter(BatchedParameters, Src, SrcBuffer.SRV);
-SetUAVParameter(BatchedParameters, Dst, DstBuffer.UAV);
-```
-
-직전 Pass에서 UAV로 기록된 Source Buffer는 다음 Dispatch 전에
-`SRVCompute` 상태로 명시적으로 전환했다.
-
-```cpp
-RHICmdList.Transition(
-    FRHITransitionInfo(
-        SrcBuffer.UAV,
-        ERHIAccess::UAVCompute,
-        ERHIAccess::SRVCompute));
-```
-
-이 수정으로 AMD와 NVIDIA가 동일한 Resource Hazard와 Cache Visibility 규칙을 따르게 했다.
-
-## 최종 수정: RDG 기반 JumpFlood
-
-수동 RHI Buffer 관리만으로는 누락 가능성이 남아 있어 JumpFlood를 RDG 기반으로 변경했다.
-
-각 Pass에 다음 의존성을 명시했다.
+이 비교가 중요한 단서였다.
+눈을 추가하고 흡수하는 기능은 그대로 두고 계산 경로만 바꿨는데 결과가 달라졌기 때문이다.
 
 ```text
-Src Buffer → SRV Read
-Dst Buffer → UAV Write
-Pass 종료 → Src/Dst Swap
+같은 눈 생성·흡수 기능
+    ├─ CPU로 계산 → 정상
+    └─ GPU로 계산 → 일부 PC에서 오류
 ```
 
-RDG가 Pass 사이의 Barrier와 리소스 상태 전환을 관리하므로
-특정 GPU 드라이버의 암묵적인 처리에 의존하지 않게 됐다.
+덕분에 조사할 범위를 GPU 계산 과정으로 좁힐 수 있었다.
+흡수 기능 자체보다 GPU에서 데이터를 읽고, 계산하고, 결과를 넘기는 부분을 살펴봤다.
 
-GPU 결과를 CPU로 가져올 때도 Source Buffer를 직접 Lock하지 않고
-`FRHIGPUBufferReadback`의 Staging Buffer를 사용했다.
+## 5. 원인은 계산 결과를 넘기는 과정에 있었다
 
-```cpp
-FRHIGPUBufferReadback Readback(TEXT("Voxel.JumpFlood.Readback"));
-AddEnqueueCopyPass(GraphBuilder, &Readback, SrcBuffer, NumBytes);
-GraphBuilder.Execute();
+이번 GPU 계산은 한 번에 끝나는 작업이 아니었다.
+앞 단계의 계산 결과를 다음 단계가 받아 여러 번 계산해야 했다.
 
-RHICmdList.ImmediateFlush(EImmediateFlushType::FlushRHIThread);
-Readback.Wait(RHICmdList, FRHIGPUMask::All());
+계산 중에는 결과를 두 개의 버퍼에 번갈아 담아가며 사용했다.
+
+```text
+1단계: A의 데이터를 읽고 → 계산 결과를 B에 저장
+2단계: B의 결과를 읽고   → 다음 결과를 A에 저장
+3단계: A의 결과를 읽고   → 다음 결과를 B에 저장
 ```
 
-마지막으로 CPU와 GPU가 동일한 Invalid Surface Position을 사용하도록 기준을 통일했다.
+여기서 중요한 조건은 **다음 단계가 앞 단계에서 갱신한 결과를 읽어야 한다**는 것이다.
+앞 단계의 결과가 다음 단계에 제대로 전달되도록 읽기·쓰기 용도의 버퍼들로 작업들을 동기화 하였다.
 
-## 해결 결과
+기존 구현에는 계산에 사용할 데이터가 올바르게 전달되도록 코드에서 보장하지 못한 것이 문제였다.
 
-RDG 기반 연산과 Readback 동기화를 적용한 뒤 AMD와 NVIDIA에서 같은 결과가 나왔다.
+그 결과 눈 표면의 위치와 거리가 잘못 계산됐고, 눈이 쌓이지 않거나 제거했는데 튀어나오는 현상으로 이어졌다.
 
-- 눈 추가 정상 동작
-- Frustum 흡수 정상 동작
-- 제거 시 반대로 돌출되던 현상 해결
-- GPU 최적화 경로 유지
-- CPU Fallback 결과와 GPU 결과 일치
+## 6. 읽을 데이터와 쓸 데이터를 구분했다
 
-## 정리
+먼저 각 단계에서 읽을 버퍼와 결과를 쓸 버퍼의 용도를 명확히 나눴다.
+기존에는 읽기만 하는 데이터도 쓰기가 가능한 방식으로 연결하고 있었다.
 
-이번 문제는 GPU 제조사별 배열 연산 방향 차이가 아니었다.
+수정한 코드에서 사용한 이름은 다음과 같다.
 
-원인은 여러 Compute Pass가 공유하는 버퍼의 읽기와 쓰기 상태,
-Barrier, GPU Readback을 명확하게 동기화하지 않은 것이었다.
+| 용어 | 이번 코드에서의 역할 |
+|---|---|
+| SRV | 계산에 사용할 데이터를 읽는 쪽 |
+| UAV | 계산 결과를 기록하는 쪽 |
 
-CPU 전환은 성능을 포기한 임시 해결책이 아니라
-상위 복셀 로직과 GPU 경로를 분리해서 원인을 확정하는 중요한 비교 실험이었다.
+앞 단계에서 결과를 기록한 버퍼가 다음 단계의 입력이 되면,
+이제 읽는 용도로 사용할 것임을 명시하도록 했다.
 
-GPU Compute 결과가 제조사별로 다를 때는 수식만 보지 말고 다음 항목도 확인해야 한다.
+핵심은 저장 공간을 바꿔 쓰는 것뿐 아니라, **언제 결과를 쓰고 언제 그 결과를 읽는지도 맞추는 것**이었다.
 
-- SRV와 UAV 사용 구분
-- Pass 간 Resource Barrier
-- Ping-Pong Buffer Swap
-- GPU Cache Visibility
-- CPU Readback Fence
-- CPU와 GPU의 초기값 및 Invalid 값 일치
+## 7. 작업 순서 관리는 언리얼의 RDG에 맡겼다
 
-같은 셰이더 코드라도 동기화가 명시되지 않으면 특정 GPU에서만 정상으로 보일 수 있다.
+각 단계의 데이터 사용을 직접 관리하면 빠뜨릴 여지가 있었다.
+최종적으로는 언리얼의 **RDG(Render Dependency Graph)**를 사용하는 방식으로 바꿨다.
+
+RDG는 GPU 작업이 어떤 데이터를 읽고 쓰는지 등록하면,
+그 관계에 맞춰 필요한 데이터 사용 전환과 동기화를 관리해 주는 기능이다.
+
+이번에는 각 계산 단계에 다음 내용을 명확히 등록했다.
+
+```text
+이 단계는 A를 읽고 B에 결과를 쓴다.
+다음 단계는 그 B를 읽고 A에 결과를 쓴다.
+```
+
+이 관계를 RDG에 알려 주어 앞 단계의 결과를 다음 단계에서 사용할 수 있도록 했다.
+특정 PC에서 우연히 잘 동작하는 상황에 기대지 않고, 코드에 필요한 관계를 드러낸 것이다.
+
+### GPU 결과를 가져올 때도 완료를 확인했다
+
+계산이 끝난 뒤에는 GPU의 결과를 CPU로 가져와야 했다.
+이 과정도 GPU가 결과를 기록하기 전에 읽지 않도록 맞춰야 한다.
+
+`FRHIGPUBufferReadback`이라는 결과 복사용 기능을 사용하고,
+복사가 끝난 것을 확인한 뒤 결과를 읽도록 정리했다.
+
+또한 표면 위치를 찾지 못했을 때 사용하는 기준값도 CPU와 GPU에서 같게 맞췄다.
+같은 상황을 두 계산 방식이 다르게 해석하지 않도록 한 것이다.
+
+## 8. 수정 후 GPU 계산을 유지하면서 문제를 해결했다
+
+수정 후에는 테스트한 AMD와 NVIDIA 환경에서 같은 결과를 확인했다.
+
+- 눈을 추가하면 정상적으로 쌓였다.
+- 눈총으로 흡수하면 해당 영역이 제거됐다.
+- 바닥을 제거할 때 반대로 튀어나오던 현상이 사라졌다.
+- GPU 계산 결과가 CPU 방식의 결과와 일치했다.
+
+CPU 전환은 원인을 좁히기 위한 비교 실험이었고,
+최종적으로는 GPU를 사용하는 최적화 경로를 유지했다.
+
+처음 의심했던 흡수 기능 추가는 기존 GPU 계산 문제를 눈에 띄게 드러낸 계기로 볼 수 있었다.
+
+## 이번 작업에서 배운 점
+
+같은 코드가 특정 PC에서만 잘못 동작하면 처음에는 캐시나 환경 설정부터 의심하기 쉽다.
+이번에도 그랬지만, 원인을 좁히는 데 가장 도움이 된 것은 **같은 계산을 CPU와 GPU에서 비교한 것**이었다.
+
+그 비교로 문제가 발생하는 부분을 찾은 뒤, 계산식뿐 아니라 데이터가 전달되는 순서까지 확인했다.
+앞 단계의 결과를 다음 단계가 제대로 받지 못하면 계산식이 같아도 결과는 달라질 수 있었다.
+
+앞으로 GPU 작업을 수정할 때는 무엇을 계산하는지와 함께,
+**어떤 데이터를 읽고, 어디에 결과를 쓰고, 그 결과를 언제 사용하는지**도 확인해야겠다.

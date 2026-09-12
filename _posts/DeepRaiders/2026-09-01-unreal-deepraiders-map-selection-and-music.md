@@ -2,13 +2,12 @@
 title: "언리얼 DeepRaiders - 맵 선택 UI와 상황별 음악"
 date: 2026-09-01 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
-tags: [UnrealEngine, DeepRaiders, UMG, ComboBoxString, GameState, Audio]
+tags
+  : [UnrealEngine, DeepRaiders, UMG, ComboBoxString, GameState, Audio]
 description: "낮과 밤 맵을 구성하고 맵 정의 기반 선택 UI와 GameState 상태에 따른 음악 재생을 연결한 기록"
 ---
 
 # 맵 선택과 상황별 음악 구성
-
-> 이 글은 주간 작업을 주제별로 나누어 정리한 회고다. 게시 날짜는 개별 기능의 실제 구현일과 다를 수 있다.
 
 기존 테스트 맵에 더해 새로운 맵을 제작했다.
 조명을 학습하면서 새 맵의 밤 버전도 구성했고, 선택 가능한 맵이 늘어나면서 맵 선택 UI를 추가했다.
@@ -23,13 +22,18 @@ description: "낮과 밤 맵을 구성하고 맵 정의 기반 선택 UI와 Game
 | 맵 참조 | 실제로 사용할 맵 지정 |
 | 표시 이름 | 선택 UI에 보여 줄 이름 |
 
+![스크린샷 2026-09-11 112952.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112952.png)  
+
 정의 데이터를 설정하고 `ComboBox String`의 선택 목록에 항목을 추가하면 해당 맵을 선택할 수 있도록 연결했다.
 새 맵을 추가할 때는 맵 정의와 선택 목록을 함께 설정하는 방식이다.
+
+![스크린샷 2026-09-11 113103.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113103.png)  
 
 같은 공간도 조명에 따라 인상이 달라졌다.
 낮과 밤 버전을 구성하면서 맵의 형태뿐 아니라 실제 플레이 화면에서 보이는 분위기도 함께 조정했다.
 
-<!-- 캡처: 같은 카메라 위치에서 낮·밤 맵 비교. 이어서 맵 선택 목록과 선택한 맵의 미리보기가 함께 보이는 화면. -->
+![Map2.png](../../assets/img/deepraders-map-selection-and-music/Map2.png)
+![Map3.png](../../assets/img/deepraders-map-selection-and-music/Map3.png)
 
 ## 맵별 음악을 관리하는 액터
 
@@ -57,4 +61,4 @@ GameState 상태 변경
 
 맵을 실행해 음악을 들어 보고 다시 수정하는 과정을 에디터 안에서 이어갈 수 있었다.
 
-<!-- 캡처: 상황별 음원이 지정된 액터의 Details와 게임 시작·종료 시 음악이 바뀌는 영상. 음악 확인용 자료는 음성이 없는 GIF 대신 소리가 포함된 영상 사용. -->
+![스크린샷 2026-09-11 113313.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113313.png)
