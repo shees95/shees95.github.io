@@ -1,5 +1,5 @@
 ---
-title: "DeepRaiders 개발 : 서버 권한 기반 광물 풀링 시스템"
+title: "언리얼 DeepRaiders 개발 : 서버 권한 기반 광물 풀링 시스템"
 date: 2026-08-11 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, UnrealEngine-Project-DeepRaiders]
 tags: [UnrealEngine, DeepRaiders, Pooling, Networking, Authority]
