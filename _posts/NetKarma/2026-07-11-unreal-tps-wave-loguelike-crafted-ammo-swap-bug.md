@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 트러블슈팅 — 크래프팅 탄 스왑 시 MaxStack 붕괴"
+title: "언리얼 NetKarma : 트러블슈팅 — 크래프팅 탄 스왑 시 MaxStack 붕괴"
 date: 2026-07-11 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Inventory, UnrealEngine-Definition, TroubleShooting]
 description: "테이블 없는 크래프팅 탄이 스왑 시 잔탄을 가방에 넣는 과정에서 MaxStack을 잃어버리는 버그를 추적한 기록"
 ---
 
-# TPS 개발 - 트러블슈팅: 크래프팅 탄 스왑 버그
+# 언리얼 NetKarma - 트러블슈팅: 크래프팅 탄 스왑 버그
 
 크래프팅으로 만든 특수탄은 데이터를 실시간으로 만든다. 이 과정으로 인해 탄 스왑 로직에서 꽤 복잡한 버그로 터졌다.
 

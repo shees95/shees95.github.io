@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 액터 레플리케이션 구현 흐름 — 생성형 지뢰(LandMine) 예제"
+title: "언리얼 NetKarma : 액터 레플리케이션 구현 흐름 — 생성형 지뢰(LandMine) 예제"
 date: 2026-08-05 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Networking, UnrealEngine-DedicatedServer]
 description: "F키로 생성되는 지뢰 액터를 예제로 스폰 레플리케이션(Server RPC+WithValidation), 오너십, NetCullDistance/Property Replication, 컴포넌트 복제, 디버깅 로그까지 실제 구현 흐름 정리"
 ---
 
-# TPS 개발 - 액터 레플리케이션 구현 흐름: 생성형 지뢰 예제
+# 언리얼 NetKarma - 액터 레플리케이션 구현 흐름: 생성형 지뢰 예제
 
 [전날]({% post_url UnrealEngine/2026-08-04-unreal-multiplayer-logging-replication-optimization %}) 정리한 개념들을 실제로 어떻게 엮어서 쓰는지, F키를 누르면 그 위치에 지뢰 액터가 생성되는 기능을 예제로 구현 흐름을 정리했다.
 

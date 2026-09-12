@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 무기 업그레이드 — GE 패시브와 캐싱"
+title: "언리얼 NetKarma : 무기 업그레이드 — GE 패시브와 캐싱"
 date: 2026-07-08 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-GameplayEffect, UnrealEngine-Weapon, UnrealEngine-Attribute]
 description: "무기별 업그레이드를 Infinite GE로 구현하고, 스왑 시 캐싱된 업글을 한 번에 재적용하는 패시브 구조"
 ---
 
-# TPS 개발 - 무기 업그레이드
+# 언리얼 NetKarma - 무기 업그레이드
 
 무기 업그레이드를 구현했다. [업그레이드 Definition]({% post_url NetKarma/2026-07-04-unreal-tps-wave-loguelike-weapon-system-3 %})으로 얼개는 잡아뒀으니, 오늘은 여기에 실제 수치를 붙이는 게 목표였다.
 

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 상점 시스템 — 구매·판매·크래프팅"
+title: "언리얼 NetKarma : 상점 시스템 — 구매·판매·크래프팅"
 date: 2026-07-01 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Shop, UnrealEngine-Crafting, UnrealEngine-Definition, UnrealEngine-CSV]
 description: "상점 골조 구축, 크래프팅을 재료 N개 조합으로 확장하고 재료별 효율(개수)을 CSV로 관리"
 ---
 
-# TPS 개발 - 상점 시스템
+# 언리얼 NetKarma - 상점 시스템
 
 상점의 기본 골조가 나왔다. **구매·판매·크래프팅** 세 기능이 동작한다. 만들다 보니 크래프팅 설계가 또 한 번 크게 바뀌었다.
 

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 이펙트 매니저 서브시스템 — GE 해석/적용 일원화"
+title: "언리얼 NetKarma : 이펙트 매니저 서브시스템 — GE 해석/적용 일원화"
 date: 2026-07-14 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-GameplayEffect, UnrealEngine-Subsystem, UnrealEngine-Augment]
 description: "증강 전용으로 GE 테이블을 만들다가, 아이템·업글도 GE를 쓴다는 걸 깨닫고 GE 해석/정책 적용을 일원화한 이펙트 매니저 서브시스템으로 리팩터링"
 ---
 
-# TPS 개발 - 이펙트 매니저 서브시스템
+# 언리얼 NetKarma - 이펙트 매니저 서브시스템
 
 [증강 시스템]({% post_url NetKarma/2026-07-10-unreal-tps-wave-loguelike-augment-system-1 %})의 GE 테이블을 만들다가, 구조를 한 단계 더 정리하게 됐다.
 

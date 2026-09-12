@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 커스텀 타쿠 — 종류별 적, 풀링, 코스메틱 버프"
+title: "언리얼 NetKarma : 커스텀 타쿠 — 종류별 적, 풀링, 코스메틱 버프"
 date: 2026-07-21 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-AI, UnrealEngine-GAS, UnrealEngine-Pooling, UnrealEngine-DataAsset]
 description: "ANKMBaseTakuCharacter 공통 뼈대 위에 종류별 타쿠를 얹고, 커스텀 타쿠 발탁 시 꾸미기+스펙버프를 함께 부여하는 구조"
 ---
 
-# TPS 개발 - 커스텀 타쿠 시스템
+# 언리얼 NetKarma - 커스텀 타쿠 시스템
 
 웨이브에 등장하는 적("타쿠")을 여러 종류로 늘리면서, 공통 뼈대와 종류별 확장을 분리하는 작업을 했다. 여기에 "커스텀 타쿠"라는 특수 개체(꾸미기 + 스펙 버프가 붙은 강화 개체)도 얹었다.
 

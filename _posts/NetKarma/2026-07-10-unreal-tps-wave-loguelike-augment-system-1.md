@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 증강 시스템 (1) — GE와 EffectSet 연결"
+title: "언리얼 NetKarma : 증강 시스템 (1) — GE와 EffectSet 연결"
 date: 2026-07-10 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-GameplayEffect, UnrealEngine-Augment, UnrealEngine-DataAsset]
 description: "증강 시스템의 GE 파트 — DA_NKMAugmentEffectSet에 이펙트 ID와 GE를 묶어 패시브 증강을 제공하는 구조"
 ---
 
-# TPS 개발 - 증강 시스템 (1)
+# 언리얼 NetKarma - 증강 시스템 (1)
 
 로그라이크의 핵심인 **증강(Augment) 시스템**을 만들기 시작했다. 이 시스템은 GE, GA, 데이터 파이프라인이 전부 얽혀 있어서 통째로 정리하면 너무 길어지니, GE → GA → 전체 흐름 순서로 나눠서 적는다. 이 시스템 하나 만드는 데 **일주일**이 걸렸다.
 

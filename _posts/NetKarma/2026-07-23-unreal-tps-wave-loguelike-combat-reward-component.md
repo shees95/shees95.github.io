@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 전투 리워드 컴포넌트 — 카테고리·연산방식 분리 설계"
+title: "언리얼 NetKarma : 전투 리워드 컴포넌트 — 카테고리·연산방식 분리 설계"
 date: 2026-07-23 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GameplayMessage, UnrealEngine-DataDriven]
 description: "코인 보상 로직을 카테고리(무엇)와 스케일모드(어떻게)로 분리하고, 타격마다 코인을 캐싱했다가 콤보 종료 시 배율을 곱해 지급하는 구조"
 ---
 
-# TPS 개발 - 전투 리워드 컴포넌트
+# 언리얼 NetKarma - 전투 리워드 컴포넌트
 
 킬/데미지/콤보/커스텀 타쿠 처치 등 여러 출처의 코인 보상을 하나로 계산하는 `UNKMCombatRewardComponent`를 정리했다.
 

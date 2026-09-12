@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : VFX 색상 — Material Attribute Binding"
+title: "언리얼 NetKarma : VFX 색상 — Material Attribute Binding"
 date: 2026-07-09 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-VFX, UnrealEngine-Niagara, UnrealEngine-Material, TroubleShooting]
 description: "재료별 VFX 색상을 RGBA 테이블 값으로 런타임에 바꾸기까지 — 유저 파라미터와 머테리얼 변수를 지나 Attribute Binding에 도달한 과정"
 ---
 
-# TPS 개발 - VFX 색상 바인딩
+# 언리얼 NetKarma - VFX 색상 바인딩
 
 특수탄 VFX까지는 만들었는데, 효과에 따라 이펙트 색상도 달라야 했다. 재료가 다르면 특수탄 색깔도 달라야 한다는 건데, 이걸 붙이는 접근법 자체가 까다로웠다.
 

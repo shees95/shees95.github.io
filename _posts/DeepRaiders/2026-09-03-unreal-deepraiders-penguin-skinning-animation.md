@@ -19,15 +19,15 @@ description: "잘못된 버텍스 가중치를 정리하고 본의 축과 키프
 토폴로지 정리와 가중치 수정을 함께 진행했지만, 사각형으로 바꾸는 것만으로 모든 변형 문제가 해결되는 것은 아니었다.
 실제 포즈에서 메시가 어떻게 움직이는지 확인하며 보정을 이어갔다.
 
-![스크린샷 2026-09-12 233817.png](../../assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233817.png)
+![스크린샷 2026-09-12 233817.png](/assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233817.png)
 
 ## 관련 없는 부위에 들어간 가중치
 
 버텍스 가중치를 하나씩 확인하니 발 본을 움직일 때 등 부위까지 변형되는 문제가 있었다.
 AI로 생성한 메시의 스키닝에 관련 없는 부위의 가중치가 포함되어 있었다.
 
-![스크린샷 2026-09-12 233927.png](../../assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233927.png)
-![녹음 2026-09-12 233536.gif](../../assets/img/deepraiders-penguin-skinning-and-animation/%EB%85%B9%EC%9D%8C%202026-09-12%20233536.gif)
+![스크린샷 2026-09-12 233927.png](/assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233927.png)
+![녹음 2026-09-12 233536.gif](/assets/img/deepraiders-penguin-skinning-and-animation/%EB%85%B9%EC%9D%8C%202026-09-12%20233536.gif)
 
 각 본이 영향을 주어야 하는 영역만 남기고 불필요한 가중치를 제거했다.
 관절 주변은 블러를 활용해 영향이 자연스럽게 이어지도록 다듬었다.
@@ -35,8 +35,8 @@ AI로 생성한 메시의 스키닝에 관련 없는 부위의 가중치가 포�
 작업 후 메시가 갑자기 튀거나 과도하게 늘어나는 현상은 전반적으로 줄었다.
 다만 일부 변형 문제는 남아 있어 추가 보정이 필요하다.
 
-![스크린샷 2026-09-12 234100.png](../../assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20234100.png)
-![녹음 2026-09-12 234452.gif](../../assets/img/deepraiders-penguin-skinning-and-animation/%EB%85%B9%EC%9D%8C%202026-09-12%20234452.gif)
+![스크린샷 2026-09-12 234100.png](/assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20234100.png)
+![녹음 2026-09-12 234452.gif](/assets/img/deepraiders-penguin-skinning-and-animation/%EB%85%B9%EC%9D%8C%202026-09-12%20234452.gif)
 
 ## 본의 방향과 로컬 축 정렬
 
@@ -48,7 +48,7 @@ AI로 생성한 메시의 스키닝에 관련 없는 부위의 가중치가 포�
 
 본의 축을 맞추는 과정은 애니메이션과 연결되어있다보니 단순히 보이는 자세를 바꾸는 작업보다 이해와 시행착오가 많이 필요했다.
 
-![스크린샷 2026-09-12 233706.png](../../assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233706.png)
+![스크린샷 2026-09-12 233706.png](/assets/img/deepraiders-penguin-skinning-and-animation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20233706.png)
 
 ## 동작별 키프레임 보정
 

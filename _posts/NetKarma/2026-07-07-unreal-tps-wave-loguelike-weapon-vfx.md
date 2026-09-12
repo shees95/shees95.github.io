@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 총기 VFX — 가짜 탄 액터와 피격 타이밍"
+title: "언리얼 NetKarma : 총기 VFX — 가짜 탄 액터와 피격 타이밍"
 date: 2026-07-07 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-VFX, UnrealEngine-Niagara, UnrealEngine-Pooling, TroubleShooting]
 description: "히트스캔 위에 나이아가라 탄 VFX를 얹으며 겪은 리본 트레일, 피격 타이밍, 딜레이 문제 해결기"
 ---
 
-# TPS 개발 - 총기 VFX
+# 언리얼 NetKarma - 총기 VFX
 
 총기 VFX를 구현했다. 히트 판정은 히트스캔으로 즉발인데, **거기에 날아가는 탄 연출을 얹는 게** 생각보다 훨씬 까다로웠다.
 

@@ -2,8 +2,7 @@
 title: "언리얼 DeepRaiders - 팀 색상과 거점 인디케이터"
 date: 2026-09-04 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project, DeepRaiders]
-tags: [U
-  nrealEngine, DeepRaiders, PlayerState, MaterialInstance, UMG, Indicator]
+tags: [UnrealEngine, DeepRaiders, PlayerState, MaterialInstance, UMG, Indicator]
 description: "TeamId에 따른 펭귄 머티리얼 교체와 눈 색상 변경, 거점 위치와 우세 팀을 보여 주는 인디케이터 구현"
 ---
 
@@ -41,8 +40,8 @@ PlayerState의 TeamId 확인
 
 대상별로 필요한 표현에 맞춰 팀 색상을 적용했다.
 
-![스크린샷 2026-09-12 235423.png](../../assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235423.png)
-![스크린샷 2026-09-12 235647.png](../../assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235647.png)
+![스크린샷 2026-09-12 235423.png](/assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235423.png)
+![스크린샷 2026-09-12 235647.png](/assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235647.png)
 
 ## 거점 위치를 화면에 표시
 
@@ -53,7 +52,7 @@ PlayerState의 TeamId 확인
 점령 진행 상태에 따라 우세한 팀을 구분할 수 있도록 인디케이터 색상도 변경했다.
 
 인디케이터 하나에서 거점의 위치, 이름, 포인트, 현재 우세한 팀을 확인하도록 구성했다.
-![스크린샷 2026-09-12 235824.png](../../assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235824.png)
+![스크린샷 2026-09-12 235824.png](/assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-12%20235824.png)
 
 ## 조준 시 시야 가림 개선 예정
 
@@ -62,4 +61,4 @@ PlayerState의 TeamId 확인
 
 현재는 위치와 상태 표시까지 구현했고, 조준 상황에 따른 투명도 조절은 남은 작업이다.
 
-![스크린샷 2026-09-13 000107.png](../../assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-13%20000107.png)
+![스크린샷 2026-09-13 000107.png](/assets/img/deepraiders-team-color-and-indicators/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-13%20000107.png)

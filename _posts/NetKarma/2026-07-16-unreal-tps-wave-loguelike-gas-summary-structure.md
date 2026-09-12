@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 프로젝트 GAS 총정리 (1) — 구조편"
+title: "언리얼 NetKarma : 프로젝트 GAS 총정리 (1) — 구조편"
 date: 2026-07-16 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-Subsystem, UnrealEngine-Augment, UnrealEngine-GameplayEffect]
 description: "EffectManagerSubsystem, AugmentManagerSubsystem, AugmentComponent, AugmentAbility 네 계층의 역할과 구조 정리"
 ---
 
-# TPS 개발 - 프로젝트 GAS 총정리 (1) 구조편
+# 언리얼 NetKarma - 프로젝트 GAS 총정리 (1) 구조편
 
 [증강 시스템 삼부작]({% post_url NetKarma/2026-07-10-unreal-tps-wave-loguelike-augment-system-1 %})과 [이펙트 매니저 서브시스템]({% post_url NetKarma/2026-07-14-unreal-tps-wave-loguelike-effect-subsystem %})까지 만들고 나니, 이 프로젝트에서 GAS를 어떻게 쓰고 있는지 한 번은 통째로 정리해둘 필요가 있었다. 언제든 다시 찾아볼 수 있게 **구조편(이 글)** 과 **구현편**으로 나눠서 적는다.
 

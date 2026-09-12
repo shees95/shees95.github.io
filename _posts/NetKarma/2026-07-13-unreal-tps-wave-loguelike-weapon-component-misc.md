@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 웨폰 컴포넌트 잡다한 개선 + 소프트 포인터 TIL"
+title: "언리얼 NetKarma : 웨폰 컴포넌트 잡다한 개선 + 소프트 포인터 TIL"
 date: 2026-07-13 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-Inventory, UnrealEngine-Delegate, UnrealEngine-SoftPointer]
 description: "인벤 캐싱 최적화, 탄 레이아웃 swap, 피격 정보 델리게이트, 소프트 포인터/레퍼런스/클래스 개념 정리"
 ---
 
-# TPS 개발 - 웨폰 컴포넌트 잡다한 개선
+# 언리얼 NetKarma - 웨폰 컴포넌트 잡다한 개선
 
 증강 시스템 삼부작을 끝내고, 오늘은 그동안 밀린 자잘한 개선들을 처리했다.
 

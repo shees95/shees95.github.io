@@ -19,16 +19,16 @@ UI의 보더, 음영, 애니메이션, 하이라이트, 폰트를 조정했다.
 기능이 연결되어 있어도 현재 어떤 항목을 선택했는지 잘 보이지 않으면 사용하기 어렵다.
 선택과 반응이 화면에서 드러나도록 시각 요소를 정리했다.
 
-![녹음 2026-09-11 114149.gif](../../assets/img/deepraiders-ui-separation-and-settings/%EB%85%B9%EC%9D%8C%202026-09-11%20114149.gif)
+![녹음 2026-09-11 114149.gif](/assets/img/deepraiders-ui-separation-and-settings/%EB%85%B9%EC%9D%8C%202026-09-11%20114149.gif)
 
 ## 재사용을 위한 위젯 분리
 
 ### 버튼 재사용
 버튼은 하나만 만들어 모든 버튼들에 재사용하여 델리게이트만 개별 연동시켜주는 식으로 재사용하였다.
 
-![스크린샷 2026-09-11 114301.png](../../assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114301.png)
+![스크린샷 2026-09-11 114301.png](/assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114301.png)
 
-![스크린샷 2026-09-11 114425.png](../../assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114425.png)
+![스크린샷 2026-09-11 114425.png](/assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114425.png)
 
 ### 타이틀 위젯 재사용
 기존에는 `Title` 위젯 안에 `Join`, `ChoiceMap`, `Settings`가 함께 들어 있었다.
@@ -70,5 +70,5 @@ UI Manager에서 닫을 최상단 UI 확인
 표시용 문자열을 설정값으로 변환한 뒤 해당 값을 적용하는 흐름이다.
 화면에서는 읽기 쉬운 이름을 사용하고, 실제 적용 단계에서는 해상도와 화면 모드에 맞는 값으로 처리했다.
 
-![스크린샷 2026-09-11 114812.png](../../assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114812.png)
+![스크린샷 2026-09-11 114812.png](/assets/img/deepraiders-ui-separation-and-settings/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20114812.png)
 

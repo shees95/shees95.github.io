@@ -1,5 +1,5 @@
 ---
-title: "TPS 개발 : GAS 총기 반동 구현 — PlayerController 책임 분리"
+title: "언리얼 NetKarma : GAS 총기 반동 구현 — PlayerController 책임 분리"
 date: 2026-06-23 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, TroubleShooting, TroubleShooting-UnrealEngine, UnrealEngine-GAS, UnrealEngine-PlayerController, UnrealEngine-Recoil]

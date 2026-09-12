@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : TIL — 데디케이트 서버, NetRole, RPC 기초 정리"
+title: "언리얼 NetKarma : TIL — 데디케이트 서버, NetRole, RPC 기초 정리"
 date: 2026-08-03 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Networking, UnrealEngine-DedicatedServer]
 description: "데디케이트 서버 실행 옵션과 NetDriver/NetConnection, LocalRole·RemoteRole의 Authority/Proxy 대칭 구조, RPC의 오너십별 도달 범위와 Reliable/Unreliable, 변수 레플리케이션 등록 흐름까지 언리얼 네트워킹 기초 정리"
 ---
 
-# TPS 개발 - TIL: 데디케이트 서버, NetRole, RPC 기초 정리
+# 언리얼 NetKarma - TIL: 데디케이트 서버, NetRole, RPC 기초 정리
 
 언리얼 네트워킹 기초를 네 갈래로 정리했다 — 데디케이트 서버 실행/커넥션, 액터의 권한을 나타내는 NetRole, 원격으로 함수를 실행시키는 RPC, 변수를 복제시키는 레플리케이션 등록 흐름.
 

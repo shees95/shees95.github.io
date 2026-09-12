@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 무기 시스템 (2) — Definition 통일"
+title: "언리얼 NetKarma : 무기 시스템 (2) — Definition 통일"
 date: 2026-07-03 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-Definition, UnrealEngine-Equipment]
 description: "아이콘·메쉬·몽타주까지 Weapon Definition에 통합해 하나의 정의에서 모든 작업이 이루어지게 개편"
 ---
 
-# TPS 개발 - 무기 시스템 (2)
+# 언리얼 NetKarma - 무기 시스템 (2)
 
 무기를 장착하는 것까진 됐는데, 문제가 있었다. 무기를 구성하는 데이터가 **여기저기 흩어져 있었다.**
 

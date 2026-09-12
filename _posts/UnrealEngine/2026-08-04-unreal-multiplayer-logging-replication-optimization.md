@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : TIL — 멀티플레이 디버깅, 액터 초기화 순서와 레플리케이션 최적화"
+title: "언리얼 NetKarma : TIL — 멀티플레이 디버깅, 액터 초기화 순서와 레플리케이션 최적화"
 date: 2026-08-04 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Networking, UnrealEngine-DedicatedServer]
 description: "멀티플레이 디버깅용 에디터 옵션, GameMode→GameState→BeginPlay 호출 흐름과 PostNetInit/PostInitializeComponents 순서, ReplicateUsing·OnRep, NetUpdateFrequency·NetCullDistance·NetPriority·NetDormancy 등 레플리케이션 최적화 옵션, TearOff·Replication Graph/Iris·서브시스템까지 정리"
 ---
 
-# TPS 개발 - TIL: 멀티플레이 디버깅, 초기화 순서, 레플리케이션 최적화
+# 언리얼 NetKarma - TIL: 멀티플레이 디버깅, 초기화 순서, 레플리케이션 최적화
 
 [전날]({% post_url UnrealEngine/2026-08-03-unreal-dedicated-server-networking-basics %}) RPC와 변수 레플리케이션 등록 흐름을 봤다면, 오늘은 멀티플레이 디버깅 환경, 액터가 초기화되는 순서, 그리고 레플리케이션 빈도/범위를 조절하는 최적화 옵션들을 정리했다.
 

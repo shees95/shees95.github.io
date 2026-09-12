@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 무기 시스템 (3) — 스페셜 탄 · 업그레이드 · UI 테스트"
+title: "언리얼 NetKarma : 무기 시스템 (3) — 스페셜 탄 · 업그레이드 · UI 테스트"
 date: 2026-07-04 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-Definition, UnrealEngine-Ammo, UnrealEngine-UI]
 description: "웨폰 컴포넌트에 스페셜 탄 리스트·총기 업그레이드 Definition·탄 선택·장착을 붙이고 UI로 테스트"
 ---
 
-# TPS 개발 - 무기 시스템 (3)
+# 언리얼 NetKarma - 무기 시스템 (3)
 
 Weapon Definition을 하나로 통일했으니, 오늘은 그 위에 **실제로 굴러가는 무기 컴포넌트**를 완성했다. 스페셜 탄 관리부터 총기 업그레이드, 탄 선택, 장착, 그리고 UI 테스트까지 한 번에 붙였다.
 

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 무기 시스템 (1) — 상점에서 장착까지"
+title: "언리얼 NetKarma : 무기 시스템 (1) — 상점에서 장착까지"
 date: 2026-07-02 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-Equipment, UnrealEngine-Definition, UnrealEngine-Inventory]
 description: "상점 구매 → 무기/노즐 분류 → 슬롯 보관 → 장착까지, 그리고 Item, Shop Definition의 한계"
 ---
 
-# TPS 개발 - 무기 시스템 (1)
+# 언리얼 NetKarma - 무기 시스템 (1)
 
 무기 시스템을 만들어야 하는데 이게 정말 빡셌다. 아이템이나 상점과 달리, 무기는 **실제로 손에 들리고 발사되는** 물건이라 챙길 게 훨씬 많았다.
 

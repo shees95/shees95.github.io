@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 증강 시스템 (3) — 전체 파이프라인 정리"
+title: "언리얼 NetKarma : 증강 시스템 (3) — 전체 파이프라인 정리"
 date: 2026-07-12 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-Augment, UnrealEngine-CSV, UnrealEngine-Definition]
 description: "CSV 파싱부터 증강 선택·제공까지, 일주일간 만든 증강 시스템의 전체 처리 흐름 회고"
 ---
 
-# TPS 개발 - 증강 시스템 (3)
+# 언리얼 NetKarma - 증강 시스템 (3)
 
 GE와 GA파트를 각각 정리했으니, 오늘은 이 둘이 어떻게 하나의 파이프라인으로 굴러가는지 전체 흐름을 정리한다. 증강 시스템 하나 만드는 데 정확히 **일주일**이 걸렸다.
 

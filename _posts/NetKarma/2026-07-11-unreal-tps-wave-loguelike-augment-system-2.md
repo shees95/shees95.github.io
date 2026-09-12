@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 증강 시스템 (2) — GA와 이벤트 트리거"
+title: "언리얼 NetKarma : 증강 시스템 (2) — GA와 이벤트 트리거"
 date: 2026-07-11 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-GA, UnrealEngine-Augment, UnrealEngine-GameplayTag]
 description: "증강 시스템의 GA 파트 — NKMAugmentAbility 상속과 GAS 이벤트 태그로 트리거 조건 구성하기"
 ---
 
-# TPS 개발 - 증강 시스템 (2)
+# 언리얼 NetKarma - 증강 시스템 (2)
 
 어제 GE와 EffectSet 연결까지 정리했다. 오늘은 "특정 조건에서 발동하는" 능동형 증강, **GA 파트**다.
 

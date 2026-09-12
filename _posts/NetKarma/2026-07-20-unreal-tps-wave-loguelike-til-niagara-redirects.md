@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : TIL — 나이아가라 완료 이벤트와 되살아난 CoreRedirects"
+title: "언리얼 NetKarma : TIL — 나이아가라 완료 이벤트와 되살아난 CoreRedirects"
 date: 2026-07-20 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, TroubleShooting, UnrealEngine-Niagara, UnrealEngine-CoreRedirects]
 description: "OnSystemFinished가 안 쏘일 수 있다는 것, 그리고 지웠던 ClassRedirects가 머지로 되살아난 사고"
 ---
 
-# TPS 개발 - TIL: 나이아가라 완료 이벤트와 되살아난 리다이렉트
+# 언리얼 NetKarma - TIL: 나이아가라 완료 이벤트와 되살아난 리다이렉트
 
 풀링 리소스 반납과 설정 파일, 서로 무관해 보이는 두 트러블을 겪었다.
 

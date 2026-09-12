@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : TIL — ImpactPoint 오버랩 함정과 스테일 스테이트 버그"
+title: "언리얼 NetKarma : TIL — ImpactPoint 오버랩 함정과 스테일 스테이트 버그"
 date: 2026-07-17 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, TroubleShooting, UnrealEngine-HitResult, UnrealEngine-Collision]
 description: "탄착이 가끔 원점으로 날아가던 버그 — ImpactPoint의 오버랩 함정과 루프 스코프가 어긋난 stale state"
 ---
 
-# TPS 개발 - TIL: ImpactPoint 오버랩 함정
+# 언리얼 NetKarma - TIL: ImpactPoint 오버랩 함정
 
 사격 시 가끔 탄착 이펙트/트레일이 `(0,0,0)`(월드 원점)으로 날아가는 버그를 잡았다. 원인이 두 개 겹쳐 있었다.
 

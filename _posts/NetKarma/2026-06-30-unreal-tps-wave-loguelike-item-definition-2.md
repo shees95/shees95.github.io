@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 아이템 Definition 시스템 (2) — 크래프팅이 깨뜨린 구조"
+title: "언리얼 NetKarma : 아이템 Definition 시스템 (2) — 크래프팅이 깨뜨린 구조"
 date: 2026-06-30 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Inventory, UnrealEngine-Definition, UnrealEngine-Crafting, UnrealEngine-GAS]
 description: "구매 전용으로 만든 Definition이 크래프팅에서 무너진 이유와 제작 전용 Definition 분리"
 ---
 
-# TPS 개발 - 아이템 Definition 시스템 (2)
+# 언리얼 NetKarma - 아이템 Definition 시스템 (2)
 
 어제만든 Definition 구조는 사실 **구매(상점 획득)만 염두에 둔 설계**였다. 오늘 크래프팅을 붙이려다 이 구조가 무너졌다.
 

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 패키징 빌드 이슈 모음"
+title: "언리얼 NetKarma : 패키징 빌드 이슈 모음"
 date: 2026-07-15 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Packaging, UnrealEngine-Build, TroubleShooting]
 description: "모듈 의존성, MSVC 버전, 리다이렉트 중복, 데이터 로드 실패까지 — 첫 패키징 시도에서 만난 빌드 이슈 모음"
 ---
 
-# TPS 개발 - 패키징 빌드 이슈 모음
+# 언리얼 NetKarma - 패키징 빌드 이슈 모음
 
 에디터에서는 멀쩡하던 프로젝트를 실제로 **패키징**하려니 문제가 줄줄이 튀어나왔다. 겪은 순서대로 정리한다.
 

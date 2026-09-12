@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 콤보 카운트 정규화와 MVVM 경계"
+title: "언리얼 NetKarma : 콤보 카운트 정규화와 MVVM 경계"
 date: 2026-07-22 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-MVVM, UnrealEngine-UMG, UnrealEngine-GameplayMessage]
 description: "행동당 1콤보만 세도록 이벤트에 대표 플래그를 싣는 설계, 그리고 ViewModel이 게임로직 구조체를 몰라야 하는 이유"
 ---
 
-# TPS 개발 - 콤보 카운트 정규화와 MVVM 경계
+# 언리얼 NetKarma - 콤보 카운트 정규화와 MVVM 경계
 
 오늘은 설계 결정 두 개를 정리한다. 하나는 콤보 카운트를 "타격 수"가 아니라 "공격 행동 수"로 바꾼 것, 다른 하나는 UI 레이어 경계를 다시 그은 것이다.
 

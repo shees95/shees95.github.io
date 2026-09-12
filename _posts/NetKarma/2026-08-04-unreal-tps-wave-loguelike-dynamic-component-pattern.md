@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : TIL — 동적 컴포넌트 추가·제거 패턴"
+title: "언리얼 NetKarma : TIL — 동적 컴포넌트 추가·제거 패턴"
 date: 2026-08-04 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Component]
 description: "CreateDefaultSubobject 없이 런타임에 NewObject로 컴포넌트를 새로 만들고 붙였다 떼는 패턴 — 추가는 Attach 후 Register, 제거는 Unregister 후 DestroyComponent"
 ---
 
-# TPS 개발 - TIL: 동적 컴포넌트 추가·제거 패턴
+# 언리얼 NetKarma - TIL: 동적 컴포넌트 추가·제거 패턴
 
 지금까지는 컴포넌트를 생성자에서 미리 다 붙여놓고, 필요할 때 메시만 `SetStaticMesh(nullptr)`로 껐다 켰다 하는 식으로 처리했다. 근데 컴포넌트 자체를 런타임에 새로 만들었다 없앴다 하는 것도 가능하다는 걸 정리했다.
 

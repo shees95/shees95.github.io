@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 무기 시스템 (4) — Equip을 GA로 통일"
+title: "언리얼 NetKarma : 무기 시스템 (4) — Equip을 GA로 통일"
 date: 2026-07-05 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-GAS, UnrealEngine-GA, UnrealEngine-GameplayTag, TroubleShooting]
 description: "컨트롤러에 붙인 Equip이 스왑 중 태그를 못 떼는 버그, Equip을 GA로 만들어 태그로 통일"
 ---
 
-# TPS 개발 - 무기 시스템 (4)
+# 언리얼 NetKarma - 무기 시스템 (4)
 
 무기 장착이 동작은 했지만, 구조에 문제가 있었다. **Equip을 그냥 컨트롤러에 붙여둔** 게 화근이었다.
 

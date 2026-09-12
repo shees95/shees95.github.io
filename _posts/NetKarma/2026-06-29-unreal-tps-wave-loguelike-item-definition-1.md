@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 아이템 Definition 시스템 (1) — CSV에서 인스턴스까지"
+title: "언리얼 NetKarma : 아이템 Definition 시스템 (1) — CSV에서 인스턴스까지"
 date: 2026-06-29 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Inventory, UnrealEngine-Definition, UnrealEngine-DataTable, UnrealEngine-CSV]
 description: "라이라 방식을 참고해 CSV → RawTableData → Definition → Instance 흐름으로 아이템 시스템 뼈대 잡기"
 ---
 
-# TPS 개발 - 아이템 Definition 시스템 (1)
+# 언리얼 NetKarma - 아이템 Definition 시스템 (1)
 
 인벤토리 시스템을 만들기 시작했다. 아이템 하나를 화면에 띄우는 것보다, **아이템 데이터를 어떻게 정의하고 어디서 관리할 것인가**가 훨씬 큰 문제였다.
 

@@ -22,18 +22,18 @@ description: "낮과 밤 맵을 구성하고 맵 정의 기반 선택 UI와 Game
 | 맵 참조 | 실제로 사용할 맵 지정 |
 | 표시 이름 | 선택 UI에 보여 줄 이름 |
 
-![스크린샷 2026-09-11 112952.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112952.png)  
+![스크린샷 2026-09-11 112952.png](/assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112952.png)  
 
 정의 데이터를 설정하고 `ComboBox String`의 선택 목록에 항목을 추가하면 해당 맵을 선택할 수 있도록 연결했다.
 새 맵을 추가할 때는 맵 정의와 선택 목록을 함께 설정하는 방식이다.
 
-![스크린샷 2026-09-11 113103.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113103.png)  
+![스크린샷 2026-09-11 113103.png](/assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113103.png)  
 
 같은 공간도 조명에 따라 인상이 달라졌다.
 낮과 밤 버전을 구성하면서 맵의 형태뿐 아니라 실제 플레이 화면에서 보이는 분위기도 함께 조정했다.
 
-![Map2.png](../../assets/img/deepraders-map-selection-and-music/Map2.png)
-![Map3.png](../../assets/img/deepraders-map-selection-and-music/Map3.png)
+![Map2.png](/assets/img/deepraders-map-selection-and-music/Map2.png)
+![Map3.png](/assets/img/deepraders-map-selection-and-music/Map3.png)
 
 ## 맵별 음악을 관리하는 액터
 
@@ -61,4 +61,4 @@ GameState 상태 변경
 
 맵을 실행해 음악을 들어 보고 다시 수정하는 과정을 에디터 안에서 이어갈 수 있었다.
 
-![스크린샷 2026-09-11 113313.png](../../assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113313.png)
+![스크린샷 2026-09-11 113313.png](/assets/img/deepraders-map-selection-and-music/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20113313.png)

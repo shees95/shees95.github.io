@@ -1,5 +1,5 @@
 ---
-title: "TPS 개발 : GAS 총기 히트 판정 — 중복 히트와 본 별 히트 처리"
+title: "언리얼 NetKarma : GAS 총기 히트 판정 — 중복 히트와 본 별 히트 처리"
 date: 2026-06-25 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, TroubleShooting, TroubleShooting-UnrealEngine, UnrealEngine-GAS, UnrealEngine-SweepMultiChannel]

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 샷건 스프레드 — 카메라 기준 각도 퍼짐"
+title: "언리얼 NetKarma : 샷건 스프레드 — 카메라 기준 각도 퍼짐"
 date: 2026-07-08 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Weapon, UnrealEngine-Shotgun, UnrealEngine-Camera, TroubleShooting]
 description: "랜덤 지점→랜덤 지점으로 쏘던 샷건탄을 카메라 기준 각도 퍼짐(tan)으로 바꿔 샷건다운 느낌 만들기"
 ---
 
-# TPS 개발 - 샷건 스프레드
+# 언리얼 NetKarma - 샷건 스프레드
 
 샷건도 테스트해봤다. 기존 구현을 보니 **카메라에서 랜덤 지점으로 시작해 랜덤 지점으로 날아가는** 방식이었다.
 

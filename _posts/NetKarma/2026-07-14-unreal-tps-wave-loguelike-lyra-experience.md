@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 라이라 Experience와 Game Feature 개념 정리"
+title: "언리얼 NetKarma : 라이라 Experience와 Game Feature 개념 정리"
 date: 2026-07-14 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Lyra, UnrealEngine-Experience, UnrealEngine-GameFeature]
 description: "라이라의 Experience와 Game Feature 개념 — 레벨 이동 없이 하나의 게임모드 안에서 모든 걸 처리하는 구조"
 ---
 
-# TPS 개발 - 라이라 Experience 개념 정리
+# 언리얼 NetKarma - 라이라 Experience 개념 정리
 
 프로젝트가 라이라 위에서 굴러가다 보니, 라이라의 핵심 개념인 **Experience**와 **Game Feature**를 다시 짚고 넘어갈 필요가 있었다.
 

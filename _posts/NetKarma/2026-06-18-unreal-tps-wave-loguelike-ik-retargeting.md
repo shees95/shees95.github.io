@@ -1,5 +1,5 @@
 ---
-title: "TPS 개발 : 블렌더 FBX → 언리얼 IK 리타게팅 이슈 정리"
+title: "언리얼 NetKarma : 블렌더 FBX → 언리얼 IK 리타게팅 이슈 정리"
 date: 2026-06-18 00:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, TroubleShooting, TroubleShooting-UnrealEngine, UnrealEngine-IKRig, UnrealEngine-IKRetargeting, UnrealEngine-SkeletalMesh, UnrealEngine-RootMotion, Blender-FBX, NetKarma]

@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 프로젝트 GAS 총정리 (2) — 구현편"
+title: "언리얼 NetKarma : 프로젝트 GAS 총정리 (2) — 구현편"
 date: 2026-07-16 18:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-GAS, UnrealEngine-ExecCalculation, UnrealEngine-SetByCaller, UnrealEngine-GameplayTag]
 description: "GE 부여/해제 핸들 관리, GA 트리거 델리게이트 수신, GiveAbility/ClearAbility, ExecCalculation까지 자주 쓰는 코드 모음"
 ---
 
-# TPS 개발 - 프로젝트 GAS 총정리 (2) 구현편
+# 언리얼 NetKarma - 프로젝트 GAS 총정리 (2) 구현편
 
 [구조편]({% post_url NetKarma/2026-07-16-unreal-tps-wave-loguelike-gas-summary-structure %})에서 4개 계층의 역할을 정리했다. 이번 편은 실제로 반복해서 쓰는 코드들을 언제든 꺼내볼 수 있게 모아둔 것이다.
 

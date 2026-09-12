@@ -27,7 +27,7 @@ description: "스태틱 메시 콜리전을 보정하고 메시 형태의 흡수
 눈 모양의 스태틱 메시를 그대로 배치하면 플레이어 입장에서는 흡수 가능한 눈인지 구분하기 어려웠다.
 지붕 위에 쌓인 눈이나 둥글게 뭉친 눈더미도 실제 복셀 지형으로 구성할 필요가 있었다.
 
-![스크린샷 2026-09-11 112053.png](../../assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112053.png)  
+![스크린샷 2026-09-11 112053.png](/assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112053.png)  
 <복셀이 아닌 지형>  
 
 
@@ -50,7 +50,7 @@ description: "스태틱 메시 콜리전을 보정하고 메시 형태의 흡수
 이를 이용해 지붕 위에 쌓인 눈, 구름처럼 둥글게 뭉친 눈더미, 특정 오브젝트 형태의 눈 지형을 만들었다.
 샘플링 영역으로 근사하기 때문에 원본 메시의 모든 세부 형태를 그대로 복제하는 방식은 아니다.
 
-![스크린샷 2026-09-11 112211.png](../../assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112211.png)
+![스크린샷 2026-09-11 112211.png](/assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112211.png)
 
 
 ## 큰 메시에서 증가한 생성 비용
@@ -58,7 +58,7 @@ description: "스태틱 메시 콜리전을 보정하고 메시 형태의 흡수
 메시가 커지면 샘플링 지점이 많아지고 복셀 추가 연산도 늘어났다.
 원하는 형태는 만들 수 있었지만, 큰 영역을 생성할 때 부하가 컸다.
 
-![스크린샷 2026-09-11 112437.png](../../assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112437.png)  
+![스크린샷 2026-09-11 112437.png](/assets/img/deepraiders-snow-world-generation/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-09-11%20112437.png)  
 <거점 활성화 전, 진입 방지 복셀 생성>  
 
 샘플링 간격과 한 번에 생성하는 복셀 범위를 조절해 전체 연산 횟수를 줄였다.

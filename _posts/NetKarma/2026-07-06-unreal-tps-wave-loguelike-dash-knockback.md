@@ -1,12 +1,12 @@
 ---
-title: "TPS 개발 : 대쉬 넉백 — 스피어 콜리전과 채널 분리"
+title: "언리얼 NetKarma : 대쉬 넉백 — 스피어 콜리전과 채널 분리"
 date: 2026-07-06 12:00:00 +0900
 categories: [UnrealEngine, UnrealEngine-Project ,UnrealEngine-Project-TPS]
 tags: [UnrealEngine, UnrealEngine-Project-TPS, UnrealEngine-Collision, UnrealEngine-CollisionChannel, UnrealEngine-Dash, TroubleShooting]
 description: "대쉬로 적을 밀어내는 기능 — 방향 콜리전의 문제와 스피어 콜리전, 그리고 탄/대쉬 채널 분리"
 ---
 
-# TPS 개발 - 대쉬 넉백
+# 언리얼 NetKarma - 대쉬 넉백
 
 대쉬로 타쿠(적)들을 밀어내는 기능을 구현했다. 별거 아닐 줄 알았는데 콜리전 문제가 두 번 튀어나왔다.
 
